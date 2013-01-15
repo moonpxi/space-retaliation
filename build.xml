@@ -1,0 +1,44 @@
+<project name="Space-Retaliation">
+    <property name="main.src" location="src/main/java"/>
+	<property name="test.src" location="src/test/java"/>
+	<property name="main.lib" location="lib"/>
+	<property name="test.lib" location="testlib"/>
+    <property name="build" location="build"/>
+	
+	<path id="compile.classpath">
+		<fileset dir="${main.lib}" includes="**/*.jar"/>
+	</path>
+	
+	<path id="test.classpath">
+		<path refid="compile.classpath" />
+		<path location="${build}" />
+		<fileset dir="${test.lib}" includes="**/*.jar"/>
+	</path>
+	
+	<target name="compile" depends="clean">
+		<mkdir dir="${build}" />
+		<javac srcdir="${main.src}" destdir="${build}" classpathref="compile.classpath" />
+	</target>
+	
+	<target name="compile-test" depends="compile">
+		<javac srcdir="${test.src}" destdir="${build}" classpathref="test.classpath" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build}" />
+	</target>
+	
+	<target name="test" depends="compile-test">
+		<junit printsummary="yes" haltonfailure="yes">
+		  	<classpath refid="test.classpath" />		 
+			
+			<formatter type="plain" />
+
+		  	<batchtest fork="yes" todir="${build}">
+		    	<fileset dir="${test.src}">
+		      		<include name="**/*Test*.java"/>
+		    	</fileset>
+		  	</batchtest>
+		</junit>
+	</target>
+</project>
