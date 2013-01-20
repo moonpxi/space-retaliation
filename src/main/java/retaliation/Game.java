@@ -1,6 +1,7 @@
 package retaliation;
 
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -23,7 +24,8 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.drawString("Nothing to see here", 100, 100);
+        g.setColor(Color.green);
+        g.fillRect(20, 20, 100, 20);
     }
 
 }
