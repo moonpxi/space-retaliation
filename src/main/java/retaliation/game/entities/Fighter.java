@@ -1,21 +1,21 @@
 package retaliation.game.entities;
 
+import retaliation.game.shapes.Quad;
+
 public class Fighter {
 
-    private int x;
-    private int y;
+    private Quad shape;
 
     public Fighter(int x, int y) {
-        this.x = x;
-        this.y = y;
+        shape = new Quad(x, y, 100, 20);
     }
 
     public int getX() {
-        return x;
+        return shape.getX();
     }
 
     public int getY() {
-        return y;
+        return shape.getY();
     }
 
 }
