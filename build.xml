@@ -5,14 +5,22 @@
 	<property name="test.lib" location="testlib"/>
     <property name="build" location="build"/>
 	
+	<!-- Compiling -->
+	
 	<path id="compile.classpath">
 		<fileset dir="${main.lib}" includes="**/*.jar"/>
 	</path>
 	
-	<path id="runtime.classpath">
-		<path refid="compile.classpath" />
-		<path location="${build}" />
-	</path>
+	<target name="clean">
+		<delete dir="${build}" />
+	</target>
+	
+	<target name="compile" depends="clean">
+		<mkdir dir="${build}" />
+		<javac srcdir="${main.src}" destdir="${build}" classpathref="compile.classpath" />
+	</target>		
+	
+	<!-- Testing -->
 	
 	<path id="test.classpath">
 		<path refid="compile.classpath" />
@@ -20,19 +28,10 @@
 		<fileset dir="${test.lib}" includes="**/*.jar"/>
 	</path>
 	
-	<target name="compile" depends="clean">
-		<mkdir dir="${build}" />
-		<javac srcdir="${main.src}" destdir="${build}" classpathref="compile.classpath" />
-	</target>
-	
 	<target name="compile-test" depends="compile">
 		<javac srcdir="${test.src}" destdir="${build}" classpathref="test.classpath" />
 	</target>
-	
-	<target name="clean">
-		<delete dir="${build}" />
-	</target>
-	
+			
 	<target name="test" depends="compile-test">
 		<junit printsummary="yes" haltonfailure="yes">
 		  	<classpath refid="test.classpath" />		 
@@ -46,6 +45,12 @@
 		  	</batchtest>
 		</junit>
 	</target>
+	
+	<!-- Running -->
+	<path id="runtime.classpath">
+		<path refid="compile.classpath" />
+		<path location="${build}" />
+	</path>
 	
 	<target name="run" depends="compile">
 		<java classname="retaliation.Main" fork="yes" classpathref="runtime.classpath">
