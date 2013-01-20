@@ -5,14 +5,18 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import retaliation.game.shapes.Quad;
+
 public class FighterTest {
 
     @Test
-    public void returnsPositionAndDimension() {
-        Fighter fighter = new Fighter(30, 50);
+    public void returnsShapeWithFightersDimension() {
+        Quad shape = new Fighter(30, 50).getShape();
         
-        assertThat(fighter.getX(), is(30));
-        assertThat(fighter.getY(), is(50));
+        assertThat(shape.getX(), is(30));
+        assertThat(shape.getY(), is(50));
+        assertThat(shape.getWidth(), is(100));
+        assertThat(shape.getHeight(), is(20));
     }
 
 }

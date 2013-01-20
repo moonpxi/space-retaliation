@@ -18,4 +18,8 @@ public class Fighter {
         return shape.getY();
     }
 
+    public Quad getShape() {
+        return shape;
+    }
+
 }

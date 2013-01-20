@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import retaliation.game.entities.Fighter;
+import retaliation.ui.renderer.slick.SlickQuadRenderer;
 
 public class Game extends BasicGame {
     
@@ -30,8 +31,7 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.setColor(Color.green);
-        g.fillRect(fighter.getX(), fighter.getY(), 100, 20);
+        new SlickQuadRenderer(g).render(fighter.getShape(), Color.green);
     }
 
 }
