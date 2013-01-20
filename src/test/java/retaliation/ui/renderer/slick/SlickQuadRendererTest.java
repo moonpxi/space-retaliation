@@ -13,21 +13,19 @@ public class SlickQuadRendererTest {
     Mockery context = new Mockery() {{
       setImposteriser(ClassImposteriser.INSTANCE);
     }};
+    private final Graphics graphics = context.mock(Graphics.class);
     
     @Test
-    public void drawsARectangleFromQuad() {
-        final Graphics graphics = context.mock(Graphics.class);
-        Quad someQuad = new Quad(10, 20, 30, 40);
-        final Color someColor = Color.black;
-        
-        SlickQuadRenderer renderer = new SlickQuadRenderer(graphics);
+    public void drawsARectangleFromQuad() {        
+        final Quad someQuad = new Quad(10, 20, 30, 40);
+        final Color someColor = Color.black;                
         
         context.checking(new Expectations() {{
             oneOf(graphics).setColor(someColor);
             oneOf(graphics).fillRect(10, 20, 30, 40);
         }});
         
-        renderer.render(someQuad, someColor);
+        new SlickQuadRenderer(graphics).render(someQuad, someColor);
         
         context.assertIsSatisfied();
     }
