@@ -11,12 +11,12 @@ import retaliation.ui.renderer.slick.SlickQuadRenderer;
 
 public class Game extends BasicGame {
     
-    private Fighter fighter;
+    private final Fighter fighter;
 
     public Game() {
        super("Space Retaliation");
        
-       fighter = new Fighter(20, 20);
+       fighter = new Fighter(350, 520);
     }
 
     @Override
