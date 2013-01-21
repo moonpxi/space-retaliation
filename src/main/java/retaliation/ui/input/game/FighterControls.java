@@ -24,17 +24,21 @@ public class FighterControls implements Controls {
     
     @Override
     public void keyDown(int keyCode) {
-        if (keyCode == KEY_UP) {
+        switch (keyCode) {
+        case KEY_UP:
             fighter.moveUp();
-        }
-        if (keyCode == KEY_DOWN) {
+            break;
+        case KEY_DOWN:
             fighter.moveDown();
-        }
-        if (keyCode == KEY_LEFT) {
+            break;
+        case KEY_LEFT:
             fighter.moveLeft();
-        }
-        if (keyCode == KEY_RIGHT) {
+            break;
+        case KEY_RIGHT:
             fighter.moveRight();
-        } 
+            break;            
+        default:
+            break;
+        }
     }
 }
