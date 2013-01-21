@@ -29,4 +29,8 @@ public class Quad {
     public int getHeight() {
         return height;
     }
+
+    public Quad move(int xAdjustment, int yAdjustment) {
+        return new Quad(x + xAdjustment, y + yAdjustment, width, height);
+    }
 }
