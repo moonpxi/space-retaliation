@@ -3,6 +3,7 @@ package retaliation.game.entities;
 import retaliation.game.shapes.Quad;
 
 public class Fighter {
+    private final static int SPEED = 4;
 
     private Quad shape;
 
@@ -15,18 +16,18 @@ public class Fighter {
     }
 
     public void moveUp() {
-        shape = shape.move(0, -1);
+        shape = shape.move(0, -SPEED);
     }
 
     public void moveDown() {
-        shape = shape.move(0, 1);        
+        shape = shape.move(0, SPEED);        
     }
 
     public void moveLeft() {
-        shape = shape.move(-1, 0);        
+        shape = shape.move(-SPEED, 0);        
     }
     
     public void moveRight() {
-        shape = shape.move(1, 0);        
+        shape = shape.move(SPEED, 0);        
     }
 }
