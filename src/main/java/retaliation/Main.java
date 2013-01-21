@@ -9,7 +9,7 @@ public class Main {
      AppGameContainer app = new AppGameContainer(new Game());         
      app.setDisplayMode(800, 600, false);
      app.setTitle("Space Retaliation");
-     app.setTargetFrameRate(60);
+     app.setTargetFrameRate(100);
      app.setSmoothDeltas(true);
      app.start();	
   }
