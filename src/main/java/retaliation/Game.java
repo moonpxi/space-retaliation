@@ -30,6 +30,15 @@ public class Game extends BasicGame {
         if (gc.getInput().isKeyDown(Input.KEY_UP)) {
             fighter.moveUp();
         }
+        if (gc.getInput().isKeyDown(Input.KEY_DOWN)) {
+            fighter.moveDown();
+        }
+        if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+            fighter.moveLeft();
+        }
+        if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+            fighter.moveRight();
+        }
     }
 
     @Override
