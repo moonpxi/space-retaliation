@@ -15,6 +15,7 @@ import retaliation.ui.renderer.slick.SlickQuadRenderer;
 public class Game extends BasicGame {
     
     private final Fighter fighter;
+    private InputController controller;
 
     public Game() {
        super("Space Retaliation");
@@ -24,13 +25,12 @@ public class Game extends BasicGame {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-    
+        controller = new SlickInputController(gc.getInput());
+        controller.listenToKeysFor(new FighterControls(fighter), FighterControls.KEYS);
     }
 
     @Override
-    public void update(GameContainer gc, int delta) throws SlickException {
-        InputController controller = new SlickInputController(gc.getInput());
-        controller.listenToKeysFor(new FighterControls(fighter), FighterControls.KEYS);
+    public void update(GameContainer gc, int delta) throws SlickException {        
         controller.processInputAndNotifyControls();
     }
 
