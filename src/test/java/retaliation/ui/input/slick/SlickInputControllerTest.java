@@ -20,17 +20,18 @@ public class SlickInputControllerTest {
     @Test
     public void notifyControlsWhenRelevantInputKeyIsDown() {
         context.checking(new Expectations() {{
-            oneOf(controls).keysToListen(); will(returnValue(asList(41, 42, 43)));
-            
             oneOf(input).isKeyDown(41); will(returnValue(true));
             oneOf(input).isKeyDown(42); will(returnValue(false));
             oneOf(input).isKeyDown(43); will(returnValue(true));
             
-            oneOf(controls).keyDown(41);
-            oneOf(controls).keyDown(43);
+            oneOf(controls).notifyKeyDown(41);
+            oneOf(controls).notifyKeyDown(43);
         }});
         
-        new SlickInputController(input).listenToInputFor(controls);
+        
+        SlickInputController controller = new SlickInputController(input);
+        controller.listenToKeysFor(controls, asList(41, 42, 43));
+        controller.processInputAndNotifyControls();
         
         context.assertIsSatisfied();
     }

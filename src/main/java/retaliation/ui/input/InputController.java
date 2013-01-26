@@ -1,6 +1,10 @@
 package retaliation.ui.input;
 
-public interface InputController {
+import java.util.List;
 
-    public void listenToInputFor(Controls controls);
+public interface InputController {
+    
+    public void listenToKeysFor(Controls controls, List<Integer> keyCodes);
+
+    public void processInputAndNotifyControls();
 }

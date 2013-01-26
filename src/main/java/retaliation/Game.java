@@ -30,7 +30,8 @@ public class Game extends BasicGame {
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
         InputController controller = new SlickInputController(gc.getInput());
-        controller.listenToInputFor(new FighterControls(fighter));
+        controller.listenToKeysFor(new FighterControls(fighter), FighterControls.KEYS);
+        controller.processInputAndNotifyControls();
     }
 
     @Override
