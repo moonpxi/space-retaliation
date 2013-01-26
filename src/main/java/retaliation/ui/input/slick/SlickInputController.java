@@ -1,5 +1,6 @@
 package retaliation.ui.input.slick;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.Input;
@@ -10,8 +11,7 @@ import retaliation.ui.input.InputController;
 public class SlickInputController implements InputController {
 
     private final Input slickInput;
-    private Controls controls;
-    private List<Integer> keyCodes;
+    private final List<Entry> controlEntries = new ArrayList<Entry>();
 
     public SlickInputController(Input slickInput) {
         this.slickInput = slickInput;
@@ -19,17 +19,29 @@ public class SlickInputController implements InputController {
 
     @Override
     public void listenToKeysFor(Controls controls, List<Integer> keyCodes) {
-        this.controls = controls;
-        this.keyCodes = keyCodes;
+        controlEntries.add(new Entry(keyCodes, controls));
     }
 
     @Override
     public void processInputAndNotifyControls() {
-        for (int keyCode : keyCodes) {
-            if (slickInput.isKeyDown(keyCode)) {
-                controls.notifyKeyDown(keyCode);
+        for (Entry entry : controlEntries) {
+            for (int keyCode : entry.keyCodes) {
+                if (slickInput.isKeyDown(keyCode)) {
+                    entry.controls.notifyKeyDown(keyCode);
+                }
             }
-        }  
+        }
+    }
+    
+    private class Entry {
+        public final List<Integer> keyCodes;
+        public final Controls controls;
+
+        public Entry(List<Integer> keyCodes, Controls controls) {
+            this.keyCodes = keyCodes;
+            this.controls = controls;
+            
+        }
     }
 
 }
