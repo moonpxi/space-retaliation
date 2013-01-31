@@ -11,7 +11,7 @@ import org.newdawn.slick.Input;
 import retaliation.ui.input.Controls;
 
 public class SlickInputControllerTest {
-    Mockery context = new Mockery() {{
+    private final Mockery context = new Mockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
     }};
     private final Input input = context.mock(Input.class);
