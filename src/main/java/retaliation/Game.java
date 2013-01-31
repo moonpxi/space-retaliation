@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import retaliation.game.entities.Fighter;
+import retaliation.game.entities.Level;
 import retaliation.ui.input.InputController;
 import retaliation.ui.input.game.FighterControls;
 import retaliation.ui.input.slick.SlickInputController;
@@ -14,19 +15,19 @@ import retaliation.ui.renderer.slick.SlickQuadRenderer;
 
 public class Game extends BasicGame {
     
-    private final Fighter fighter;
     private InputController controller;
+    private final Level level;
 
     public Game() {
        super("Space Retaliation");
        
-       fighter = new Fighter(350, 520);
+       level = new Level(new Fighter(350, 520));
     }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
         controller = new SlickInputController(gc.getInput());
-        controller.listenToKeysFor(new FighterControls(fighter), FighterControls.KEYS);
+        controller.listenToKeysFor(new FighterControls(level.getFighter()), FighterControls.KEYS);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        new SlickQuadRenderer(g).render(fighter.getShape(), Color.green);
+        new SlickQuadRenderer(g).render(level.getFighter().getShape(), Color.green);
     }
 
 }
