@@ -1,17 +1,17 @@
 package retaliation.game.entities;
 
-import retaliation.game.shapes.Quad;
+import retaliation.game.shapes.Shape;
 
 public class Fighter {
     private final static int SPEED = 4;
 
-    private Quad shape;
+    private Shape shape;
 
     public Fighter(int x, int y) {
-        shape = new Quad(x, y, 100, 20);
+        shape = new Shape(x, y, 100, 20);
     }
 
-    public Quad getShape() {
+    public Shape getShape() {
         return shape;
     }
 

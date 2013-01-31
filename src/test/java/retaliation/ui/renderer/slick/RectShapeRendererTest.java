@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import retaliation.game.shapes.Quad;
+import retaliation.game.shapes.Shape;
 
-public class SlickQuadRendererTest {
+public class RectShapeRendererTest {
     Mockery context = new Mockery() {{
       setImposteriser(ClassImposteriser.INSTANCE);
     }};
@@ -17,7 +17,7 @@ public class SlickQuadRendererTest {
     
     @Test
     public void drawsARectangleFromQuad() {        
-        final Quad someQuad = new Quad(10, 20, 30, 40);
+        final Shape someShape = new Shape(10, 20, 30, 40);
         final Color someColor = Color.black;                
         
         context.checking(new Expectations() {{
@@ -25,7 +25,7 @@ public class SlickQuadRendererTest {
             oneOf(graphics).fillRect(10, 20, 30, 40);
         }});
         
-        new SlickQuadRenderer(graphics).render(someQuad, someColor);
+        new RectShapeRenderer(graphics).render(someShape, someColor);
         
         context.assertIsSatisfied();
     }

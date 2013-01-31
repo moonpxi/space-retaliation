@@ -1,13 +1,13 @@
 package retaliation.game.shapes;
 
-public class Quad {
+public class Shape {
 
     private final int x;
     private final int y;
     private final int width;
     private final int height;
  
-    public Quad(int x, int y, int width, int height) {
+    public Shape(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -30,7 +30,7 @@ public class Quad {
         return height;
     }
 
-    public Quad move(int xAdjustment, int yAdjustment) {
-        return new Quad(x + xAdjustment, y + yAdjustment, width, height);
+    public Shape move(int xAdjustment, int yAdjustment) {
+        return new Shape(x + xAdjustment, y + yAdjustment, width, height);
     }
 }

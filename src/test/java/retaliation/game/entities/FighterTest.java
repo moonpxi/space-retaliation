@@ -5,13 +5,13 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import retaliation.game.shapes.Quad;
+import retaliation.game.shapes.Shape;
 
 public class FighterTest {
 
     @Test
     public void returnsShapeWithFightersDimension() {
-        Quad shape = new Fighter(30, 50).getShape();
+        Shape shape = new Fighter(30, 50).getShape();
         
         assertThat(shape.getX(), is(30));
         assertThat(shape.getY(), is(50));

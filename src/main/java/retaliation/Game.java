@@ -11,7 +11,7 @@ import retaliation.game.entities.Level;
 import retaliation.ui.input.InputController;
 import retaliation.ui.input.game.FighterControls;
 import retaliation.ui.input.slick.SlickInputController;
-import retaliation.ui.renderer.slick.SlickQuadRenderer;
+import retaliation.ui.renderer.slick.RectShapeRenderer;
 
 public class Game extends BasicGame {
     
@@ -37,7 +37,7 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        new SlickQuadRenderer(g).render(level.getFighter().getShape(), Color.green);
+        new RectShapeRenderer(g).render(level.getFighter().getShape(), Color.green);
     }
 
 }

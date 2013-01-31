@@ -5,13 +5,13 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class QuadTest {
+public class ShapeTest {
 
     @Test
     public void movingQuadIsAnImmutableOperation() {
-        Quad startingQuad = new Quad(10, 20, 30, 40);
+        Shape startingQuad = new Shape(10, 20, 30, 40);
         
-        Quad movedQuad = startingQuad.move(1, 2);
+        Shape movedQuad = startingQuad.move(1, 2);
         
         assertThat(startingQuad.getX(), equalTo(10));
         assertThat(startingQuad.getY(), equalTo(20));
