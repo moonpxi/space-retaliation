@@ -1,6 +1,9 @@
 package retaliation.game.entities;
 
-public class Level {
+import retaliation.game.shapes.Shape;
+import retaliation.game.shapes.ShapeMovementListener;
+
+public class Level implements ShapeMovementListener {
 
     private final Fighter fighter;
 
@@ -10,5 +13,10 @@ public class Level {
 
     public Fighter getFighter() {
         return fighter;
+    }
+
+    @Override
+    public void shapeMoved(Shape shape) {
+        
     }
 }
