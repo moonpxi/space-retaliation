@@ -11,6 +11,7 @@ public class Main {
      app.setTitle("Space Retaliation");
      app.setTargetFrameRate(100);
      app.setSmoothDeltas(true);
+     app.setVSync(true);
      app.start();	
   }
 }
