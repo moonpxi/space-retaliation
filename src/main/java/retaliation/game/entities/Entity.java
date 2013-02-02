@@ -22,7 +22,7 @@ public abstract class Entity {
     public void move(int xMovement, int yMovement) {
         shape = shape.move(xMovement, yMovement);
         for (EntityMovementListener listener : movementListeners) {
-            listener.entityMoved(this, shape.getX(), shape.getY());
+            listener.entityMoved(this);
         }
     }
 

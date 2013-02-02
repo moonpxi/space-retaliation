@@ -18,8 +18,8 @@ public class EntityTest {
         entity.registerMovementListener(anotherListener);
         
         context.checking(new Expectations() {{
-            oneOf(listener).entityMoved(entity, 15, 42);
-            oneOf(anotherListener).entityMoved(entity, 15, 42);
+            oneOf(listener).entityMoved(entity);
+            oneOf(anotherListener).entityMoved(entity);
         }});
         
         entity.move(15, 42);
