@@ -11,52 +11,42 @@ import retaliation.game.shapes.Shape;
 public class RestrictEntityToBoundaryTest {
 
     private final Shape boundary = new Shape(5, 6, 20, 21);
+    private final Entity entity = new RealEntity(new Shape(10, 10, 5, 5));
+    private final RestrictEntityToBoundary restriction = 
+            new RestrictEntityToBoundary(entity, boundary);
         
     @Test
     public void restrictEntityFromLeavingLeftBoundary() {
-        Entity entity = entityAt(2, 10);
-        
-        whenRestricting(entity);
+        whenEntityMovesTo(2, 10);
         
         assertThat(entity.getShape().getX(), equalTo(5));
     }
     
     @Test
     public void restrictEntityFromLeavingRightBoundary() {
-        Entity entity = entityAt(28, 10);
-        
-        whenRestricting(entity);
+        whenEntityMovesTo(28, 10);
         
         assertThat(entity.getShape().getX(), equalTo(20));
     }
     
     @Test
     public void restrictEntityFromLeavingBottomBoundary() {
-        Entity entity = entityAt(10, 1);
-        
-        whenRestricting(entity);
+        whenEntityMovesTo(10, 1);
         
         assertThat(entity.getShape().getY(), equalTo(6));
     }
 
     @Test
     public void restrictEntityFromLeavingTopBoundary() {
-        Entity entity = entityAt(10, 30);
-        
-        whenRestricting(entity);
+        whenEntityMovesTo(10, 30);
         
         assertThat(entity.getShape().getY(), equalTo(22));
     }
     
-    private void whenRestricting(Entity entity) {
-        RestrictEntityToBoundary restriction = new RestrictEntityToBoundary(entity, boundary);
-        restriction.entityMoved(entity);
+    private void whenEntityMovesTo(int x, int y) {
+        entity.move(x - entity.getShape().getX(), y - entity.getShape().getY()); 
     }
-
-    private RealEntity entityAt(int x, int y) {
-        return new RealEntity(new Shape(x, y, 5, 5));
-    }
-
+   
     private final class RealEntity extends Entity {
         public RealEntity(Shape shape) {
             super(shape);
