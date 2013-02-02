@@ -3,6 +3,7 @@ package retaliation.game.constraints;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import retaliation.game.entities.Entity;
@@ -12,9 +13,12 @@ public class RestrictEntityToBoundaryTest {
 
     private final Shape boundary = new Shape(5, 6, 20, 21);
     private final Entity entity = new RealEntity(new Shape(10, 10, 5, 5));
-    private final RestrictEntityToBoundary restriction = 
-            new RestrictEntityToBoundary(entity, boundary);
-        
+    
+    @Before
+    public void configureRestriction() {
+        new RestrictEntityToBoundary(entity, boundary);
+    }
+    
     @Test
     public void restrictEntityFromLeavingLeftBoundary() {
         whenEntityMovesTo(2, 10);
