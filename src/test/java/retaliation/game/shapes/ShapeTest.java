@@ -19,5 +19,13 @@ public class ShapeTest {
         assertThat(movedQuad.getX(), equalTo(11));
         assertThat(movedQuad.getY(), equalTo(22));
     }
+    
+    @Test
+    public void calculateRightmostXAndTopmostY() {
+        Shape shape = new Shape(10, 20, 100, 200);
+        
+        assertThat(shape.getRightmostX(), equalTo(110));
+        assertThat(shape.getTopmostY(), equalTo(220));
+    }
    
 }

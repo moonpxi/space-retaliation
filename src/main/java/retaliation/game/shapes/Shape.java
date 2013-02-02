@@ -30,9 +30,17 @@ public class Shape {
     public int getWidth() {
         return width;
     }
+    
+    public int getRightmostX() {
+        return x + width;
+    }
 
     public int getHeight() {
         return height;
+    }
+
+    public int getTopmostY() {
+        return y + height;
     }
 
 }

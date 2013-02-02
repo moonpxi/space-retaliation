@@ -21,7 +21,7 @@ public class Game extends BasicGame {
     public Game() {
        super("Space Retaliation");
        
-       level = new Level(new Fighter(350, 520));
+       level = constructLevel();
     }
 
     @Override
@@ -40,4 +40,7 @@ public class Game extends BasicGame {
         new RectShapeRenderer(g).render(level.getFighter().getShape(), Color.green);
     }
 
+    private Level constructLevel() {
+        return new Level(new Fighter(350, 520));
+    }
 }

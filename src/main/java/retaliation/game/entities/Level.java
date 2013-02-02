@@ -20,9 +20,20 @@ public class Level implements EntityMovementListener {
 
     @Override
     public void entityMoved(Entity entity, int newX, int newY) {
-        if (newX < boundary.getX()) {
-            entity.move(-newX, 0);
-        }        
+        Shape newPosition = entity.getShape();
+        
+        if (newPosition.getX() < boundary.getX()) {
+            entity.move(-newPosition.getX(), 0);
+        } 
+        if (newPosition.getRightmostX() > boundary.getRightmostX()) {
+            entity.move(-(newPosition.getRightmostX() - boundary.getRightmostX()), 0);
+        }
+        if (newPosition.getY() < boundary.getY()) {
+            entity.move(0, -newPosition.getY());
+        } 
+        if (newPosition.getTopmostY() > boundary.getTopmostY()) {
+            entity.move(0, -(newPosition.getTopmostY() - boundary.getTopmostY()));
+        }
     }
     
 }
