@@ -16,18 +16,24 @@ public class RestrictEntityToBoundary implements EntityMovementListener {
     @Override
     public void entityMoved(Entity entity) {
         Shape newPosition = entity.getShape();
+        int xAdjustment = 0,
+            yAdjustment = 0;
         
         if (newPosition.getX() < boundary.getX()) {
-            entity.move(boundary.getX() - newPosition.getX(), 0);
+            xAdjustment = boundary.getX() - newPosition.getX();
         } 
         if (newPosition.getRightmostX() > boundary.getRightmostX()) {
-            entity.move(-(newPosition.getRightmostX() - boundary.getRightmostX()), 0);
+            xAdjustment = -(newPosition.getRightmostX() - boundary.getRightmostX());
         }
         if (newPosition.getY() < boundary.getY()) {
-            entity.move(0, boundary.getY() - newPosition.getY());
+            yAdjustment = boundary.getY() - newPosition.getY();
         } 
         if (newPosition.getTopmostY() > boundary.getTopmostY()) {
-            entity.move(0, -(newPosition.getTopmostY() - boundary.getTopmostY()));
+            yAdjustment = -(newPosition.getTopmostY() - boundary.getTopmostY());
+        }
+        
+        if (xAdjustment != 0 || yAdjustment != 0) {
+            entity.move(xAdjustment, yAdjustment);
         }
     }
 

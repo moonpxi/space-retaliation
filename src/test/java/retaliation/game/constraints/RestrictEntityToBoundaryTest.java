@@ -43,6 +43,14 @@ public class RestrictEntityToBoundaryTest {
         assertThat(entity.getShape().getY(), equalTo(22));
     }
     
+    @Test
+    public void restrictEntityFromLeavingACornerBoundary() {
+        whenEntityMovesTo(2, 30);
+        
+        assertThat(entity.getShape().getX(), equalTo(5));
+        assertThat(entity.getShape().getY(), equalTo(22));
+    }
+    
     private void whenEntityMovesTo(int x, int y) {
         entity.move(x - entity.getShape().getX(), y - entity.getShape().getY()); 
     }
