@@ -16,25 +16,23 @@ public class RestrictEntityToBoundary implements EntityMovementListener {
     @Override
     public void entityMoved(Entity entity) {
         Shape newPosition = entity.getShape();
-        int xAdjustment = 0,
-            yAdjustment = 0;
-        
-        if (newPosition.getX() < boundary.getX()) {
-            xAdjustment = boundary.getX() - newPosition.getX();
-        } 
-        if (newPosition.getRightmostX() > boundary.getRightmostX()) {
-            xAdjustment = -(newPosition.getRightmostX() - boundary.getRightmostX());
-        }
-        if (newPosition.getY() < boundary.getY()) {
-            yAdjustment = boundary.getY() - newPosition.getY();
-        } 
-        if (newPosition.getTopmostY() > boundary.getTopmostY()) {
-            yAdjustment = -(newPosition.getTopmostY() - boundary.getTopmostY());
-        }
-        
+        int xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
+                                              boundary.getX(), boundary.getRightmostX()),
+            yAdjustment = calculateAdjustment(newPosition.getY(), newPosition.getTopmostY(),
+                                              boundary.getY(), boundary.getTopmostY());
+                
         if (xAdjustment != 0 || yAdjustment != 0) {
             entity.move(xAdjustment, yAdjustment);
         }
+    }
+
+    private int calculateAdjustment(int lowerPosition, int upperPosition, int lowerBoundary, int upperBoundary) {
+        if (lowerPosition < lowerBoundary) {
+            return lowerBoundary - lowerPosition;
+        } else if (upperPosition > upperBoundary) {
+            return upperBoundary - upperPosition;
+        }
+        return 0;
     }
 
 }
