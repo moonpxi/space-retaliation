@@ -45,6 +45,7 @@ public class Game extends BasicGame {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         RectShapeRenderer renderer = new RectShapeRenderer(g);
+        
         renderer.render(level.getFighter().getShape(), Color.green);
         for (AIEntity enemy : level.getEnemies()) {
             renderer.render(enemy.getShape(), Color.white);

@@ -18,6 +18,12 @@ public class Level {
         new RestrictEntityToBoundary(fighter, new Shape(0, 0, 800, 600));
     }
 
+    public void updateEnemyEntities(int delta) {
+        for (AIEntity enemy : enemies) {
+            enemy.update(delta);
+        }
+    }
+
     public Fighter getFighter() {
         return fighter;
     }
@@ -25,11 +31,4 @@ public class Level {
     public List<AIEntity> getEnemies() {
         return enemies;
     }
-
-    public void updateEnemyEntities(int delta) {
-        for (AIEntity enemy : enemies) {
-            enemy.update(delta);
-        }
-    }
-    
 }
