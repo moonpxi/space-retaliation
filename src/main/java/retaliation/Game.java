@@ -1,11 +1,16 @@
 package retaliation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import retaliation.game.entities.AIEntity;
+import retaliation.game.entities.Defender;
 import retaliation.game.entities.Fighter;
 import retaliation.game.entities.Level;
 import retaliation.ui.input.InputController;
@@ -37,10 +42,17 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        new RectShapeRenderer(g).render(level.getFighter().getShape(), Color.green);
+        RectShapeRenderer renderer = new RectShapeRenderer(g);
+        renderer.render(level.getFighter().getShape(), Color.green);
+        for (AIEntity enemy : level.getEnemies()) {
+            renderer.render(enemy.getShape(), Color.white);
+        }
     }
 
     private Level constructLevel() {
-        return new Level(new Fighter(350, 520));
+        List<AIEntity> enemies = new ArrayList<AIEntity>();
+        enemies.add(new Defender(400, 100));
+        
+        return new Level(new Fighter(350, 520), enemies);
     }
 }
