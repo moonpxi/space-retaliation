@@ -25,5 +25,11 @@ public class Level {
     public List<AIEntity> getEnemies() {
         return enemies;
     }
+
+    public void updateEnemyEntities(int delta) {
+        for (AIEntity enemy : enemies) {
+            enemy.update(delta);
+        }
+    }
     
 }

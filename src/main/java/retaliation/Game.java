@@ -39,9 +39,7 @@ public class Game extends BasicGame {
     public void update(GameContainer gc, int delta) throws SlickException {        
         controller.processInputAndNotifyControls();
         
-        for (AIEntity enemy : level.getEnemies()) {
-            enemy.update(delta);
-        }
+        level.updateEnemyEntities(delta);
     }
 
     @Override
