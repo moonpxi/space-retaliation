@@ -56,6 +56,8 @@ public class Game extends BasicGame {
     private Level constructLevel() {
         List<AIEntity> enemies = new ArrayList<AIEntity>();
         enemies.add(new Defender(400, 100));
+        enemies.add(new Defender(300, 200));
+        enemies.add(new Defender(500, 300));
         
         return new Level(new Fighter(350, 520), enemies);
     }
