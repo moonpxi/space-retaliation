@@ -9,14 +9,13 @@ import retaliation.game.shapes.Shape;
 public class Level {
 
     private final Fighter fighter;
-    private final Shape boundary;
     private final List<AIEntity> enemies;
 
     public Level(Fighter fighter, List<AIEntity> enemies) {
         this.fighter = fighter;
         this.enemies = enemies;        
-        boundary = new Shape(0, 0, 800, 600);
-        new RestrictEntityToBoundary(fighter, boundary);
+        
+        new RestrictEntityToBoundary(fighter, new Shape(0, 0, 800, 600));
     }
 
     public Fighter getFighter() {
