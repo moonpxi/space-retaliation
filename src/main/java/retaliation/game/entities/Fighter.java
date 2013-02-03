@@ -24,4 +24,8 @@ public class Fighter extends Entity {
     public void moveRight() {
         move(SPEED, 0);        
     }
+
+    public void shoot() {
+        System.out.println("Shooting");
+    }
 }
