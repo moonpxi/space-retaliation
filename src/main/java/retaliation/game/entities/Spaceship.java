@@ -25,6 +25,10 @@ public class Spaceship {
             listener.notifyMoved(this);
         }
     }
+    
+    public void shoot() {
+        System.out.println("Shooting");
+    }
 
     public void registerMovementListener(SpaceshipMovementListener listener) {
         movementListeners.add(listener);

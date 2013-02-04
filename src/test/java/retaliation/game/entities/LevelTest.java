@@ -16,7 +16,7 @@ public class LevelTest {
 
     @Test
     public void updateAllEnemies() {
-        Level level = new Level(new Fighter(0, 0), Arrays.asList(enemy1, enemy2));
+        Level level = new Level(new Spaceship(null), Arrays.asList(enemy1, enemy2));
         
         context.checking(new Expectations() {{
             oneOf(enemy1).update(41);

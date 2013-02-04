@@ -1,5 +1,8 @@
 package retaliation;
 
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,9 @@ import org.newdawn.slick.SlickException;
 
 import retaliation.game.entities.AIEntity;
 import retaliation.game.entities.Defender;
-import retaliation.game.entities.Fighter;
 import retaliation.game.entities.Level;
+import retaliation.game.entities.Spaceship;
+import retaliation.game.geometry.Rectangle;
 import retaliation.ui.input.InputController;
 import retaliation.ui.input.game.FighterControls;
 import retaliation.ui.input.slick.SlickInputController;
@@ -32,7 +36,7 @@ public class Game extends BasicGame {
     @Override
     public void init(GameContainer gc) throws SlickException {
         controller = new SlickInputController(gc.getInput());
-        controller.listenToKeysFor(new FighterControls(level.getFighter()), FighterControls.KEYS);
+        controller.listenToKeysFor(new FighterControls(level.getPlayer()), FighterControls.KEYS);
     }
 
     @Override
@@ -46,7 +50,7 @@ public class Game extends BasicGame {
     public void render(GameContainer gc, Graphics g) throws SlickException {
         RectShapeRenderer renderer = new RectShapeRenderer(g);
         
-        renderer.render(level.getFighter().getShape(), Color.green);
+        renderer.render(level.getPlayer().getShape(), Color.green);
         for (AIEntity enemy : level.getEnemies()) {
             renderer.render(enemy.getShape(), Color.white);
         }
@@ -58,6 +62,6 @@ public class Game extends BasicGame {
         enemies.add(new Defender(300, 200));
         enemies.add(new Defender(500, 300));
         
-        return new Level(new Fighter(350, 520), enemies);
+        return new Level(new Spaceship(new Rectangle(at(350, 520), size(100, 20))), enemies);
     }
 }
