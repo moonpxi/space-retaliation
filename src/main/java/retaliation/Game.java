@@ -12,17 +12,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import retaliation.game.ai.EnemyControls;
 import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
+import retaliation.ui.controller.EnemyController;
 import retaliation.ui.controller.PlayerShipController;
 import retaliation.ui.controller.SlickController;
 import retaliation.ui.renderer.slick.RectShapeRenderer;
 
 public class Game extends BasicGame {
     
-    private final List<EnemyControls> enemyControls = new ArrayList<EnemyControls>();
     private final List<SlickController> controllers = new ArrayList<SlickController>();
     private final Level level;
 
@@ -42,10 +41,6 @@ public class Game extends BasicGame {
     public void update(GameContainer gc, int delta) throws SlickException {        
         for (SlickController controller : this.controllers) {
             controller.update(gc.getInput(), delta);
-        }
-        
-        for (EnemyControls enemyControl : this.enemyControls) {
-            enemyControl.update(delta);
         }
     }
 
@@ -67,7 +62,7 @@ public class Game extends BasicGame {
         enemies.add(enemyShipAt(500, 300));
         
         for (Spaceship enemy : enemies) {
-            enemyControls.add(new EnemyControls(enemy));
+            controllers.add(new EnemyController(enemy));
         }
         
         return new Level(playerFighterAt(350, 520), enemies);

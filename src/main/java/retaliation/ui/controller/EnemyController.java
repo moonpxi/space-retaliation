@@ -1,23 +1,26 @@
-package retaliation.game.ai;
+package retaliation.ui.controller;
+
+import org.newdawn.slick.Input;
 
 import retaliation.game.entities.Spaceship;
 
-public class EnemyControls {
+public class EnemyController implements SlickController {
     
     private final float leftSide;
     private final float rightSide;
     private float speed;
     private final Spaceship enemy;
 
-    public EnemyControls(Spaceship enemy) {
+    public EnemyController(Spaceship enemy) {
         this.enemy = enemy;
         leftSide = enemy.position().x() - 200;
         rightSide = enemy.position().y() + 300;
         speed = -5;
     }
 
-    // TODO: write a test for this
-    public void update(int delta) {
+    // TODO: This should be in an game specific bit. write a test for this
+    @Override
+    public void update(Input input, int delta) {
         float position = enemy.position().x();
         
         if (position < leftSide || position > rightSide) {
