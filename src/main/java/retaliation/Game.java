@@ -53,22 +53,23 @@ public class Game extends BasicGame {
     public void render(GameContainer gc, Graphics g) throws SlickException {
         RectShapeRenderer renderer = new RectShapeRenderer(g);
         
-        renderer.render(level.getPlayer().getShape(), Color.green);
+        Spaceship player = level.getPlayer();
+        renderer.render(new Rectangle(player.position(), player.dimension()), Color.green);
         for (Spaceship enemy : level.getEnemies()) {
-            renderer.render(enemy.getShape(), Color.white);
+            renderer.render(new Rectangle(enemy.position(), enemy.dimension()), Color.white);
         }
     }
 
     private Level constructLevel() {
         List<Spaceship> enemies = new ArrayList<Spaceship>();
-        enemies.add(new Spaceship(new Rectangle(at(400, 100), size(40, 40))));
-        enemies.add(new Spaceship(new Rectangle(at(300, 200), size(40, 40))));
-        enemies.add(new Spaceship(new Rectangle(at(500, 300), size(40, 40))));
+        enemies.add(new Spaceship(at(400, 100), size(40, 40)));
+        enemies.add(new Spaceship(at(300, 200), size(40, 40)));
+        enemies.add(new Spaceship(at(500, 300), size(40, 40)));
         
         for (Spaceship enemy : enemies) {
             enemyControls.add(new EnemyControls(enemy));
         }
         
-        return new Level(new Spaceship(new Rectangle(at(350, 520), size(100, 20))), enemies);
+        return new Level(new Spaceship(at(350, 520), size(100, 20)), enemies);
     }
 }

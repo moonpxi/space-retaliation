@@ -14,15 +14,16 @@ public class RestrictEntityToBoundary implements SpaceshipMovementListener {
     }
     
     @Override
-    public void notifyMoved(Spaceship entity) {
-        Rectangle newPosition = entity.getShape();
+    public void notifyMoved(Spaceship ship) {
+        // TODO: revise this
+        Rectangle newPosition = new Rectangle(ship.position(), ship.dimension());
         float xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
                                               boundary.getX(), boundary.getRightmostX()),
               yAdjustment = calculateAdjustment(newPosition.getY(), newPosition.getTopmostY(),
                                               boundary.getY(), boundary.getTopmostY());
                 
         if (xAdjustment != 0 || yAdjustment != 0) {
-            entity.move(xAdjustment, yAdjustment);
+            ship.move(xAdjustment, yAdjustment);
         }
     }
 
