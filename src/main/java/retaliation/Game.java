@@ -1,7 +1,7 @@
 package retaliation;
 
-import static retaliation.game.geometry.Dimension.size;
-import static retaliation.game.geometry.Position.at;
+import static retaliation.game.entities.SpaceshipFactory.enemyShipAt;
+import static retaliation.game.entities.SpaceshipFactory.playerFighterAt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,14 +62,14 @@ public class Game extends BasicGame {
 
     private Level constructLevel() {
         List<Spaceship> enemies = new ArrayList<Spaceship>();
-        enemies.add(new Spaceship(at(400, 100), size(40, 40)));
-        enemies.add(new Spaceship(at(300, 200), size(40, 40)));
-        enemies.add(new Spaceship(at(500, 300), size(40, 40)));
+        enemies.add(enemyShipAt(400, 100));
+        enemies.add(enemyShipAt(300, 200));
+        enemies.add(enemyShipAt(500, 300));
         
         for (Spaceship enemy : enemies) {
             enemyControls.add(new EnemyControls(enemy));
         }
         
-        return new Level(new Spaceship(at(350, 520), size(100, 20)), enemies);
+        return new Level(playerFighterAt(350, 520), enemies);
     }
 }
