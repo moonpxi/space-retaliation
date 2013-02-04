@@ -1,12 +1,14 @@
 package retaliation.game.entities;
 
-import retaliation.game.geometry.Shape;
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
+import retaliation.game.geometry.Rectangle;
 
 public class Fighter extends Spaceship {
     private final static int SPEED = 4;
 
     public Fighter(int x, int y) {
-        super(new Shape(x, y, 100, 20));
+        super(new Rectangle(at(x, y), size(100, 20)));
     }
 
     public void moveUp() {

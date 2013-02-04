@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import retaliation.game.geometry.Shape;
+import retaliation.game.geometry.Dimension;
+import retaliation.game.geometry.Position;
+import retaliation.game.geometry.Rectangle;
 
 public class RectShapeRendererTest {
     Mockery context = new Mockery() {{
@@ -17,7 +19,7 @@ public class RectShapeRendererTest {
     
     @Test
     public void drawsARectangleFromQuad() {        
-        final Shape someShape = new Shape(10, 20, 30, 40);
+        final Rectangle someShape = new Rectangle(Position.at(10, 20), Dimension.size(30, 40));
         final Color someColor = Color.black;                
         
         context.checking(new Expectations() {{

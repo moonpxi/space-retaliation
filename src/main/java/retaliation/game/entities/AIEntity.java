@@ -1,10 +1,10 @@
 package retaliation.game.entities;
 
-import retaliation.game.geometry.Shape;
+import retaliation.game.geometry.Rectangle;
 
 public abstract class AIEntity extends Spaceship {
 
-    public AIEntity(Shape shape) {
+    public AIEntity(Rectangle shape) {
         super(shape);
     }
     

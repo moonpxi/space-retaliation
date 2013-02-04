@@ -1,6 +1,8 @@
 package retaliation.game.entities;
 
-import retaliation.game.geometry.Shape;
+import retaliation.game.geometry.Dimension;
+import retaliation.game.geometry.Position;
+import retaliation.game.geometry.Rectangle;
 
 public class Defender extends AIEntity {
 
@@ -9,7 +11,7 @@ public class Defender extends AIEntity {
     private int speed;
 
     public Defender(int x, int y) {
-        super(new Shape(x, y, 40, 40));
+        super(new Rectangle(Position.at(x, y), Dimension.size(40, 40)));
         leftSide = x - 200;
         rightSide = x + 300;
         speed = -5;
@@ -17,7 +19,7 @@ public class Defender extends AIEntity {
 
     @Override
     public void update(int delta) {
-        int position = getShape().getX();
+        float position = getShape().getX();
         
         if (position < leftSide || position > rightSide) {
             speed *= -1;

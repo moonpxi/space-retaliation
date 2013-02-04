@@ -3,7 +3,7 @@ package retaliation.ui.renderer.slick;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import retaliation.game.geometry.Shape;
+import retaliation.game.geometry.Rectangle;
 import retaliation.ui.renderer.ShapeRenderer;
 
 public class RectShapeRenderer implements ShapeRenderer {
@@ -15,7 +15,7 @@ public class RectShapeRenderer implements ShapeRenderer {
     }
 
     @Override
-    public void render(Shape shape, Color color) {
+    public void render(Rectangle shape, Color color) {
         graphics.setColor(color);
         graphics.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
     }

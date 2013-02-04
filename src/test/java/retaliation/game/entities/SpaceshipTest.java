@@ -4,7 +4,9 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
-import retaliation.game.geometry.Shape;
+import retaliation.game.geometry.Dimension;
+import retaliation.game.geometry.Position;
+import retaliation.game.geometry.Rectangle;
 
 public class SpaceshipTest {
     private final Mockery context = new Mockery();
@@ -13,7 +15,7 @@ public class SpaceshipTest {
 
     @Test
     public void notifiesListenersWhenItMoves() {
-        final Spaceship ship = new Spaceship(new Shape(0, 0, 10, 10));
+        final Spaceship ship = new Spaceship(new Rectangle(Position.at(0, 0), Dimension.size(10, 10)));
         ship.registerMovementListener(listener);
         ship.registerMovementListener(anotherListener);
         
