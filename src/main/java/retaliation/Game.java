@@ -16,34 +16,34 @@ import retaliation.game.ai.EnemyControls;
 import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
-import retaliation.ui.input.InputController;
-import retaliation.ui.input.game.ManualControls;
-import retaliation.ui.input.slick.SlickInputController;
+import retaliation.ui.controller.PlayerShipController;
+import retaliation.ui.controller.SlickController;
 import retaliation.ui.renderer.slick.RectShapeRenderer;
 
 public class Game extends BasicGame {
     
-    private InputController controller;
     private final List<EnemyControls> enemyControls = new ArrayList<EnemyControls>();
+    private final List<SlickController> controllers = new ArrayList<SlickController>();
     private final Level level;
 
     public Game() {
        super("Space Retaliation");
        
        level = constructLevel();
+       this.controllers.add(new PlayerShipController(level.getPlayer()));
     }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        controller = new SlickInputController(gc.getInput());
-        controller.listenToKeysFor(new ManualControls(level.getPlayer()), ManualControls.KEYS);
     }
-
+    
+    // TODO: write a test for this
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {        
-        controller.processInputAndNotifyControls();
+        for (SlickController controller : this.controllers) {
+            controller.update(gc.getInput(), delta);
+        }
         
-        // TODO: write a test for this
         for (EnemyControls enemyControl : this.enemyControls) {
             enemyControl.update(delta);
         }
