@@ -12,26 +12,20 @@ import retaliation.game.geometry.Rectangle;
 public class Level {
 
     private final Spaceship player;
-    private final List<AIEntity> enemies;
+    private final List<Spaceship> enemies;
 
-    public Level(Spaceship player, List<AIEntity> enemies) {
+    public Level(Spaceship player, List<Spaceship> enemies) {
         this.player = player;
         this.enemies = enemies;        
         
         new RestrictEntityToBoundary(player, new Rectangle(at(0, 0), size(800, 600)));
     }
 
-    public void updateEnemyEntities(int delta) {
-        for (AIEntity enemy : enemies) {
-            enemy.update(delta);
-        }
-    }
-
     public Spaceship getPlayer() {
         return player;
     }
 
-    public List<AIEntity> getEnemies() {
+    public List<Spaceship> getEnemies() {
         return enemies;
     }
 }
