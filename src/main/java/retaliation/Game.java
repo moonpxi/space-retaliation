@@ -18,7 +18,7 @@ import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
 import retaliation.ui.input.InputController;
-import retaliation.ui.input.game.FighterControls;
+import retaliation.ui.input.game.ManualControls;
 import retaliation.ui.input.slick.SlickInputController;
 import retaliation.ui.renderer.slick.RectShapeRenderer;
 
@@ -36,7 +36,7 @@ public class Game extends BasicGame {
     @Override
     public void init(GameContainer gc) throws SlickException {
         controller = new SlickInputController(gc.getInput());
-        controller.listenToKeysFor(new FighterControls(level.getPlayer()), FighterControls.KEYS);
+        controller.listenToKeysFor(new ManualControls(level.getPlayer()), ManualControls.KEYS);
     }
 
     @Override

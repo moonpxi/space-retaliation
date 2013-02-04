@@ -12,13 +12,13 @@ import java.util.List;
 import retaliation.game.entities.Spaceship;
 import retaliation.ui.input.Controls;
 
-public class FighterControls implements Controls {
+public class ManualControls implements Controls {
 
     public static final List<Integer> KEYS = asList(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_SPACE);
     public static final int SPEED = 4;
     private final Spaceship spaceship;
 
-    public FighterControls(Spaceship spaceship) {
+    public ManualControls(Spaceship spaceship) {
         this.spaceship = spaceship;
     }
     
