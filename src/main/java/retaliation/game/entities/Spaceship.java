@@ -5,14 +5,14 @@ import java.util.List;
 
 import retaliation.game.shapes.Shape;
 
-public abstract class Entity {
+public class Spaceship {
     
     private Shape shape;
-    private final List<EntityMovementListener> movementListeners;
+    private final List<SpaceshipMovementListener> movementListeners;
 
-    public Entity(Shape shape) {
+    public Spaceship(Shape shape) {
         this.shape = shape;
-        movementListeners = new ArrayList<EntityMovementListener>();
+        movementListeners = new ArrayList<SpaceshipMovementListener>();
     }
     
     public Shape getShape() {
@@ -21,12 +21,12 @@ public abstract class Entity {
 
     public void move(int xMovement, int yMovement) {
         shape = shape.move(xMovement, yMovement);
-        for (EntityMovementListener listener : movementListeners) {
-            listener.entityMoved(this);
+        for (SpaceshipMovementListener listener : movementListeners) {
+            listener.notifyMoved(this);
         }
     }
 
-    public void registerMovementListener(EntityMovementListener listener) {
+    public void registerMovementListener(SpaceshipMovementListener listener) {
         movementListeners.add(listener);
     }
 }

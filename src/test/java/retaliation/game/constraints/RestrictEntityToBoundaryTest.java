@@ -6,13 +6,13 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import retaliation.game.entities.Entity;
+import retaliation.game.entities.Spaceship;
 import retaliation.game.shapes.Shape;
 
 public class RestrictEntityToBoundaryTest {
 
     private final Shape boundary = new Shape(5, 6, 20, 21);
-    private final Entity entity = new RealEntity(new Shape(10, 10, 5, 5));
+    private final Spaceship entity = new RealEntity(new Shape(10, 10, 5, 5));
     
     @Before
     public void configureRestriction() {
@@ -59,7 +59,7 @@ public class RestrictEntityToBoundaryTest {
         entity.move(x - entity.getShape().getX(), y - entity.getShape().getY()); 
     }
    
-    private final class RealEntity extends Entity {
+    private final class RealEntity extends Spaceship {
         public RealEntity(Shape shape) {
             super(shape);
         }

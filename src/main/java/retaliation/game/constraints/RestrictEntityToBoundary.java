@@ -1,20 +1,20 @@
 package retaliation.game.constraints;
 
-import retaliation.game.entities.Entity;
-import retaliation.game.entities.EntityMovementListener;
+import retaliation.game.entities.Spaceship;
+import retaliation.game.entities.SpaceshipMovementListener;
 import retaliation.game.shapes.Shape;
 
-public class RestrictEntityToBoundary implements EntityMovementListener {
+public class RestrictEntityToBoundary implements SpaceshipMovementListener {
 
     private final Shape boundary;
 
-    public RestrictEntityToBoundary(Entity entity, Shape boundary) {
+    public RestrictEntityToBoundary(Spaceship entity, Shape boundary) {
         this.boundary = boundary;
         entity.registerMovementListener(this);
     }
     
     @Override
-    public void entityMoved(Entity entity) {
+    public void notifyMoved(Spaceship entity) {
         Shape newPosition = entity.getShape();
         int xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
                                               boundary.getX(), boundary.getRightmostX()),

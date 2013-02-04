@@ -2,7 +2,7 @@ package retaliation.game.entities;
 
 import retaliation.game.shapes.Shape;
 
-public class Fighter extends Entity {
+public class Fighter extends Spaceship {
     private final static int SPEED = 4;
 
     public Fighter(int x, int y) {
