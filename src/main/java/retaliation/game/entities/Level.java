@@ -3,7 +3,7 @@ package retaliation.game.entities;
 import java.util.List;
 
 import retaliation.game.constraints.RestrictEntityToBoundary;
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 
 public class Level {

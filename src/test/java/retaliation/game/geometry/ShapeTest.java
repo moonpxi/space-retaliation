@@ -1,9 +1,11 @@
-package retaliation.game.shapes;
+package retaliation.game.geometry;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import retaliation.game.geometry.Shape;
 
 public class ShapeTest {
 

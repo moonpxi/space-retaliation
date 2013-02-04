@@ -1,6 +1,6 @@
 package retaliation.game.entities;
 
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class Defender extends AIEntity {
 

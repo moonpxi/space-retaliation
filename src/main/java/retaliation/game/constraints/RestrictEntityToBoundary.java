@@ -2,7 +2,7 @@ package retaliation.game.constraints;
 
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.SpaceshipMovementListener;
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class RestrictEntityToBoundary implements SpaceshipMovementListener {
 

@@ -1,4 +1,4 @@
-package retaliation.game.shapes;
+package retaliation.game.geometry;
 
 
 public class Shape {

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import retaliation.game.entities.Spaceship;
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class RestrictEntityToBoundaryTest {
 

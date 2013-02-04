@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class FighterTest {
 

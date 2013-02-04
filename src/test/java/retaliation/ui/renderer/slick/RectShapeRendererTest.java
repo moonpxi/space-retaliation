@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class RectShapeRendererTest {
     Mockery context = new Mockery() {{

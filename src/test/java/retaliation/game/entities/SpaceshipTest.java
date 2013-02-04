@@ -4,7 +4,7 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 
 public class SpaceshipTest {
     private final Mockery context = new Mockery();

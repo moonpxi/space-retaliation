@@ -3,7 +3,7 @@ package retaliation.ui.renderer.slick;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import retaliation.game.shapes.Shape;
+import retaliation.game.geometry.Shape;
 import retaliation.ui.renderer.ShapeRenderer;
 
 public class RectShapeRenderer implements ShapeRenderer {
