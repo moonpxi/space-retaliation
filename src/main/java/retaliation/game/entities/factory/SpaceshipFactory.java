@@ -1,7 +1,8 @@
-package retaliation.game.entities;
+package retaliation.game.entities.factory;
 
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
+import retaliation.game.entities.Spaceship;
 
 public class SpaceshipFactory {
     

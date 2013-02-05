@@ -3,6 +3,7 @@ package retaliation.game.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 

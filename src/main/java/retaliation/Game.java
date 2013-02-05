@@ -1,7 +1,7 @@
 package retaliation;
 
-import static retaliation.game.entities.SpaceshipFactory.enemyShipAt;
-import static retaliation.game.entities.SpaceshipFactory.playerFighterAt;
+import static retaliation.game.entities.factory.SpaceshipFactory.enemyShipAt;
+import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt;
 
 import java.util.ArrayList;
 import java.util.List;

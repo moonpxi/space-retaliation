@@ -9,6 +9,8 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
+import retaliation.game.entities.listener.SpaceshipMovementListener;
+
 public class SpaceshipTest {
     private final Mockery context = new Mockery();
     private final SpaceshipMovementListener listener = context.mock(SpaceshipMovementListener.class, "ML1");
