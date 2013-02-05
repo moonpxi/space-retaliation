@@ -12,15 +12,16 @@ import org.newdawn.slick.SlickException;
 import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.factory.LevelFactory;
-import retaliation.game.geometry.Rectangle;
 import retaliation.ui.controller.EnemyController;
 import retaliation.ui.controller.PlayerShipController;
 import retaliation.ui.controller.SlickController;
-import retaliation.ui.renderer.slick.RectShapeRenderer;
+import retaliation.ui.renderer.SlickRenderable;
+import retaliation.ui.renderer.SpaceshipRenderable;
 
 public class Game extends BasicGame {
     
     private final List<SlickController> controllers = new ArrayList<SlickController>();
+    private final List<SlickRenderable> renderables = new ArrayList<SlickRenderable>();
     private final Level level;
 
     public Game() {
@@ -31,10 +32,12 @@ public class Game extends BasicGame {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        this.controllers.add(new PlayerShipController(level.getPlayer()));
+        controllers.add(new PlayerShipController(level.getPlayer()));
+        renderables.add(new SpaceshipRenderable(level.getPlayer(), Color.green));
         
         for (Spaceship enemy : level.getEnemies()) {
             controllers.add(new EnemyController(enemy));
+            renderables.add(new SpaceshipRenderable(enemy, Color.white));
         }
     }
     
@@ -48,12 +51,8 @@ public class Game extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        RectShapeRenderer renderer = new RectShapeRenderer(g);
-        
-        Spaceship player = level.getPlayer();
-        renderer.render(new Rectangle(player.position(), player.dimension()), Color.green);
-        for (Spaceship enemy : level.getEnemies()) {
-            renderer.render(new Rectangle(enemy.position(), enemy.dimension()), Color.white);
+        for (SlickRenderable renderable : this.renderables) {
+            renderable.render(g);
         }
     }
 
