@@ -10,56 +10,65 @@ import org.junit.Test;
 
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
-import retaliation.game.rules.EnforceLevelBoundaryRule;
 
 public class EnforceLevelBoundaryRuleTest {
 
     private final Rectangle boundary = new Rectangle(at(5, 6), size(20, 21));
-    private final Spaceship ship = new Spaceship(at(10, 10), size(5, 5));
+    private EnforceLevelBoundaryRule rule;
     
     @Before
     public void configureRestriction() {
-        new EnforceLevelBoundaryRule(ship, boundary);
+        rule = new EnforceLevelBoundaryRule(new Spaceship(null, null), boundary);
     }
     
     @Test
-    public void restrictEntityFromLeavingLeftBoundary() {
-        whenEntityMovesTo(2, 10);
+    public void restrictShipFromLeavingLeftBoundary() {
+        Spaceship ship = shipAt(2, 10);
+        
+        rule.enforceBoundaryOn(ship);
         
         assertThat(ship.position().x(), equalTo(5f));
     }
     
     @Test
-    public void restrictEntityFromLeavingRightBoundary() {
-        whenEntityMovesTo(28, 10);
+    public void restrictShipFromLeavingRightBoundary() {
+        Spaceship ship = shipAt(28, 10);
+        
+        rule.enforceBoundaryOn(ship);
         
         assertThat(ship.position().x(), equalTo(20f));
     }
     
     @Test
-    public void restrictEntityFromLeavingBottomBoundary() {
-        whenEntityMovesTo(10, 1);
+    public void restrictShipFromLeavingBottomBoundary() {
+        Spaceship ship = shipAt(10, 1);
+        
+        rule.enforceBoundaryOn(ship);
         
         assertThat(ship.position().y(), equalTo(6f));
     }
 
     @Test
-    public void restrictEntityFromLeavingTopBoundary() {
-        whenEntityMovesTo(10, 30);
+    public void restrictShipFromLeavingTopBoundary() {
+        Spaceship ship = shipAt(10, 30);
+        
+        rule.enforceBoundaryOn(ship);
         
         assertThat(ship.position().y(), equalTo(22f));
     }
     
     @Test
-    public void restrictEntityFromLeavingACornerBoundary() {
-        whenEntityMovesTo(2, 30);
+    public void restrictShipFromLeavingACornerBoundary() {
+        Spaceship ship = shipAt(2, 30);
+        
+        rule.enforceBoundaryOn(ship);
         
         assertThat(ship.position().x(), equalTo(5f));
         assertThat(ship.position().y(), equalTo(22f));
     }
-    
-    private void whenEntityMovesTo(float x, float y) {
-        ship.move(x - ship.position().x(), y - ship.position().y()); 
-    }
    
+    private Spaceship shipAt(float x, float y) {
+        return new Spaceship(at(x, y), size(5, 5));
+    }
+
  }
