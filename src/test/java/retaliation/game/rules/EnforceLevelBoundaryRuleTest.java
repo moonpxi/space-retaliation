@@ -1,4 +1,4 @@
-package retaliation.game.constraints;
+package retaliation.game.rules;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -10,15 +10,16 @@ import org.junit.Test;
 
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
+import retaliation.game.rules.EnforceLevelBoundaryRule;
 
-public class RestrictEntityToBoundaryTest {
+public class EnforceLevelBoundaryRuleTest {
 
     private final Rectangle boundary = new Rectangle(at(5, 6), size(20, 21));
     private final Spaceship ship = new Spaceship(at(10, 10), size(5, 5));
     
     @Before
     public void configureRestriction() {
-        new RestrictEntityToBoundary(ship, boundary);
+        new EnforceLevelBoundaryRule(ship, boundary);
     }
     
     @Test

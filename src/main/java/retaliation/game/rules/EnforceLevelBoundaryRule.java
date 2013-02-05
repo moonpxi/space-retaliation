@@ -1,20 +1,24 @@
-package retaliation.game.constraints;
+package retaliation.game.rules;
 
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.geometry.Rectangle;
 
-public class RestrictEntityToBoundary implements SpaceshipMovementListener {
+public class EnforceLevelBoundaryRule implements SpaceshipMovementListener {
 
     private final Rectangle boundary;
 
-    public RestrictEntityToBoundary(Spaceship entity, Rectangle boundary) {
+    public EnforceLevelBoundaryRule(Spaceship entity, Rectangle boundary) {
         this.boundary = boundary;
         entity.registerMovementListener(this);
     }
     
     @Override
     public void notifyMoved(Spaceship ship) {
+        enforceBoundaryOn(ship);
+    }
+    
+    public void enforceBoundaryOn(Spaceship ship) {
         // TODO: revise this
         Rectangle newPosition = new Rectangle(ship.position(), ship.dimension());
         float xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
@@ -24,7 +28,7 @@ public class RestrictEntityToBoundary implements SpaceshipMovementListener {
                 
         if (xAdjustment != 0 || yAdjustment != 0) {
             ship.move(xAdjustment, yAdjustment);
-        }
+        } 
     }
 
     private float calculateAdjustment(float lowerPosition, float upperPosition, float lowerBoundary, float upperBoundary) {

@@ -5,8 +5,8 @@ import static retaliation.game.geometry.Position.at;
 
 import java.util.List;
 
-import retaliation.game.constraints.RestrictEntityToBoundary;
 import retaliation.game.geometry.Rectangle;
+import retaliation.game.rules.EnforceLevelBoundaryRule;
 
 
 public class Level {
@@ -18,7 +18,7 @@ public class Level {
         this.player = player;
         this.enemies = enemies;        
         
-        new RestrictEntityToBoundary(player, new Rectangle(at(0, 0), size(800, 600)));
+        new EnforceLevelBoundaryRule(player, new Rectangle(at(0, 0), size(800, 600)));
     }
 
     public Spaceship getPlayer() {
