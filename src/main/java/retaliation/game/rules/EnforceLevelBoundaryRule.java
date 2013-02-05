@@ -1,21 +1,14 @@
 package retaliation.game.rules;
 
 import retaliation.game.entities.Spaceship;
-import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.geometry.Rectangle;
 
-public class EnforceLevelBoundaryRule implements SpaceshipMovementListener {
+public class EnforceLevelBoundaryRule {
 
     private final Rectangle boundary;
 
-    public EnforceLevelBoundaryRule(Spaceship entity, Rectangle boundary) {
+    public EnforceLevelBoundaryRule(Rectangle boundary) {
         this.boundary = boundary;
-        entity.registerMovementListener(this);
-    }
-    
-    @Override
-    public void notifyMoved(Spaceship ship) {
-        enforceBoundaryOn(ship);
     }
     
     public void enforceBoundaryOn(Spaceship ship) {

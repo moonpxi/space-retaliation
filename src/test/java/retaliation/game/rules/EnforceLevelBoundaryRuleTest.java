@@ -18,7 +18,7 @@ public class EnforceLevelBoundaryRuleTest {
     
     @Before
     public void configureRestriction() {
-        rule = new EnforceLevelBoundaryRule(new Spaceship(null, null), boundary);
+        rule = new EnforceLevelBoundaryRule(boundary);
     }
     
     @Test
