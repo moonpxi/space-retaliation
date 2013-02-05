@@ -1,8 +1,5 @@
 package retaliation;
 
-import static retaliation.game.entities.factory.SpaceshipFactory.enemyShipAt;
-import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,7 @@ import org.newdawn.slick.SlickException;
 
 import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
+import retaliation.game.entities.factory.LevelFactory;
 import retaliation.game.geometry.Rectangle;
 import retaliation.ui.controller.EnemyController;
 import retaliation.ui.controller.PlayerShipController;
@@ -28,12 +26,16 @@ public class Game extends BasicGame {
     public Game() {
        super("Space Retaliation");
        
-       level = constructLevel();
-       this.controllers.add(new PlayerShipController(level.getPlayer()));
+       level = LevelFactory.sampleLevel();     
     }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
+        this.controllers.add(new PlayerShipController(level.getPlayer()));
+        
+        for (Spaceship enemy : level.getEnemies()) {
+            controllers.add(new EnemyController(enemy));
+        }
     }
     
     // TODO: write a test for this
@@ -55,16 +57,4 @@ public class Game extends BasicGame {
         }
     }
 
-    private Level constructLevel() {
-        List<Spaceship> enemies = new ArrayList<Spaceship>();
-        enemies.add(enemyShipAt(400, 100));
-        enemies.add(enemyShipAt(300, 200));
-        enemies.add(enemyShipAt(500, 300));
-        
-        for (Spaceship enemy : enemies) {
-            controllers.add(new EnemyController(enemy));
-        }
-        
-        return new Level(playerFighterAt(350, 520), enemies);
-    }
 }
