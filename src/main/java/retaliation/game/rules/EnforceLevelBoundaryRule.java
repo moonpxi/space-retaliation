@@ -12,8 +12,8 @@ public class EnforceLevelBoundaryRule {
     }
     
     public void enforceBoundaryOn(Spaceship ship) {
-        // TODO: revise this
         Rectangle newPosition = new Rectangle(ship.position(), ship.dimension());
+        
         float xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
                                               boundary.getX(), boundary.getRightmostX()),
               yAdjustment = calculateAdjustment(newPosition.getY(), newPosition.getTopmostY(),
