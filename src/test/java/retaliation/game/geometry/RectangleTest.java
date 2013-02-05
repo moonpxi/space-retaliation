@@ -8,7 +8,7 @@ import org.junit.Test;
 public class RectangleTest {
 
     @Test
-    public void movingQuadIsAnImmutableOperation() {
+    public void movingRectangleIsAnImmutableOperation() {
         Rectangle startingQuad = new Rectangle(Position.at(10, 20), Dimension.size(30, 40));
         
         Rectangle movedQuad = startingQuad.move(1, 2);
