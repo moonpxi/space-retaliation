@@ -20,9 +20,8 @@ public class Level implements SpaceshipMovementListener {
         this.player = player;
         this.enemies = enemies;        
         
-        this.player.registerMovementListener(this);
-        
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
+        this.player.registerMovementListener(this);
     }
 
     public Spaceship getPlayer() {
