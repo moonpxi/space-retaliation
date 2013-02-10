@@ -18,7 +18,8 @@ public class EnemyController implements SlickController {
         speed = -5;
     }
 
-    // TODO: This should be in an game specific bit. write a test for this
+    // TODO: This should be in an game specific bit. Extract this whenever 
+    // there are more than one ways to control a ship.
     @Override
     public void update(Input input, int delta) {
         float position = enemy.position().x();
