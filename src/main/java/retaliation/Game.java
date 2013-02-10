@@ -41,7 +41,6 @@ public class Game extends BasicGame {
         }
     }
     
-    // TODO: write a test for this
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {        
         for (SlickController controller : this.controllers) {
