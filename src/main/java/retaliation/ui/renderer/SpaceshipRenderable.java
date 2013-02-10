@@ -15,7 +15,6 @@ public class SpaceshipRenderable implements SlickRenderable {
         this.color = color;
     }
     
-    // TODO: test this
     @Override
     public void render(Graphics graphics) {
         graphics.setColor(color);
