@@ -32,15 +32,15 @@ public class Game extends BasicGame {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        controllers.add(new PlayerShipController(level.getPlayer()));
-        renderables.add(new SpaceshipRenderable(level.getPlayer(), Color.green));
+        register(new PlayerShipController(level.getPlayer()), 
+                 new SpaceshipRenderable(level.getPlayer(), Color.green));
         
         for (Spaceship enemy : level.getEnemies()) {
-            controllers.add(new EnemyController(enemy));
-            renderables.add(new SpaceshipRenderable(enemy, Color.white));
+            register(new EnemyController(enemy),
+                     new SpaceshipRenderable(enemy, Color.white));
         }
     }
-    
+
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {        
         for (SlickController controller : this.controllers) {
@@ -53,6 +53,11 @@ public class Game extends BasicGame {
         for (SlickRenderable renderable : this.renderables) {
             renderable.render(g);
         }
+    }
+    
+    private void register(SlickController controller, SlickRenderable renderable) {
+        controllers.add(controller);
+        renderables.add(renderable);
     }
 
 }
