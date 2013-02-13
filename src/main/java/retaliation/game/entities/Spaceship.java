@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retaliation.game.entities.listener.SpaceshipMovementListener;
+import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 
@@ -12,6 +13,7 @@ public class Spaceship {
     private final List<SpaceshipMovementListener> movementListeners;
     private final Dimension dimension;
     private Position position;
+    private SpaceshipShootingListener shootingListener;
 
     public Spaceship(Position position, Dimension dimension) {
         this.position = position;
@@ -27,11 +29,7 @@ public class Spaceship {
     }
     
     public void shoot() {
-        System.out.println("Shooting");
-    }
-
-    public void registerMovementListener(SpaceshipMovementListener listener) {
-        movementListeners.add(listener);
+        shootingListener.fired(this);
     }
 
     public Position position() {
@@ -40,5 +38,13 @@ public class Spaceship {
 
     public Dimension dimension() {
         return dimension;
+    }
+    
+    public void registerMovementListener(SpaceshipMovementListener listener) {
+        movementListeners.add(listener);
+    }
+    
+    public void registerShootingListener(SpaceshipShootingListener listener) {
+        this.shootingListener = listener;
     }
 }
