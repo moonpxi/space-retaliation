@@ -6,11 +6,12 @@ import static retaliation.game.geometry.Position.at;
 import java.util.List;
 
 import retaliation.game.entities.listener.SpaceshipMovementListener;
+import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
 
 
-public class Level implements SpaceshipMovementListener {
+public class Level implements SpaceshipMovementListener, SpaceshipShootingListener {
 
     private final Spaceship player;
     private final List<Spaceship> enemies;
@@ -35,5 +36,10 @@ public class Level implements SpaceshipMovementListener {
     @Override
     public void notifyMoved(Spaceship ship) {
         boundaryRule.enforceBoundaryOn(ship);
+    }
+
+    @Override
+    public void fired(Spaceship ship) {
+        
     }
 }
