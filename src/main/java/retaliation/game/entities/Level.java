@@ -5,6 +5,7 @@ import static retaliation.game.geometry.Position.at;
 
 import java.util.List;
 
+import retaliation.game.entities.listener.EntityStateListener;
 import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
@@ -17,6 +18,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
     private final Spaceship player;
     private final List<Spaceship> enemies;
     private final EnforceLevelBoundaryRule boundaryRule;
+    private EntityStateListener stateListener;
 
     public Level(Spaceship player, List<Spaceship> enemies) {
         this.player = player;
@@ -26,6 +28,10 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
         this.player.registerShootingListener(this);
     }
 
+    public void registerStateListener(EntityStateListener stateListener) {
+        this.stateListener = stateListener; 
+    }
+    
     public Spaceship getPlayer() {
         return player;
     }
@@ -41,6 +47,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     @Override
     public void fired(Position from) {
-        System.out.println("Firing from " + from.x() + "," + from.y());
+        stateListener.laserCreated(new Laser(from, size(1, 3)));
     }
+
 }
