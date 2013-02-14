@@ -25,7 +25,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
         this.enemies = enemies;        
         
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
-        this.player.registerShootingListener(this);
+        this.player.registerShootingListener(this); // TODO: add to constructor
     }
 
     public void registerStateListener(EntityStateListener stateListener) {
@@ -47,6 +47,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     @Override
     public void fired(Position from) {
+        // TODO: add laser somewhere
         stateListener.laserCreated(new Laser(from, size(1, 3)));
     }
 

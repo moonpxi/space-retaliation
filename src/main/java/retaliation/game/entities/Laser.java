@@ -8,6 +8,7 @@ public class Laser {
     private Position position;
     private final Dimension dimension;
 
+    // TODO is laser parent of spaceship?
     public Laser(Position position, Dimension dimension) {
         this.position = position;
         this.dimension = dimension;
