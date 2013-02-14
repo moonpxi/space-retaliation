@@ -48,6 +48,6 @@ public class Spaceship {
     }
     
     public void registerShootingListener(SpaceshipShootingListener listener) {
-        this.shootingListener = listener;
+        shootingListener = listener;
     }
 }
