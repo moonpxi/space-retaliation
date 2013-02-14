@@ -21,4 +21,23 @@ public class Position {
     public float y() {
         return y;
     }
+
+    @Override
+    public int hashCode() {
+        return 961 + 31 * Float.floatToIntBits(x) + Float.floatToIntBits(y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        Position other = (Position) obj;
+        return x == other.x && y == other.y;
+    }
+    
+    
 }

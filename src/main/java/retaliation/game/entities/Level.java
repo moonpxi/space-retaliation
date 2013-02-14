@@ -7,6 +7,7 @@ import java.util.List;
 
 import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
+import retaliation.game.geometry.Position;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
 
@@ -39,7 +40,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
     }
 
     @Override
-    public void fired(Spaceship ship) {
-        
+    public void fired(Position from) {
+        System.out.println("Firing from " + from.x() + "," + from.y());
     }
 }

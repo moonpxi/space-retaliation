@@ -45,7 +45,7 @@ public class SpaceshipTest {
         ship.registerShootingListener(shootingListener);
         
         context.checking(new Expectations() {{
-            oneOf(shootingListener).fired(ship);
+            oneOf(shootingListener).fired(at(10, 7));
         }});
         
         ship.shoot();

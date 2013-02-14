@@ -29,7 +29,10 @@ public class Spaceship {
     }
     
     public void shoot() {
-        shootingListener.fired(this);
+        Position from = Position.at(position.x() + (dimension.width() / 2), 
+                                    position.y() - 1);
+        
+        shootingListener.fired(from);
     }
 
     public Position position() {

@@ -1,8 +1,9 @@
 package retaliation.game.entities.listener;
 
-import retaliation.game.entities.Spaceship;
+import retaliation.game.geometry.Position;
+
 
 public interface SpaceshipShootingListener {
 
-    public void fired(Spaceship ship);
+    public void fired(Position from);
 }
