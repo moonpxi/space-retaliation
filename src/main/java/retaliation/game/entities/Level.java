@@ -3,6 +3,7 @@ package retaliation.game.entities;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retaliation.game.entities.listener.EntityStateListener;
@@ -17,6 +18,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     private final Spaceship player;
     private final List<Spaceship> enemies;
+    private final List<Laser> lasers = new ArrayList<Laser>();
     private final EnforceLevelBoundaryRule boundaryRule;
     private EntityStateListener stateListener;
 
@@ -29,7 +31,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
     }
 
     public void registerStateListener(EntityStateListener stateListener) {
-        this.stateListener = stateListener; 
+        this.stateListener = stateListener;
     }
     
     public Spaceship getPlayer() {
@@ -47,8 +49,9 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     @Override
     public void fired(Position from) {
-        // TODO: add laser somewhere
-        stateListener.laserCreated(new Laser(from, size(1, 3)));
+        Laser laser = new Laser(from, size(1, 3));
+        lasers.add(laser);
+        stateListener.laserCreated(laser);
     }
 
 }
