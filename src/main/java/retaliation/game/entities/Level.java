@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retaliation.game.entities.listener.EntityStateListener;
-import retaliation.game.entities.listener.SpaceshipMovementListener;
+import retaliation.game.entities.listener.MovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
 
 
-public class Level implements SpaceshipMovementListener, SpaceshipShootingListener {
+public class Level implements MovementListener, SpaceshipShootingListener {
 
     private final Spaceship player;
     private final List<Spaceship> enemies;
@@ -29,6 +29,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
         
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
         this.player.registerShootingListener(this); // TODO: add to constructor
+        this.player.registerMovementListener(this);
     }
 
     public Spaceship getPlayer() {
@@ -40,7 +41,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
     }
 
     @Override
-    public void notifyMoved(Spaceship ship) {
+    public void notifyMoved(Moveable ship) {
         boundaryRule.enforceBoundaryOn(ship);
     }
 

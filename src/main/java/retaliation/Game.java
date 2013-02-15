@@ -18,8 +18,8 @@ import retaliation.game.entities.listener.EntityStateListener;
 import retaliation.ui.controller.EnemyController;
 import retaliation.ui.controller.PlayerShipController;
 import retaliation.ui.controller.SlickController;
+import retaliation.ui.renderer.MoveableRectRenderable;
 import retaliation.ui.renderer.SlickRenderable;
-import retaliation.ui.renderer.SpaceshipRenderable;
 
 public class Game extends BasicGame implements EntityStateListener {
     
@@ -37,11 +37,11 @@ public class Game extends BasicGame implements EntityStateListener {
     @Override
     public void init(GameContainer gc) throws SlickException {
         register(new PlayerShipController(level.getPlayer()), 
-                 new SpaceshipRenderable(level.getPlayer(), Color.green));
+                 new MoveableRectRenderable(level.getPlayer(), Color.green));
         
         for (Spaceship enemy : level.getEnemies()) {
             register(new EnemyController(enemy),
-                     new SpaceshipRenderable(enemy, Color.white));
+                     new MoveableRectRenderable(enemy, Color.white));
         }
     }
 
@@ -76,14 +76,7 @@ public class Game extends BasicGame implements EntityStateListener {
                 laser.move(0, -1);
             }
         });
-        renderables.add(new SlickRenderable() {
-            @Override
-            public void render(Graphics g) {
-                g.setColor(Color.green);
-                g.fillRect(laser.position().x(), laser.position().y(), 
-                           laser.dimension().width(), laser.dimension().height());
-            }
-        });
+        renderables.add(new MoveableRectRenderable(laser, Color.green));
     }
 
 }

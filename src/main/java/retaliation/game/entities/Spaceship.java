@@ -1,31 +1,17 @@
 package retaliation.game.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retaliation.game.entities.listener.SpaceshipMovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 
 public class Spaceship extends Moveable {
     
-    private final List<SpaceshipMovementListener> movementListeners;
     private SpaceshipShootingListener shootingListener;
 
     public Spaceship(Position position, Dimension dimension) {
         super(position, dimension);
-        movementListeners = new ArrayList<SpaceshipMovementListener>();
     }
 
-    @Override
-    public void move(float xMovement, float yMovement) {
-        super.move(xMovement, yMovement);
-        for (SpaceshipMovementListener listener : movementListeners) {
-            listener.notifyMoved(this);
-        }
-    }
-    
     public void shoot() {
         Position from = Position.at(position().x() + (dimension().width() / 2),
                                     position().y() - 1);
@@ -33,10 +19,6 @@ public class Spaceship extends Moveable {
         shootingListener.fired(from);
     }
 
-    public void registerMovementListener(SpaceshipMovementListener listener) {
-        movementListeners.add(listener);
-    }
-    
     public void registerShootingListener(SpaceshipShootingListener listener) {
         shootingListener = listener;
     }

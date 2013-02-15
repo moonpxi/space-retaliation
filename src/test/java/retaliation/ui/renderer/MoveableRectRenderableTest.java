@@ -1,18 +1,17 @@
 package retaliation.ui.renderer;
 
-import static retaliation.game.geometry.Dimension.size;
-import static retaliation.game.geometry.Position.at;
-
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Test;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import retaliation.game.entities.Moveable;
 
-import retaliation.game.entities.Spaceship;
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
 
-public class SpaceshipRenderableTest {
+public class MoveableRectRenderableTest {
     private final Mockery context = new Mockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
     }};
@@ -25,7 +24,7 @@ public class SpaceshipRenderableTest {
             oneOf(graphics).fillRect(10, 20, 200, 300);
         }});
         
-        new SpaceshipRenderable(new Spaceship(at(10, 20), size(200, 300)), 
+        new MoveableRectRenderable(new Moveable(at(10, 20), size(200, 300)),
                                 Color.blue).
                                 render(graphics);
         
