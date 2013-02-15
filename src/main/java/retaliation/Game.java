@@ -1,25 +1,20 @@
 package retaliation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-
-import retaliation.game.entities.Moveable;
+import org.newdawn.slick.*;
 import retaliation.game.entities.Level;
+import retaliation.game.entities.Moveable;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.factory.LevelFactory;
 import retaliation.game.entities.listener.EntityStateListener;
 import retaliation.ui.controller.EnemyController;
+import retaliation.ui.controller.LaserController;
 import retaliation.ui.controller.PlayerShipController;
 import retaliation.ui.controller.SlickController;
 import retaliation.ui.renderer.MoveableRectRenderable;
 import retaliation.ui.renderer.SlickRenderable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends BasicGame implements EntityStateListener {
     
@@ -69,13 +64,7 @@ public class Game extends BasicGame implements EntityStateListener {
 
     @Override
     public void laserCreated(final Moveable laser) {
-        // TODO: fix this
-        nextUpdate.add(new SlickController() {
-            @Override
-            public void update(Input input, int delta) {
-                laser.move(0, -1);
-            }
-        });
+        nextUpdate.add(new LaserController(laser));
         renderables.add(new MoveableRectRenderable(laser, Color.green));
     }
 

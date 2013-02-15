@@ -24,9 +24,7 @@ public class MoveableRectRenderableTest {
             oneOf(graphics).fillRect(10, 20, 200, 300);
         }});
         
-        new MoveableRectRenderable(new Moveable(at(10, 20), size(200, 300)),
-                                Color.blue).
-                                render(graphics);
+        new MoveableRectRenderable(new Moveable(at(10, 20), size(200, 300)), Color.blue). render(graphics);
         
         context.assertIsSatisfied();
     }
