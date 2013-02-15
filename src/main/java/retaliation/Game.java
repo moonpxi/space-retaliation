@@ -1,7 +1,6 @@
 package retaliation;
 
 import org.newdawn.slick.*;
-import retaliation.game.entities.Level;
 import retaliation.game.entities.Moveable;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.factory.LevelFactory;
@@ -21,18 +20,15 @@ public class Game extends BasicGame implements EntityStateListener {
     private final List<SlickController> controllers = new ArrayList<SlickController>();
     private final List<SlickController> nextUpdate = new ArrayList<SlickController>();
     private final List<SlickRenderable> renderables = new ArrayList<SlickRenderable>();
-    private final Level level;
 
     public Game() {
        super("Space Retaliation");
        
-       level = LevelFactory.sampleLevel(this);
+       LevelFactory.sampleLevel(this);
     }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        register(new PlayerShipController(level.getPlayer()), 
-                 new MoveableRectRenderable(level.getPlayer(), Color.green));
     }
 
     @Override
@@ -60,13 +56,19 @@ public class Game extends BasicGame implements EntityStateListener {
     @Override
     public void laserCreated(final Moveable laser) {
         register(new LaserController(laser),
-                 new MoveableRectRenderable(laser, Color.green));
+                new MoveableRectRenderable(laser, Color.green));
     }
 
     @Override
     public void enemyCreated(Spaceship enemy) {
         register(new EnemyController(enemy),
                  new MoveableRectRenderable(enemy, Color.white));
+    }
+
+    @Override
+    public void playerCreated(Spaceship player) {
+        register(new PlayerShipController(player),
+                 new MoveableRectRenderable(player, Color.green));
     }
 
 }

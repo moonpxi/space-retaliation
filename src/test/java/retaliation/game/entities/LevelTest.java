@@ -14,7 +14,7 @@ import static retaliation.game.geometry.Position.at;
 public class LevelTest {
     private final Mockery context = new Mockery();
     private final EntityStateListener stateListener = context.mock(EntityStateListener.class);
-    private final Level level = new Level(stateListener, new Spaceship(null, null));
+    private final Level level = new Level(stateListener);
 
     @Test
     public void notifiesListenerWhenCreatingALaserAfterAFiredEvent() {
@@ -34,6 +34,17 @@ public class LevelTest {
         }});
 
         level.addEnemyShip(new Spaceship(at(20, 50), size(100, 30)));
+
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void notifiesListenerWhenPlayerIsConfigured() {
+        context.checking(new Expectations() {{
+            oneOf(stateListener).playerCreated(with(shipAt(30, 60)));
+        }});
+
+        level.setPlayer(new Spaceship(at(30, 60), size(100, 30)));
 
         context.assertIsSatisfied();
     }

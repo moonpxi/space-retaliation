@@ -8,4 +8,6 @@ public interface EntityStateListener {
     void laserCreated(Moveable laser);
 
     void enemyCreated(Spaceship enemy);
+
+    void playerCreated(Spaceship player);
 }
