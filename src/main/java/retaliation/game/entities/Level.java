@@ -17,16 +17,15 @@ import retaliation.game.rules.EnforceLevelBoundaryRule;
 public class Level implements MovementListener, SpaceshipShootingListener {
 
     private final Spaceship player;
-    private final List<Spaceship> enemies;
+    private final List<Spaceship> enemies = new ArrayList<Spaceship>();
     private final List<Moveable> lasers = new ArrayList<Moveable>();
     private final EnforceLevelBoundaryRule boundaryRule;
     private EntityStateListener stateListener;
 
-    public Level(EntityStateListener listener, Spaceship player, List<Spaceship> enemies) {
+    public Level(EntityStateListener listener, Spaceship player) {
         stateListener = listener;
         this.player = player;
-        this.enemies = enemies;        
-        
+
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
         this.player.registerShootingListener(this); // TODO: add to constructor
         this.player.registerMovementListener(this);
@@ -36,8 +35,9 @@ public class Level implements MovementListener, SpaceshipShootingListener {
         return player;
     }
 
-    public List<Spaceship> getEnemies() {
-        return enemies;
+    public void addEnemyShip(Spaceship enemy) {
+        enemies.add(enemy);
+        stateListener.enemyCreated(enemy);
     }
 
     @Override

@@ -33,11 +33,6 @@ public class Game extends BasicGame implements EntityStateListener {
     public void init(GameContainer gc) throws SlickException {
         register(new PlayerShipController(level.getPlayer()), 
                  new MoveableRectRenderable(level.getPlayer(), Color.green));
-        
-        for (Spaceship enemy : level.getEnemies()) {
-            register(new EnemyController(enemy),
-                     new MoveableRectRenderable(enemy, Color.white));
-        }
     }
 
     @Override
@@ -58,14 +53,20 @@ public class Game extends BasicGame implements EntityStateListener {
     }
     
     private void register(SlickController controller, SlickRenderable renderable) {
-        controllers.add(controller);
+        nextUpdate.add(controller);
         renderables.add(renderable);
     }
 
     @Override
     public void laserCreated(final Moveable laser) {
-        nextUpdate.add(new LaserController(laser));
-        renderables.add(new MoveableRectRenderable(laser, Color.green));
+        register(new LaserController(laser),
+                 new MoveableRectRenderable(laser, Color.green));
+    }
+
+    @Override
+    public void enemyCreated(Spaceship enemy) {
+        register(new EnemyController(enemy),
+                 new MoveableRectRenderable(enemy, Color.white));
     }
 
 }

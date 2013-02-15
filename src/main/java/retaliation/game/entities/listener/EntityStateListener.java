@@ -1,9 +1,11 @@
 package retaliation.game.entities.listener;
 
 import retaliation.game.entities.Moveable;
+import retaliation.game.entities.Spaceship;
 
 public interface EntityStateListener {
     
-    public void laserCreated(Moveable laser);
+    void laserCreated(Moveable laser);
 
+    void enemyCreated(Spaceship enemy);
 }

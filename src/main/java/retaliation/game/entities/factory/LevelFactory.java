@@ -1,23 +1,20 @@
 package retaliation.game.entities.factory;
 
+import retaliation.game.entities.Level;
+import retaliation.game.entities.listener.EntityStateListener;
+
 import static retaliation.game.entities.factory.SpaceshipFactory.enemyShipAt;
 import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retaliation.game.entities.Level;
-import retaliation.game.entities.Spaceship;
-import retaliation.game.entities.listener.EntityStateListener;
 
 public class LevelFactory {
 
     public static Level sampleLevel(EntityStateListener listener) {
-        List<Spaceship> enemies = new ArrayList<Spaceship>();
-        enemies.add(enemyShipAt(400, 100));
-        enemies.add(enemyShipAt(300, 200));
-        enemies.add(enemyShipAt(500, 300));
-        
-        return new Level(listener, playerFighterAt(350, 520), enemies);
+        Level level = new Level(listener, playerFighterAt(350, 520));
+
+        level.addEnemyShip(enemyShipAt(400, 100));
+        level.addEnemyShip(enemyShipAt(300, 200));
+        level.addEnemyShip(enemyShipAt(500, 300));
+
+        return level;
     }
 }
