@@ -18,7 +18,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     private final Spaceship player;
     private final List<Spaceship> enemies;
-    private final List<Laser> lasers = new ArrayList<Laser>();
+    private final List<Moveable> lasers = new ArrayList<Moveable>();
     private final EnforceLevelBoundaryRule boundaryRule;
     private EntityStateListener stateListener;
 
@@ -46,7 +46,7 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
 
     @Override
     public void fired(Position from) {
-        Laser laser = new Laser(from, size(1, 3));
+        Moveable laser = new Moveable(from, size(1, 3));
         lasers.add(laser);
         stateListener.laserCreated(laser);
     }

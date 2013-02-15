@@ -10,7 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import retaliation.game.entities.Laser;
+import retaliation.game.entities.Moveable;
 import retaliation.game.entities.Level;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.factory.LevelFactory;
@@ -68,7 +68,7 @@ public class Game extends BasicGame implements EntityStateListener {
     }
 
     @Override
-    public void laserCreated(final Laser laser) {
+    public void laserCreated(final Moveable laser) {
         // TODO: fix this
         nextUpdate.add(new SlickController() {
             @Override

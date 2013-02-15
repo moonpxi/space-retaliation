@@ -7,16 +7,16 @@ import static retaliation.game.geometry.Position.at;
 
 import org.junit.Test;
 
-public class LaserTest {
+public class MoveableTest {
 
 
     @Test
     public void movesRelativeToAdjustment() {
-        final Laser laser = new Laser(at(5, 8), size(10, 10));
+        final Moveable moveable = new Moveable(at(5, 8), size(10, 10));
         
-        laser.move(15, 42);
+        moveable.move(15, 42);
         
-        assertThat(laser.position().x(), equalTo(20f));
-        assertThat(laser.position().y(), equalTo(50f));
+        assertThat(moveable.position().x(), equalTo(20f));
+        assertThat(moveable.position().y(), equalTo(50f));
     }
 }

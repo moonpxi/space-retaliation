@@ -30,8 +30,8 @@ public class LevelTest {
         context.assertIsSatisfied();
     }
     
-    private Matcher<Laser> laserAt(final float x, final float y) {
-        return new TypeSafeDiagnosingMatcher<Laser>() {
+    private Matcher<Moveable> laserAt(final float x, final float y) {
+        return new TypeSafeDiagnosingMatcher<Moveable>() {
 
             @Override
             public void describeTo(Description description) {
@@ -39,8 +39,8 @@ public class LevelTest {
             }
 
             @Override
-            protected boolean matchesSafely(Laser actual, Description description) {
-                description.appendValue("Laser was at " + actual.position().x() + ", " + actual.position().y());
+            protected boolean matchesSafely(Moveable actual, Description description) {
+                description.appendValue("Moveable was at " + actual.position().x() + ", " + actual.position().y());
                 return actual.position().equals(at(x, y));
             }
         };
