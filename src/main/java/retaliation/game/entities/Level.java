@@ -19,6 +19,7 @@ public class Level implements MovementListener, SpaceshipShootingListener {
     private final Spaceship player;
     private final List<Spaceship> enemies = new ArrayList<Spaceship>();
     private final List<Moveable> lasers = new ArrayList<Moveable>();
+
     private final EnforceLevelBoundaryRule boundaryRule;
     private EntityStateListener stateListener;
 
