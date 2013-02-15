@@ -31,8 +31,7 @@ public class Game extends BasicGame implements EntityStateListener {
     public Game() {
        super("Space Retaliation");
        
-       level = LevelFactory.sampleLevel();   
-       level.registerStateListener(this); // TODO: Add to constructor
+       level = LevelFactory.sampleLevel(this);
     }
 
     @Override

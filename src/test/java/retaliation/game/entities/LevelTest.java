@@ -19,9 +19,8 @@ public class LevelTest {
 
     @Test
     public void notifiesListenerWhenCreatingALaserAfterAFiredEvent() {
-        Level level = new Level(new Spaceship(null, null), new ArrayList<Spaceship>());
-        level.registerStateListener(stateListener);
-        
+        Level level = new Level(stateListener, new Spaceship(null, null), new ArrayList<Spaceship>());
+
         context.checking(new Expectations() {{
             oneOf(stateListener).laserCreated(with(laserAt(10, 30)));
         }});

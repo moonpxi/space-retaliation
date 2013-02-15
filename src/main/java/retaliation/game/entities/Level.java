@@ -22,7 +22,8 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
     private final EnforceLevelBoundaryRule boundaryRule;
     private EntityStateListener stateListener;
 
-    public Level(Spaceship player, List<Spaceship> enemies) {
+    public Level(EntityStateListener listener, Spaceship player, List<Spaceship> enemies) {
+        stateListener = listener;
         this.player = player;
         this.enemies = enemies;        
         
@@ -30,10 +31,6 @@ public class Level implements SpaceshipMovementListener, SpaceshipShootingListen
         this.player.registerShootingListener(this); // TODO: add to constructor
     }
 
-    public void registerStateListener(EntityStateListener stateListener) {
-        this.stateListener = stateListener;
-    }
-    
     public Spaceship getPlayer() {
         return player;
     }
