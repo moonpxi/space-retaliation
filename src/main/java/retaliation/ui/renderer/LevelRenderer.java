@@ -3,8 +3,8 @@ package retaliation.ui.renderer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.EntityType;
 import retaliation.game.entities.Level;
-import retaliation.game.entities.Spaceship;
 
 public class LevelRenderer implements SlickRenderer {
 
@@ -16,14 +16,12 @@ public class LevelRenderer implements SlickRenderer {
 
     @Override
     public void render(Graphics graphics) {
-        renderMoveable(graphics, level.getPlayer(), Color.green);
-
-        for (Spaceship enemy : level.getEnemies()) {
-            renderMoveable(graphics, enemy, Color.white);
-        }
-
-        for (Entity laser : level.getLasers()) {
-            renderMoveable(graphics, laser, Color.green);
+        for (Entity entity : level.allEntities()) {
+            Color color = Color.green;
+            if (entity.getType() == EntityType.Enemy) {
+                color = Color.white;
+            }
+            renderMoveable(graphics, entity, color);
         }
     }
 

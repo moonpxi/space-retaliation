@@ -14,7 +14,9 @@ import retaliation.game.rules.EnforceLevelBoundaryRule;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.concat;
 import static com.google.common.collect.Iterables.transform;
+import static java.util.Arrays.asList;
 import static retaliation.game.entities.EntityType.Laser;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
@@ -39,20 +41,16 @@ public class Level implements MovementListener, SpaceshipShootingListener {
         player.registerMovementListener(this);
     }
 
-    public Spaceship getPlayer() {
-        return player.getShip();
+    public GameLogic getPlayer() {
+        return player;
     }
 
     public void addEnemyShip(Spaceship enemy) {
         enemies.add(new EnemyAI(enemy));
     }
 
-    public Iterable<Spaceship> getEnemies() {
-        return transform(enemies, new Function<EnemyAI, Spaceship>() {
-            @Override public Spaceship apply(EnemyAI enemy) {
-                return enemy.getShip();
-            }
-        });
+    public Iterable<EnemyAI> getEnemies() {
+        return enemies;
     }
 
     @Override
@@ -60,13 +58,8 @@ public class Level implements MovementListener, SpaceshipShootingListener {
         lasers.add(new FlyingLaser(new Entity(Laser, from, size(1, 3))));
     }
 
-    public Iterable<Entity> getLasers() {
-        return transform(lasers, new Function<FlyingLaser, Entity>() {
-            @Override
-            public Entity apply(FlyingLaser laser) {
-                return laser.getLaser();
-            }
-        });
+    public Iterable<FlyingLaser> getLasers() {
+        return lasers;
     }
 
     @Override
@@ -74,15 +67,14 @@ public class Level implements MovementListener, SpaceshipShootingListener {
         boundaryRule.enforceBoundaryOn(ship);
     }
 
-    public GameLogic getPlayerLogic() {
-        return player;
-    }
+    public Iterable<? extends Entity> allEntities() {
+        Iterable<Spaceship> enemyShips = transform(this.enemies, new Function<EnemyAI, Spaceship>() {
+            @Override public Spaceship apply(EnemyAI enemy) { return enemy.getShip(); }
+        });
+        Iterable<Entity> laserBolts = transform(lasers, new Function<FlyingLaser, Entity>() {
+            @Override public Entity apply(FlyingLaser laser) { return laser.getLaser(); }
+        });
 
-    public Iterable<EnemyAI> getEnemiesLogic() {
-        return enemies;
-    }
-
-    public Iterable<FlyingLaser> getLasersLogic() {
-        return lasers;
+        return concat(asList(player.getShip()), enemyShips, laserBolts);
     }
 }

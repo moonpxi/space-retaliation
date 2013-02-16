@@ -36,7 +36,12 @@ public class Entity {
         return dimension;
     }
 
+    public EntityType getType() {
+        return type;
+    }
+
     public void registerMovementListener(MovementListener listener) {
         movementListeners.add(listener);
     }
+
 }

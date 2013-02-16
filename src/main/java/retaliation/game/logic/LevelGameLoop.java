@@ -13,13 +13,13 @@ public class LevelGameLoop implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        level.getPlayerLogic().update(input, delta);
+        level.getPlayer().update(input, delta);
 
-        for (EnemyAI enemy : level.getEnemiesLogic()) {
+        for (EnemyAI enemy : level.getEnemies()) {
             enemy.update(input, delta);
         }
 
-        for (FlyingLaser laser : level.getLasersLogic()) {
+        for (FlyingLaser laser : level.getLasers()) {
             laser.update(input, delta);
         }
     }
