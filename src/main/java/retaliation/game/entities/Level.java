@@ -29,6 +29,18 @@ public class Level implements MovementListener, SpaceshipShootingListener {
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
     }
 
+    public Spaceship getPlayer() {
+        return player;
+    }
+
+    public List<Spaceship> getEnemies() {
+        return  enemies;
+    }
+
+    public List<Moveable> getLasers() {
+        return lasers;
+    }
+
     public void setPlayer(Spaceship player) {
         this.player = player;
 

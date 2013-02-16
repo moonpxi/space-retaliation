@@ -1,6 +1,10 @@
 package retaliation;
 
-import org.newdawn.slick.*;
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import retaliation.game.entities.Level;
 import retaliation.game.entities.Moveable;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.factory.LevelFactory;
@@ -9,8 +13,8 @@ import retaliation.ui.controller.EnemyController;
 import retaliation.ui.controller.LaserController;
 import retaliation.ui.controller.PlayerShipController;
 import retaliation.ui.controller.SlickController;
-import retaliation.ui.renderer.MoveableRectRenderable;
-import retaliation.ui.renderer.SlickRenderable;
+import retaliation.ui.renderer.LevelRenderer;
+import retaliation.ui.renderer.SlickRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +23,14 @@ public class Game extends BasicGame implements EntityStateListener {
     
     private final List<SlickController> controllers = new ArrayList<SlickController>();
     private final List<SlickController> nextUpdate = new ArrayList<SlickController>();
-    private final List<SlickRenderable> renderables = new ArrayList<SlickRenderable>();
+    private final List<SlickRenderer> renderables = new ArrayList<SlickRenderer>();
+    private final Level level;
 
     public Game() {
        super("Space Retaliation");
-       
-       LevelFactory.sampleLevel(this);
+
+        level = LevelFactory.sampleLevel(this);
+        renderables.add(new LevelRenderer(level));
     }
 
     @Override
@@ -43,32 +49,28 @@ public class Game extends BasicGame implements EntityStateListener {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        for (SlickRenderable renderable : this.renderables) {
+        for (SlickRenderer renderable : this.renderables) {
             renderable.render(g);
         }
     }
     
-    private void register(SlickController controller, SlickRenderable renderable) {
+    private void register(SlickController controller) {
         nextUpdate.add(controller);
-        renderables.add(renderable);
     }
 
     @Override
     public void laserCreated(final Moveable laser) {
-        register(new LaserController(laser),
-                new MoveableRectRenderable(laser, Color.green));
+        register(new LaserController(laser));
     }
 
     @Override
     public void enemyCreated(Spaceship enemy) {
-        register(new EnemyController(enemy),
-                 new MoveableRectRenderable(enemy, Color.white));
+        register(new EnemyController(enemy));
     }
 
     @Override
     public void playerCreated(Spaceship player) {
-        register(new PlayerShipController(player),
-                 new MoveableRectRenderable(player, Color.green));
+        register(new PlayerShipController(player));
     }
 
 }
