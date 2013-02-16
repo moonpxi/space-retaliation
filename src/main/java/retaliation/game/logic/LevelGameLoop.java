@@ -20,16 +20,32 @@ public class LevelGameLoop implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        level.getPlayer().update(input, delta);
+        Loop loop = new Loop(input, delta);
 
-        for (EnemyAI enemy : level.getEnemies()) {
-            enemy.update(input, delta);
+        loop.update(level.getPlayer());
+        loop.updateAll(level.getEnemies());
+        loop.updateAll(level.getLasers());
+
+        loop.update(boundaryCheck);
+    }
+
+    private class Loop {
+        private final Input input;
+        private final int delta;
+
+        public Loop(Input input, int delta) {
+            this.input = input;
+            this.delta = delta;
         }
 
-        for (FlyingLaser laser : level.getLasers()) {
-            laser.update(input, delta);
+        public void update(GameLogic logic) {
+            logic.update(input, delta);
         }
 
-        boundaryCheck.update(input, delta);
+        public void updateAll(Iterable<? extends GameLogic> logics) {
+            for (GameLogic logic : logics) {
+                update(logic);
+            }
+        }
     }
 }
