@@ -1,11 +1,11 @@
-package retaliation.ui.controller;
+package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Spaceship;
 
 import static org.newdawn.slick.Input.*;
 
-public class PlayerShipController implements SlickController {
+public class PlayerShipController implements GameLogic {
     public static final int SPEED = 4;
     private final Spaceship player;
 

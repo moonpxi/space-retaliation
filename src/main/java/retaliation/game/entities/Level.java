@@ -1,16 +1,15 @@
 package retaliation.game.entities;
 
 import com.google.common.base.Function;
-import org.newdawn.slick.Input;
 import retaliation.game.entities.listener.MovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
 import retaliation.game.geometry.Rectangle;
+import retaliation.game.logic.EnemyAI;
+import retaliation.game.logic.FlyingLaser;
+import retaliation.game.logic.GameLogic;
+import retaliation.game.logic.PlayerShipController;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
-import retaliation.ui.controller.EnemyController;
-import retaliation.ui.controller.LaserController;
-import retaliation.ui.controller.PlayerShipController;
-import retaliation.ui.controller.SlickController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,37 +19,16 @@ import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
 
-public class Level implements MovementListener, SpaceshipShootingListener, SlickController {
+public class Level implements MovementListener, SpaceshipShootingListener {
 
     private PlayerShipController player;
-    private final List<EnemyController> enemies = new ArrayList<EnemyController>();
-    private final List<LaserController> lasers = new ArrayList<LaserController>();
+    private final List<EnemyAI> enemies = new ArrayList<EnemyAI>();
+    private final List<FlyingLaser> lasers = new ArrayList<FlyingLaser>();
 
     private final EnforceLevelBoundaryRule boundaryRule;
 
     public Level() {
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
-    }
-
-    public Spaceship getPlayer() {
-        return player.getShip();
-    }
-
-    public Iterable<Spaceship> getEnemies() {
-        return transform(enemies, new Function<EnemyController, Spaceship>() {
-            @Override public Spaceship apply(EnemyController enemy) {
-                return enemy.getShip();
-            }
-        });
-    }
-
-    public Iterable<Moveable> getLasers() {
-        return transform(lasers, new Function<LaserController, Moveable>() {
-            @Override
-            public Moveable apply(LaserController laser) {
-                return laser.getLaser();
-            }
-        });
     }
 
     public void setPlayer(Spaceship player) {
@@ -60,8 +38,34 @@ public class Level implements MovementListener, SpaceshipShootingListener, Slick
         player.registerMovementListener(this);
     }
 
+    public Spaceship getPlayer() {
+        return player.getShip();
+    }
+
     public void addEnemyShip(Spaceship enemy) {
-        enemies.add(new EnemyController(enemy));
+        enemies.add(new EnemyAI(enemy));
+    }
+
+    public Iterable<Spaceship> getEnemies() {
+        return transform(enemies, new Function<EnemyAI, Spaceship>() {
+            @Override public Spaceship apply(EnemyAI enemy) {
+                return enemy.getShip();
+            }
+        });
+    }
+
+    @Override
+    public void fired(Position from) {
+        lasers.add(new FlyingLaser(new Moveable(from, size(1, 3))));
+    }
+
+    public Iterable<Moveable> getLasers() {
+        return transform(lasers, new Function<FlyingLaser, Moveable>() {
+            @Override
+            public Moveable apply(FlyingLaser laser) {
+                return laser.getLaser();
+            }
+        });
     }
 
     @Override
@@ -69,21 +73,15 @@ public class Level implements MovementListener, SpaceshipShootingListener, Slick
         boundaryRule.enforceBoundaryOn(ship);
     }
 
-    @Override
-    public void fired(Position from) {
-        lasers.add(new LaserController(new Moveable(from, size(1, 3))));
+    public GameLogic getPlayerLogic() {
+        return player;
     }
 
-    @Override
-    public void update(Input input, int delta) {
-        player.update(input, delta);
+    public Iterable<EnemyAI> getEnemiesLogic() {
+        return enemies;
+    }
 
-        for (EnemyController enemy : enemies) {
-            enemy.update(input, delta);
-        }
-
-        for (LaserController laser : lasers) {
-            laser.update(input, delta);
-        }
+    public Iterable<FlyingLaser> getLasersLogic() {
+        return lasers;
     }
 }

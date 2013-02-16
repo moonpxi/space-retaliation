@@ -1,16 +1,16 @@
-package retaliation.ui.controller;
+package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Spaceship;
 
-public class EnemyController implements SlickController {
+public class EnemyAI implements GameLogic {
     
     private final float leftSide;
     private final float rightSide;
     private float speed;
     private final Spaceship enemy;
 
-    public EnemyController(Spaceship enemy) {
+    public EnemyAI(Spaceship enemy) {
         this.enemy = enemy;
         leftSide = enemy.position().x() - 200;
         rightSide = enemy.position().y() + 300;

@@ -1,12 +1,12 @@
-package retaliation.ui.controller;
+package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Moveable;
 
-public class LaserController implements SlickController {
+public class FlyingLaser implements GameLogic {
     private final Moveable laser;
 
-    public LaserController(Moveable laser) {
+    public FlyingLaser(Moveable laser) {
         this.laser = laser;
     }
 

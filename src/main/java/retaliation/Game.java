@@ -6,18 +6,20 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import retaliation.game.entities.Level;
 import retaliation.game.entities.factory.LevelFactory;
+import retaliation.game.logic.LevelGameLoop;
 import retaliation.ui.renderer.LevelRenderer;
 import retaliation.ui.renderer.SlickRenderer;
 
 public class Game extends BasicGame {
     
     private final SlickRenderer renderer;
-    private final Level level;
+    private final LevelGameLoop levelLogic;
 
     public Game() {
        super("Space Retaliation");
 
-        level = LevelFactory.sampleLevel();
+        Level level = LevelFactory.sampleLevel();
+        levelLogic = new LevelGameLoop(level);
         renderer = new LevelRenderer(level);
     }
 
@@ -27,7 +29,7 @@ public class Game extends BasicGame {
 
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
-        level.update(gc.getInput(), delta);
+        levelLogic.update(gc.getInput(), delta);
     }
 
     @Override
