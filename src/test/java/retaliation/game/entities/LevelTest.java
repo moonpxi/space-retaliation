@@ -5,11 +5,12 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.junit.Test;
 
+import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
 // TODO: redefine tests
 public class LevelTest {
-    private final Level level = new Level();
+    private final Level level = new Level(new Spaceship(EntityType.Player, at(20, 40), size(100, 100)));
 
     @Test public void
     toBeDefined() {

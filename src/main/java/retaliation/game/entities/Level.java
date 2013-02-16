@@ -30,23 +30,21 @@ public class Level implements MovementListener, SpaceshipShootingListener {
 
     private final EnforceLevelBoundaryRule boundaryRule;
 
-    public Level() {
+    public Level(Spaceship playerShip) {
+        this.player = new PlayerShipController(playerShip);
+
+        playerShip.registerShootingListener(this);
+        playerShip.registerMovementListener(this);
+
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
-    }
-
-    public void setPlayer(Spaceship player) {
-        this.player = new PlayerShipController(player);
-
-        player.registerShootingListener(this);
-        player.registerMovementListener(this);
     }
 
     public GameLogic getPlayer() {
         return player;
     }
 
-    public void addEnemyShip(Spaceship enemy) {
-        enemies.add(new EnemyAI(enemy));
+    public void addEnemyShip(Spaceship enemyShip) {
+        enemies.add(new EnemyAI(enemyShip));
     }
 
     public Iterable<EnemyAI> getEnemies() {
