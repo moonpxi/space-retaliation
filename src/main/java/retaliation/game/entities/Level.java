@@ -1,5 +1,6 @@
 package retaliation.game.entities;
 
+import com.google.common.base.Function;
 import org.newdawn.slick.Input;
 import retaliation.game.entities.listener.MovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
@@ -14,15 +15,16 @@ import retaliation.ui.controller.SlickController;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.transform;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
 
 public class Level implements MovementListener, SpaceshipShootingListener, SlickController {
 
-    private Spaceship player;
-    private final List<Spaceship> enemies = new ArrayList<Spaceship>();
-    private final List<Moveable> lasers = new ArrayList<Moveable>();
+    private PlayerShipController player;
+    private final List<EnemyController> enemies = new ArrayList<EnemyController>();
+    private final List<LaserController> lasers = new ArrayList<LaserController>();
 
     private final EnforceLevelBoundaryRule boundaryRule;
 
@@ -31,26 +33,35 @@ public class Level implements MovementListener, SpaceshipShootingListener, Slick
     }
 
     public Spaceship getPlayer() {
-        return player;
+        return player.getShip();
     }
 
-    public List<Spaceship> getEnemies() {
-        return  enemies;
+    public Iterable<Spaceship> getEnemies() {
+        return transform(enemies, new Function<EnemyController, Spaceship>() {
+            @Override public Spaceship apply(EnemyController enemy) {
+                return enemy.getShip();
+            }
+        });
     }
 
-    public List<Moveable> getLasers() {
-        return lasers;
+    public Iterable<Moveable> getLasers() {
+        return transform(lasers, new Function<LaserController, Moveable>() {
+            @Override
+            public Moveable apply(LaserController laser) {
+                return laser.getLaser();
+            }
+        });
     }
 
     public void setPlayer(Spaceship player) {
-        this.player = player;
+        this.player = new PlayerShipController(player);
 
-        this.player.registerShootingListener(this); // TODO: add to constructor
-        this.player.registerMovementListener(this);
+        player.registerShootingListener(this);
+        player.registerMovementListener(this);
     }
 
     public void addEnemyShip(Spaceship enemy) {
-        enemies.add(enemy);
+        enemies.add(new EnemyController(enemy));
     }
 
     @Override
@@ -60,19 +71,19 @@ public class Level implements MovementListener, SpaceshipShootingListener, Slick
 
     @Override
     public void fired(Position from) {
-        lasers.add(new Moveable(from, size(1, 3)));
+        lasers.add(new LaserController(new Moveable(from, size(1, 3))));
     }
 
     @Override
     public void update(Input input, int delta) {
-        new PlayerShipController(player).update(input, delta);
+        player.update(input, delta);
 
-        for (Spaceship enemy : enemies) {
-            new EnemyController(enemy).update(input, delta);
+        for (EnemyController enemy : enemies) {
+            enemy.update(input, delta);
         }
 
-        for (Moveable laser : lasers) {
-            new LaserController(laser).update(input, delta);
+        for (LaserController laser : lasers) {
+            laser.update(input, delta);
         }
     }
 }

@@ -1,7 +1,6 @@
 package retaliation.ui.controller;
 
 import org.newdawn.slick.Input;
-
 import retaliation.game.entities.Spaceship;
 
 public class EnemyController implements SlickController {
@@ -18,8 +17,6 @@ public class EnemyController implements SlickController {
         speed = -5;
     }
 
-    // TODO: This should be in an game specific bit. Extract this whenever 
-    // there are more than one ways to control a ship.
     @Override
     public void update(Input input, int delta) {
         float position = enemy.position().x();
@@ -31,5 +28,7 @@ public class EnemyController implements SlickController {
         enemy.move(speed, 0);
     }
 
-
+    public Spaceship getShip() {
+        return enemy;
+    }
 }

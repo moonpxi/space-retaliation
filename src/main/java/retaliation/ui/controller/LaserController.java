@@ -14,4 +14,8 @@ public class LaserController implements SlickController {
     public void update(Input input, int delta) {
         laser.move(0, -1);
     }
+
+    public Moveable getLaser() {
+        return laser;
+    }
 }

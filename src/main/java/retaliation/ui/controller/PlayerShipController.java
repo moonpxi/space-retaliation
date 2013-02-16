@@ -1,14 +1,9 @@
 package retaliation.ui.controller;
 
-import static org.newdawn.slick.Input.KEY_DOWN;
-import static org.newdawn.slick.Input.KEY_LEFT;
-import static org.newdawn.slick.Input.KEY_RIGHT;
-import static org.newdawn.slick.Input.KEY_SPACE;
-import static org.newdawn.slick.Input.KEY_UP;
-
 import org.newdawn.slick.Input;
-
 import retaliation.game.entities.Spaceship;
+
+import static org.newdawn.slick.Input.*;
 
 public class PlayerShipController implements SlickController {
     public static final int SPEED = 4;
@@ -37,4 +32,7 @@ public class PlayerShipController implements SlickController {
         }
     }
 
+    public Spaceship getShip() {
+        return player;
+    }
 }
