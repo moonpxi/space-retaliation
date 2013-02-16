@@ -56,20 +56,20 @@ public class Level implements MovementListener, SpaceshipShootingListener {
 
     @Override
     public void fired(Position from) {
-        lasers.add(new FlyingLaser(new Moveable(from, size(1, 3))));
+        lasers.add(new FlyingLaser(new Entity(from, size(1, 3))));
     }
 
-    public Iterable<Moveable> getLasers() {
-        return transform(lasers, new Function<FlyingLaser, Moveable>() {
+    public Iterable<Entity> getLasers() {
+        return transform(lasers, new Function<FlyingLaser, Entity>() {
             @Override
-            public Moveable apply(FlyingLaser laser) {
+            public Entity apply(FlyingLaser laser) {
                 return laser.getLaser();
             }
         });
     }
 
     @Override
-    public void notifyMoved(Moveable ship) {
+    public void notifyMoved(Entity ship) {
         boundaryRule.enforceBoundaryOn(ship);
     }
 

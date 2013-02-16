@@ -1,6 +1,6 @@
 package retaliation.game.rules;
 
-import retaliation.game.entities.Moveable;
+import retaliation.game.entities.Entity;
 import retaliation.game.geometry.Rectangle;
 
 public class EnforceLevelBoundaryRule {
@@ -11,7 +11,7 @@ public class EnforceLevelBoundaryRule {
         this.boundary = boundary;
     }
     
-    public void enforceBoundaryOn(Moveable ship) {
+    public void enforceBoundaryOn(Entity ship) {
         Rectangle newPosition = new Rectangle(ship.position(), ship.dimension());
         
         float xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),

@@ -7,13 +7,13 @@ import retaliation.game.geometry.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Moveable {
+public class Entity {
     
     private Position position;
     private final Dimension dimension;
     private final List<MovementListener> movementListeners;
 
-    public Moveable(Position position, Dimension dimension) {
+    public Entity(Position position, Dimension dimension) {
         this.position = position;
         this.dimension = dimension;
         movementListeners = new ArrayList<MovementListener>();

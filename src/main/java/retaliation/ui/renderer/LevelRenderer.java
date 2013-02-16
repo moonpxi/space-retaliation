@@ -2,8 +2,8 @@ package retaliation.ui.renderer;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import retaliation.game.entities.Entity;
 import retaliation.game.entities.Level;
-import retaliation.game.entities.Moveable;
 import retaliation.game.entities.Spaceship;
 
 public class LevelRenderer implements SlickRenderer {
@@ -22,14 +22,14 @@ public class LevelRenderer implements SlickRenderer {
             renderMoveable(graphics, enemy, Color.white);
         }
 
-        for (Moveable laser : level.getLasers()) {
+        for (Entity laser : level.getLasers()) {
             renderMoveable(graphics, laser, Color.green);
         }
     }
 
-    private void renderMoveable(Graphics graphics, Moveable moveable, Color color) {
+    private void renderMoveable(Graphics graphics, Entity entity, Color color) {
         graphics.setColor(color);
-        graphics.fillRect(moveable.position().x(), moveable.position().y(),
-                moveable.dimension().width(), moveable.dimension().height());
+        graphics.fillRect(entity.position().x(), entity.position().y(),
+                entity.dimension().width(), entity.dimension().height());
     }
 }

@@ -1,10 +1,10 @@
 package retaliation.game.entities.listener;
 
-import retaliation.game.entities.Moveable;
+import retaliation.game.entities.Entity;
 
 
 public interface MovementListener {
 
-    void notifyMoved(Moveable entity);
+    void notifyMoved(Entity entity);
 
 }

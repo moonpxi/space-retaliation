@@ -10,27 +10,27 @@ import static org.junit.Assert.assertThat;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
-public class MoveableTest {
+public class EntityTest {
     private final Mockery context = new Mockery();
     private final MovementListener listener = context.mock(MovementListener.class, "ML1");
     private final MovementListener anotherListener = context.mock(MovementListener.class, "ML2");
 
     @Test
     public void movesRelativeToAdjustmentAndNotifiesMovementListeners() {
-        final Moveable moveable = new Moveable(at(5, 8), size(10, 10));
+        final Entity entity = new Entity(at(5, 8), size(10, 10));
 
-        moveable.registerMovementListener(listener);
-        moveable.registerMovementListener(anotherListener);
+        entity.registerMovementListener(listener);
+        entity.registerMovementListener(anotherListener);
 
         context.checking(new Expectations() {{
-            oneOf(listener).notifyMoved(moveable);
-            oneOf(anotherListener).notifyMoved(moveable);
+            oneOf(listener).notifyMoved(entity);
+            oneOf(anotherListener).notifyMoved(entity);
         }});
 
-        moveable.move(15, 42);
+        entity.move(15, 42);
 
-        assertThat(moveable.position().x(), equalTo(20f));
-        assertThat(moveable.position().y(), equalTo(50f));
+        assertThat(entity.position().x(), equalTo(20f));
+        assertThat(entity.position().y(), equalTo(50f));
 
         context.assertIsSatisfied();
     }

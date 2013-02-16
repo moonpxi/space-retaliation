@@ -16,8 +16,8 @@ public class LevelTest {
 
     }
 
-    private Matcher<Moveable> moveableAt(final float x, final float y) {
-        return new TypeSafeDiagnosingMatcher<Moveable>() {
+    private Matcher<Entity> moveableAt(final float x, final float y) {
+        return new TypeSafeDiagnosingMatcher<Entity>() {
 
             @Override
             public void describeTo(Description description) {
@@ -25,8 +25,8 @@ public class LevelTest {
             }
 
             @Override
-            protected boolean matchesSafely(Moveable actual, Description description) {
-                description.appendValue("Moveable was at " + actual.position().x() + ", " + actual.position().y());
+            protected boolean matchesSafely(Entity actual, Description description) {
+                description.appendValue("Entity was at " + actual.position().x() + ", " + actual.position().y());
                 return actual.position().equals(at(x, y));
             }
         };

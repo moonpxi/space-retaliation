@@ -4,7 +4,7 @@ import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 
-public class Spaceship extends Moveable {
+public class Spaceship extends Entity {
     
     private SpaceshipShootingListener shootingListener;
 
