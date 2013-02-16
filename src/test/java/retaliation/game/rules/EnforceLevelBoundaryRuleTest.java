@@ -18,7 +18,7 @@ public class EnforceLevelBoundaryRuleTest {
     
     @Before
     public void configureRestriction() {
-        rule = new EnforceLevelBoundaryRule(boundary);
+        rule = new EnforceLevelBoundaryRule(boundary, null);
     }
     
     @Test

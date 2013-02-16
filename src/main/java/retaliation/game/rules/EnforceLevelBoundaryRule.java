@@ -1,14 +1,19 @@
 package retaliation.game.rules;
 
+import org.newdawn.slick.Input;
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
+import retaliation.game.logic.GameLogic;
 
-public class EnforceLevelBoundaryRule {
+public class EnforceLevelBoundaryRule implements GameLogic {
 
     private final Rectangle boundary;
+    private final Spaceship ship;
 
-    public EnforceLevelBoundaryRule(Rectangle boundary) {
+    public EnforceLevelBoundaryRule(Rectangle boundary, Spaceship ship) {
         this.boundary = boundary;
+        this.ship = ship;
     }
     
     public void enforceBoundaryOn(Entity ship) {
@@ -33,4 +38,8 @@ public class EnforceLevelBoundaryRule {
         return 0;
     }
 
+    @Override
+    public void update(Input input, int delta) {
+        enforceBoundaryOn(ship);
+    }
 }
