@@ -1,31 +1,32 @@
 package retaliation.game.entities;
 
-import static retaliation.game.geometry.Dimension.size;
-import static retaliation.game.geometry.Position.at;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retaliation.game.entities.listener.EntityStateListener;
+import org.newdawn.slick.Input;
 import retaliation.game.entities.listener.MovementListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
+import retaliation.ui.controller.EnemyController;
+import retaliation.ui.controller.LaserController;
+import retaliation.ui.controller.PlayerShipController;
+import retaliation.ui.controller.SlickController;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
 
 
-public class Level implements MovementListener, SpaceshipShootingListener {
+public class Level implements MovementListener, SpaceshipShootingListener, SlickController {
 
     private Spaceship player;
     private final List<Spaceship> enemies = new ArrayList<Spaceship>();
     private final List<Moveable> lasers = new ArrayList<Moveable>();
 
     private final EnforceLevelBoundaryRule boundaryRule;
-    private EntityStateListener stateListener;
 
-    public Level(EntityStateListener listener) {
-        stateListener = listener;
-
+    public Level() {
         boundaryRule = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)));
     }
 
@@ -46,13 +47,10 @@ public class Level implements MovementListener, SpaceshipShootingListener {
 
         this.player.registerShootingListener(this); // TODO: add to constructor
         this.player.registerMovementListener(this);
-
-        stateListener.playerCreated(this.player);
     }
 
     public void addEnemyShip(Spaceship enemy) {
         enemies.add(enemy);
-        stateListener.enemyCreated(enemy);
     }
 
     @Override
@@ -62,8 +60,19 @@ public class Level implements MovementListener, SpaceshipShootingListener {
 
     @Override
     public void fired(Position from) {
-        Moveable laser = new Moveable(from, size(1, 3));
-        lasers.add(laser);
-        stateListener.laserCreated(laser);
+        lasers.add(new Moveable(from, size(1, 3)));
+    }
+
+    @Override
+    public void update(Input input, int delta) {
+        new PlayerShipController(player).update(input, delta);
+
+        for (Spaceship enemy : enemies) {
+            new EnemyController(enemy).update(input, delta);
+        }
+
+        for (Moveable laser : lasers) {
+            new LaserController(laser).update(input, delta);
+        }
     }
 }

@@ -1,15 +1,14 @@
 package retaliation.game.entities.factory;
 
 import retaliation.game.entities.Level;
-import retaliation.game.entities.listener.EntityStateListener;
 
 import static retaliation.game.entities.factory.SpaceshipFactory.enemyShipAt;
 import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt;
 
 public class LevelFactory {
 
-    public static Level sampleLevel(EntityStateListener listener) {
-        Level level = new Level(listener);
+    public static Level sampleLevel() {
+        Level level = new Level();
 
         level.setPlayer(playerFighterAt(350, 520));
 
