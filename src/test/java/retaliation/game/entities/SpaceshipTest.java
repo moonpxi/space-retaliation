@@ -5,6 +5,7 @@ import org.jmock.Mockery;
 import org.junit.Test;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 
+import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -14,7 +15,7 @@ public class SpaceshipTest {
 
     @Test
     public void notifiesShootingListenerWhenShooting() {
-        final Spaceship ship = new Spaceship(at(5, 8), size(10, 10));
+        final Spaceship ship = new Spaceship(Player, at(5, 8), size(10, 10));
         
         ship.registerShootingListener(shootingListener);
         

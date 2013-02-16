@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Entity {
-    
+
+    private final EntityType type;
     private Position position;
     private final Dimension dimension;
     private final List<MovementListener> movementListeners;
 
-    public Entity(Position position, Dimension dimension) {
+    public Entity(EntityType type, Position position, Dimension dimension) {
+        this.type = type;
         this.position = position;
         this.dimension = dimension;
         movementListeners = new ArrayList<MovementListener>();

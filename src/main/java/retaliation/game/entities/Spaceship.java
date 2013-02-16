@@ -8,8 +8,8 @@ public class Spaceship extends Entity {
     
     private SpaceshipShootingListener shootingListener;
 
-    public Spaceship(Position position, Dimension dimension) {
-        super(position, dimension);
+    public Spaceship(EntityType type, Position position, Dimension dimension) {
+        super(type, position, dimension);
     }
 
     public void shoot() {

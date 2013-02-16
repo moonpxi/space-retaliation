@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Iterables.transform;
+import static retaliation.game.entities.EntityType.Laser;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -56,7 +57,7 @@ public class Level implements MovementListener, SpaceshipShootingListener {
 
     @Override
     public void fired(Position from) {
-        lasers.add(new FlyingLaser(new Entity(from, size(1, 3))));
+        lasers.add(new FlyingLaser(new Entity(Laser, from, size(1, 3))));
     }
 
     public Iterable<Entity> getLasers() {

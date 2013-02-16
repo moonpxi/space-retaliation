@@ -1,15 +1,15 @@
 package retaliation.game.rules;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static retaliation.game.geometry.Dimension.size;
-import static retaliation.game.geometry.Position.at;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
 
 public class EnforceLevelBoundaryRuleTest {
 
@@ -68,7 +68,7 @@ public class EnforceLevelBoundaryRuleTest {
     }
    
     private Spaceship shipAt(float x, float y) {
-        return new Spaceship(at(x, y), size(5, 5));
+        return new Spaceship(Enemy, at(x, y), size(5, 5));
     }
 
  }

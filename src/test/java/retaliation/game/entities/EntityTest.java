@@ -7,6 +7,7 @@ import retaliation.game.entities.listener.MovementListener;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -17,7 +18,7 @@ public class EntityTest {
 
     @Test
     public void movesRelativeToAdjustmentAndNotifiesMovementListeners() {
-        final Entity entity = new Entity(at(5, 8), size(10, 10));
+        final Entity entity = new Entity(Player, at(5, 8), size(10, 10));
 
         entity.registerMovementListener(listener);
         entity.registerMovementListener(anotherListener);
