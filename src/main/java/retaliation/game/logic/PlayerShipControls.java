@@ -5,11 +5,11 @@ import retaliation.game.entities.Spaceship;
 
 import static org.newdawn.slick.Input.*;
 
-public class PlayerShipController implements GameLogic {
+public class PlayerShipControls implements GameLogic {
     public static final int SPEED = 4;
     private final Spaceship player;
 
-    public PlayerShipController(Spaceship player) {
+    public PlayerShipControls(Spaceship player) {
         this.player = player;
     }
 

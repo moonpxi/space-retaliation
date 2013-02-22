@@ -5,7 +5,7 @@ import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
-import retaliation.game.logic.PlayerShipController;
+import retaliation.game.logic.PlayerShipControls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +19,17 @@ import static retaliation.game.geometry.Dimension.size;
 
 public class Level implements SpaceshipShootingListener {
 
-    private PlayerShipController player;
+    private PlayerShipControls player;
     private final List<EnemyAI> enemies = new ArrayList<EnemyAI>();
     private final List<FlyingLaser> lasers = new ArrayList<FlyingLaser>();
 
     public Level(Spaceship playerShip) {
-        this.player = new PlayerShipController(playerShip);
+        this.player = new PlayerShipControls(playerShip);
 
         playerShip.registerShootingListener(this);
     }
 
-    public PlayerShipController getPlayer() {
+    public PlayerShipControls getPlayer() {
         return player;
     }
 
