@@ -3,35 +3,36 @@ package retaliation.game.logic;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
-import org.junit.Before;
 import org.junit.Test;
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Spaceship;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.newdawn.slick.Input.*;
+import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
 
 public class PlayerShipControlsTest {
     private final Mockery context = new Mockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
     }};
     private final Input input = context.mock(Input.class);
-    private final Spaceship ship = context.mock(Spaceship.class);
-    private PlayerShipControls controls;
-
-    @Before
-    public void setupControls() {
-        controls = new PlayerShipControls(ship);
-    }
+    private final PlayerShipControls controls = new PlayerShipControls(new Spaceship(Player, at(0, 0), size(100, 100)));
 
     @Test
     public void
     shootWhenSpaceIsPressed() {
+        final Spaceship mockShip = context.mock(Spaceship.class);
+        PlayerShipControls controlsWithMockShip = new PlayerShipControls(mockShip);
+
         expectKey(KEY_SPACE);
         context.checking(new Expectations() {{
-            oneOf(ship).shoot();
+            oneOf(mockShip).shoot();
         }});
 
-        controls.update(input, 0);
+        controlsWithMockShip.update(input, 0);
 
         context.assertIsSatisfied();
      }
@@ -40,52 +41,40 @@ public class PlayerShipControlsTest {
     public void
     moveUpWhenUpArrowIsPressed() {
         expectKey(KEY_UP);
-        context.checking(new Expectations() {{
-            oneOf(ship).move(0, -4);
-        }});
 
         controls.update(input, 0);
 
-        context.assertIsSatisfied();
+        assertThat(controls.getShip().position(), equalTo(at(0, -4)));
     }
 
     @Test
     public void
     moveDownWhenDownArrowIsPressed() {
         expectKey(KEY_DOWN);
-        context.checking(new Expectations() {{
-            oneOf(ship).move(0, 4);
-        }});
 
         controls.update(input, 0);
 
-        context.assertIsSatisfied();
+        assertThat(controls.getShip().position(), equalTo(at(0, 4)));
     }
 
     @Test
     public void
     moveLeftWhenLeftArrowIsPressed() {
         expectKey(KEY_LEFT);
-        context.checking(new Expectations() {{
-            oneOf(ship).move(-4, 0);
-        }});
 
         controls.update(input, 0);
 
-        context.assertIsSatisfied();
+        assertThat(controls.getShip().position(), equalTo(at(-4, 0)));
     }
 
     @Test
     public void
     moveRightWhenRightArrowIsPressed() {
         expectKey(KEY_RIGHT);
-        context.checking(new Expectations() {{
-            oneOf(ship).move(4, 0);
-        }});
 
         controls.update(input, 0);
 
-        context.assertIsSatisfied();
+        assertThat(controls.getShip().position(), equalTo(at(4, 0)));
     }
 
     @Test
@@ -95,14 +84,11 @@ public class PlayerShipControlsTest {
             oneOf(input).isKeyDown(KEY_UP); will(returnValue(true));
             oneOf(input).isKeyDown(KEY_RIGHT); will(returnValue(true));
             allowing(input);
-
-            oneOf(ship).move(0, -4);
-            oneOf(ship).move(4, 0);
         }});
 
         controls.update(input, 0);
 
-        context.assertIsSatisfied();
+        assertThat(controls.getShip().position(), equalTo(at(4, -4)));
     }
 
     private void expectKey(final int keyCode) {
