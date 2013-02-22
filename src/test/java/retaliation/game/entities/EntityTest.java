@@ -9,6 +9,7 @@ import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
 public class EntityTest {
+
     @Test
     public void movesRelativeToAdjustmentAndNotifiesMovementListeners() {
         final Entity entity = new Entity(Player, at(5, 8), size(10, 10));
