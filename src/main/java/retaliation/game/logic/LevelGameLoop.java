@@ -22,9 +22,7 @@ public class LevelGameLoop implements GameLogic {
     public void update(Input input, int delta) {
         Loop loop = new Loop(input, delta);
 
-        loop.update(level.getPlayer());
-        loop.updateAll(level.getEnemies());
-        loop.updateAll(level.getLasers());
+        loop.updateAll(level.allEntitiesLogic());
 
         loop.update(boundaryCheck);
     }

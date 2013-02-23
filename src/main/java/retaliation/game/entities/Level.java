@@ -5,6 +5,7 @@ import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
+import retaliation.game.logic.GameLogic;
 import retaliation.game.logic.PlayerShipControls;
 
 import java.util.ArrayList;
@@ -29,25 +30,13 @@ public class Level implements SpaceshipShootingListener {
         playerShip.registerShootingListener(this);
     }
 
-    public PlayerShipControls getPlayer() {
-        return player;
-    }
-
     public void addEnemyShip(Spaceship enemyShip) {
         enemies.add(new EnemyAI(enemyShip));
-    }
-
-    public Iterable<EnemyAI> getEnemies() {
-        return enemies;
     }
 
     @Override
     public void fired(Position from) {
         lasers.add(new FlyingLaser(new Entity(Laser, from, size(1, 3))));
-    }
-
-    public Iterable<FlyingLaser> getLasers() {
-        return lasers;
     }
 
     public Iterable<? extends Entity> allEntities() {
@@ -59,5 +48,13 @@ public class Level implements SpaceshipShootingListener {
         });
 
         return concat(asList(player.getShip()), enemyShips, laserBolts);
+    }
+
+    public Iterable<GameLogic> allEntitiesLogic() {
+        return concat(asList(player), enemies, lasers);
+    }
+
+    public PlayerShipControls getPlayer() {
+        return player;
     }
 }
