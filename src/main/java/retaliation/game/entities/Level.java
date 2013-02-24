@@ -1,7 +1,6 @@
 package retaliation.game.entities;
 
-import retaliation.game.entities.listener.SpaceshipShootingListener;
-import retaliation.game.geometry.Position;
+import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
 import retaliation.game.logic.GameLogic;
@@ -12,40 +11,14 @@ import java.util.List;
 
 import static com.google.common.collect.Iterables.concat;
 import static java.util.Arrays.asList;
-import static retaliation.game.entities.EntityType.Laser;
-import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.entities.EntityType.Player;
 
 
-public class Level implements SpaceshipShootingListener {
+public class Level implements EntityListener {
 
     private PlayerShipControls player;
     private final List<EnemyAI> enemies = new ArrayList<EnemyAI>();
     private final List<FlyingLaser> lasers = new ArrayList<FlyingLaser>();
-    private final Entities entities = new Entities();
-
-    public Level(Spaceship playerShip) {
-        this.player = new PlayerShipControls(playerShip);
-
-        playerShip.registerShootingListener(this);
-
-        entities.add(playerShip);
-    }
-
-    public void addEnemyShip(Spaceship enemyShip) {
-        enemies.add(new EnemyAI(enemyShip));
-        entities.add(enemyShip);
-    }
-
-    @Override
-    public void fired(Position from) {
-        Entity laser = new Entity(Laser, from, size(1, 3));
-        lasers.add(new FlyingLaser(laser));
-        entities.add(laser);
-    }
-
-    public Iterable<? extends Entity> allEntities() {
-        return entities.activeEntities();
-    }
 
     public Iterable<GameLogic> allEntitiesLogic() {
         return concat(asList(player), enemies, lasers);
@@ -53,5 +26,19 @@ public class Level implements SpaceshipShootingListener {
 
     public PlayerShipControls getPlayer() {
         return player;
+    }
+
+    @Override
+    public void entityCreated(Entity entity) {
+        lasers.add(new FlyingLaser(entity));
+    }
+
+    @Override
+    public void spaceshipCreated(Spaceship ship) {
+        if (ship.getType() == Player) {
+            player = new PlayerShipControls(ship);
+        } else {
+            enemies.add(new EnemyAI(ship));
+        }
     }
 }

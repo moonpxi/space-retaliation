@@ -2,23 +2,23 @@ package retaliation.ui.renderer;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import retaliation.game.entities.Entities;
 import retaliation.game.entities.Entity;
 import retaliation.game.entities.EntityType;
-import retaliation.game.entities.Level;
 
 public class LevelRenderer implements SlickRenderer {
 
-    private final Level level;
+    private final Entities entities;
 
-    public LevelRenderer(Level level) {
-        this.level = level;
+    public LevelRenderer(Entities entities) {
+        this.entities = entities;
     }
 
     @Override
     public void render(Graphics graphics) {
         int count = 0;
 
-        for (Entity entity : level.allEntities()) {
+        for (Entity entity : entities.activeEntities()) {
             count++;
 
             Color color = Color.green;
