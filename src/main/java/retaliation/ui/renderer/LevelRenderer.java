@@ -21,19 +21,16 @@ public class LevelRenderer implements SlickRenderer {
         for (Entity entity : entities.activeEntities()) {
             count++;
 
-            Color color = Color.green;
-            if (entity.getType() == EntityType.Enemy) {
-                color = Color.white;
-            }
+            Color color = entity.getType() == EntityType.Enemy ? Color.white : Color.green;
             renderMoveable(graphics, entity, color);
         }
 
-        graphics.drawString("Live entities: " + count, 400, 10);
+        graphics.drawString("Active entities: " + count, 400, 10);
     }
 
     private void renderMoveable(Graphics graphics, Entity entity, Color color) {
         graphics.setColor(color);
         graphics.fillRect(entity.position().x(), entity.position().y(),
-                entity.dimension().width(), entity.dimension().height());
+                          entity.dimension().width(), entity.dimension().height());
     }
 }
