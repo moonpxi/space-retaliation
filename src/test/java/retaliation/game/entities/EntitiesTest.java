@@ -2,11 +2,11 @@ package retaliation.game.entities;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.junit.Assert;
 import org.junit.Test;
 import retaliation.game.entities.listener.EntityListener;
 
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
@@ -30,7 +30,7 @@ public class EntitiesTest {
         entities.add(player);
         entities.add(enemy);
 
-        Assert.assertThat(entities.activeEntities(), contains(laser, player, enemy));
+        assertThat(entities.activeEntities(), contains(laser, player, enemy));
     }
 
     @Test public void
@@ -53,4 +53,17 @@ public class EntitiesTest {
         new Entities(listener).add(player);
 
         context.assertIsSatisfied();
-    }}
+    }
+
+    @Test public void
+    createsLaserWhenFired() {
+        context.checking(new Expectations() {{
+            allowing(listener);
+        }});
+
+        Entities entities = new Entities(listener);
+        entities.fired(at(20, 20));
+
+        assertThat(entities.activeEntities(), contains(hasProperty("type", equalTo(Laser))));
+    }
+}

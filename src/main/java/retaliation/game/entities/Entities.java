@@ -43,7 +43,6 @@ public class Entities implements SpaceshipShootingListener {
 
     @Override
     public void fired(Position from) {
-        // TODO: test it
         add(new Entity(Laser, from, size(1, 3)));
     }
 }
