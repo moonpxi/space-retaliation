@@ -21,7 +21,11 @@ public class EntitiesTest {
 
     @Test public void
     returnsListOfAllActiveEntities() {
-        Entities entities = new Entities();
+        context.checking(new Expectations() {{
+            allowing(listener);
+        }});
+
+        Entities entities = new Entities(listener);
         entities.add(laser);
         entities.add(player);
         entities.add(enemy);
@@ -31,28 +35,22 @@ public class EntitiesTest {
 
     @Test public void
     notifiesListenerWhenEntityCreated() {
-        Entities entities = new Entities();
-        entities.registerListener(listener);
-
         context.checking(new Expectations() {{
             oneOf(listener).entityCreated(laser);
         }});
 
-        entities.add(laser);
+        new Entities(listener).add(laser);
 
         context.assertIsSatisfied();
     }
 
     @Test public void
     notifiesListenerWhenSpaceshipCreated() {
-        Entities entities = new Entities();
-        entities.registerListener(listener);
-
         context.checking(new Expectations() {{
             oneOf(listener).spaceshipCreated(player);
         }});
 
-        entities.add(player);
+        new Entities(listener).add(player);
 
         context.assertIsSatisfied();
     }}

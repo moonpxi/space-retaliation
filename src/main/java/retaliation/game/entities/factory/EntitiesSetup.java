@@ -9,8 +9,7 @@ import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt
 public class EntitiesSetup {
 
     public static Entities createSampleLevelEntities(EntityListener listener) {
-        Entities entities = new Entities();
-        entities.registerListener(listener);
+        Entities entities = new Entities(listener);
 
         entities.add(playerFighterAt(350, 520));
         entities.add(enemyShipAt(400, 100));

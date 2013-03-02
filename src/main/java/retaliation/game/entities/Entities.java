@@ -15,7 +15,7 @@ public class Entities implements SpaceshipShootingListener {
     private final List<Entity> active = new ArrayList<Entity>();
     private EntityListener listener;
 
-    public void registerListener(EntityListener listener) {
+    public Entities(EntityListener listener) {
         this.listener = listener;
     }
 
@@ -34,12 +34,10 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     private void notifyListener(Entity entity) {
-        if (listener != null) {
-            if (entity instanceof Spaceship) {
-                listener.spaceshipCreated((Spaceship) entity);
-            } else {
-                listener.entityCreated(entity);
-            }
+        if (entity instanceof Spaceship) {
+            listener.spaceshipCreated((Spaceship) entity);
+        } else {
+            listener.entityCreated(entity);
         }
     }
 

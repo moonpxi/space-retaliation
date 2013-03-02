@@ -11,7 +11,7 @@ import static retaliation.game.geometry.Position.at;
 public class EntityTest {
 
     @Test
-    public void movesRelativeToAdjustmentAndNotifiesMovementListeners() {
+    public void movesRelativeToAdjustment() {
         final Entity entity = new Entity(Player, at(5, 8), size(10, 10));
 
         entity.move(15, 42);
