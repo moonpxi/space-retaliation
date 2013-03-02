@@ -6,7 +6,7 @@ import retaliation.game.entities.listener.EntityListener;
 import static retaliation.game.entities.factory.SpaceshipFactory.enemyShipAt;
 import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt;
 
-public class LevelSetup {
+public class EntitiesSetup {
 
     public static Entities createSampleLevelEntities(EntityListener listener) {
         Entities entities = new Entities();
