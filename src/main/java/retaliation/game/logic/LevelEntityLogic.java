@@ -12,13 +12,13 @@ import static java.util.Arrays.asList;
 import static retaliation.game.entities.EntityType.Player;
 
 
-public class Level implements EntityListener {
+public class LevelEntityLogic implements EntityListener {
 
     private PlayerShipControls player;
     private final List<EnemyAI> enemies = new ArrayList<EnemyAI>();
     private final List<FlyingLaser> lasers = new ArrayList<FlyingLaser>();
 
-    public Iterable<GameLogic> allEntitiesLogic() {
+    public Iterable<? extends GameLogic> allEntitiesLogic() {
         return concat(asList(player), enemies, lasers);
     }
 

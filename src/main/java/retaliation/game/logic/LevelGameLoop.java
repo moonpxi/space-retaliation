@@ -9,19 +9,19 @@ import static retaliation.game.geometry.Position.at;
 
 public class LevelGameLoop implements GameLogic {
 
-    private final Level level;
+    private final LevelEntityLogic levelEntityLogic;
     private final EnforceLevelBoundaryRule boundaryCheck;
 
-    public LevelGameLoop(Level level) {
-        this.level = level;
-        this.boundaryCheck = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)), this.level.getPlayer().getShip());
+    public LevelGameLoop(LevelEntityLogic levelEntityLogic) {
+        this.levelEntityLogic = levelEntityLogic;
+        this.boundaryCheck = new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600)), this.levelEntityLogic.getPlayer().getShip());
     }
 
     @Override
     public void update(Input input, int delta) {
         Loop loop = new Loop(input, delta);
 
-        loop.updateAll(level.allEntitiesLogic());
+        loop.updateAll(levelEntityLogic.allEntitiesLogic());
 
         loop.update(boundaryCheck);
     }
