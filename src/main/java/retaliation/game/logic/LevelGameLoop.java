@@ -1,7 +1,6 @@
 package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
-import retaliation.game.entities.Level;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
 

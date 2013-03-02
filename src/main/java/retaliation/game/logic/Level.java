@@ -1,10 +1,8 @@
-package retaliation.game.entities;
+package retaliation.game.logic;
 
+import retaliation.game.entities.Entity;
+import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.listener.EntityListener;
-import retaliation.game.logic.EnemyAI;
-import retaliation.game.logic.FlyingLaser;
-import retaliation.game.logic.GameLogic;
-import retaliation.game.logic.PlayerShipControls;
 
 import java.util.ArrayList;
 import java.util.List;
