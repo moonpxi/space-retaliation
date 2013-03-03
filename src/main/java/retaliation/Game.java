@@ -8,6 +8,7 @@ import retaliation.game.entities.Entities;
 import retaliation.game.entities.factory.EntitiesSetup;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
+import retaliation.game.logic.factory.EntityGameLogicFactory;
 import retaliation.ui.renderer.LevelRenderer;
 import retaliation.ui.renderer.SlickRenderer;
 
@@ -20,7 +21,8 @@ public class Game extends BasicGame {
        super("Space Retaliation");
 
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
-        Entities entities = EntitiesSetup.createSampleLevelEntities(levelEntityLogic);
+        EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
+        Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
         levelLogic = new LevelGameLoop(levelEntityLogic);
         renderer = new LevelRenderer(entities);
     }
