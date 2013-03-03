@@ -19,30 +19,8 @@ public class LevelGameLoop implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        Loop loop = new Loop(input, delta);
+        levelEntityLogic.update(input, delta);
 
-        loop.updateAll(levelEntityLogic.allEntitiesLogic());
-
-        loop.update(boundaryCheck);
-    }
-
-    private class Loop {
-        private final Input input;
-        private final int delta;
-
-        public Loop(Input input, int delta) {
-            this.input = input;
-            this.delta = delta;
-        }
-
-        public void update(GameLogic logic) {
-            logic.update(input, delta);
-        }
-
-        public void updateAll(Iterable<? extends GameLogic> logics) {
-            for (GameLogic logic : logics) {
-                update(logic);
-            }
-        }
+        boundaryCheck.update(input, delta);
     }
 }
