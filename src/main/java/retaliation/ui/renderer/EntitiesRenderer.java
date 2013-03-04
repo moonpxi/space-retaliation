@@ -6,11 +6,11 @@ import retaliation.game.entities.Entities;
 import retaliation.game.entities.Entity;
 import retaliation.game.entities.EntityType;
 
-public class LevelRenderer implements SlickRenderer {
+public class EntitiesRenderer implements SlickRenderer {
 
     private final Entities entities;
 
-    public LevelRenderer(Entities entities) {
+    public EntitiesRenderer(Entities entities) {
         this.entities = entities;
     }
 

@@ -9,7 +9,7 @@ import retaliation.game.entities.factory.EntitiesSetup;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
-import retaliation.ui.renderer.LevelRenderer;
+import retaliation.ui.renderer.EntitiesRenderer;
 import retaliation.ui.renderer.SlickRenderer;
 
 public class Game extends BasicGame {
@@ -24,7 +24,7 @@ public class Game extends BasicGame {
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
         levelLogic = new LevelGameLoop(levelEntityLogic);
-        renderer = new LevelRenderer(entities);
+        renderer = new EntitiesRenderer(entities);
     }
 
     @Override
