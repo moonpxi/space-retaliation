@@ -66,4 +66,18 @@ public class EntitiesTest {
 
         assertThat(entities.activeEntities(), contains(hasProperty("type", equalTo(Laser))));
     }
+
+    @Test public void
+    filterOutPlayerShip() {
+        context.checking(new Expectations() {{
+            allowing(listener);
+        }});
+
+        Entities entities = new Entities(listener);
+        entities.add(enemy);
+        entities.add(player);
+        entities.add(enemy);
+
+        assertThat(entities.getPlayerShip(), equalTo(player));
+    }
 }

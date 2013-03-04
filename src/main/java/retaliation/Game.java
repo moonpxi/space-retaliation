@@ -6,11 +6,17 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import retaliation.game.entities.Entities;
 import retaliation.game.entities.factory.EntitiesSetup;
+import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
+import retaliation.game.rules.EnforceLevelBoundaryRule;
+import retaliation.game.rules.LevelRules;
 import retaliation.ui.renderer.EntitiesRenderer;
 import retaliation.ui.renderer.SlickRenderer;
+
+import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.geometry.Position.at;
 
 public class Game extends BasicGame {
     
@@ -23,7 +29,9 @@ public class Game extends BasicGame {
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
-        levelLogic = new LevelGameLoop(entities, levelEntityLogic);
+        LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600))));
+
+        levelLogic = new LevelGameLoop(entities, levelEntityLogic, rules);
         renderer = new EntitiesRenderer(entities);
     }
 

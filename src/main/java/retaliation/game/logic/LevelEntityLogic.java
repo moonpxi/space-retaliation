@@ -19,10 +19,6 @@ public class LevelEntityLogic implements GameLogic {
         this.player = player;
     }
 
-    public PlayerShipControls getPlayer() {
-        return player;
-    }
-
     public void add(FlyingLaser laser) {
         lasers.add(laser);
     }
@@ -33,13 +29,9 @@ public class LevelEntityLogic implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        for (GameLogic logic : allEntitiesLogic()) {
+        for (GameLogic logic : concat(asList(player), enemies, lasers)) {
             logic.update(input, delta);
         }
-    }
-
-    private Iterable<? extends GameLogic> allEntitiesLogic() {
-        return concat(asList(player), enemies, lasers);
     }
 
 }
