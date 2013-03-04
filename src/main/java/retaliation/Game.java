@@ -23,7 +23,7 @@ public class Game extends BasicGame {
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
-        levelLogic = new LevelGameLoop(levelEntityLogic);
+        levelLogic = new LevelGameLoop(entities, levelEntityLogic);
         renderer = new EntitiesRenderer(entities);
     }
 
