@@ -10,6 +10,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.entities.Spaceship.State.Alive;
+import static retaliation.game.entities.Spaceship.State.Destroyed;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -39,6 +40,13 @@ public class SpaceshipTest {
     @Test public void
     isAliveWhenCreated() {
         assertThat(ship.state(), is(Alive));
+    }
+
+    @Test public void
+    isDestroyedWhenItTakesAHit() {
+        ship.takeHit();
+
+        assertThat(ship.state(), is(Destroyed));
     }
    
 }

@@ -5,6 +5,7 @@ import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 
 import static retaliation.game.entities.Spaceship.State.Alive;
+import static retaliation.game.entities.Spaceship.State.Destroyed;
 
 public class Spaceship extends Entity {
 
@@ -13,9 +14,11 @@ public class Spaceship extends Entity {
     }
     
     private SpaceshipShootingListener shootingListener;
+    private State state;
 
     public Spaceship(EntityType type, Position position, Dimension dimension) {
         super(type, position, dimension);
+        state = Alive;
     }
 
     public void shoot() {
@@ -25,11 +28,16 @@ public class Spaceship extends Entity {
         shootingListener.fired(from);
     }
 
+    public void takeHit() {
+        state = Destroyed;
+    }
+
+    public State state() {
+        return state;
+    }
+
     public void registerShootingListener(SpaceshipShootingListener listener) {
         shootingListener = listener;
     }
 
-    public State state() {
-        return Alive;
-    }
 }
