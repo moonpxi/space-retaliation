@@ -9,8 +9,8 @@ import static retaliation.game.entities.Spaceship.State.Destroyed;
 
 public class Spaceship extends Entity {
 
-    enum State {
-        Alive, Damaged, Destroyed
+    public enum State {
+        Alive, Destroyed
     }
     
     private SpaceshipShootingListener shootingListener;
