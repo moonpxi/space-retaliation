@@ -27,8 +27,9 @@ public class PlayerShipControlsTest {
         final Spaceship mockShip = context.mock(Spaceship.class);
         PlayerShipControls controlsWithMockShip = new PlayerShipControls(mockShip);
 
-        expectKey(KEY_SPACE);
         context.checking(new Expectations() {{
+            oneOf(input).isKeyDown(KEY_SPACE); will(returnValue(true));
+            allowing(input);
             oneOf(mockShip).shoot();
         }});
 
@@ -42,8 +43,6 @@ public class PlayerShipControlsTest {
     moveUpWhenUpArrowIsPressed() {
         expectKey(KEY_UP);
 
-        controls.update(input, 0);
-
         assertThat(controls.getShip().position(), equalTo(at(0, -4)));
     }
 
@@ -51,8 +50,6 @@ public class PlayerShipControlsTest {
     public void
     moveDownWhenDownArrowIsPressed() {
         expectKey(KEY_DOWN);
-
-        controls.update(input, 0);
 
         assertThat(controls.getShip().position(), equalTo(at(0, 4)));
     }
@@ -62,8 +59,6 @@ public class PlayerShipControlsTest {
     moveLeftWhenLeftArrowIsPressed() {
         expectKey(KEY_LEFT);
 
-        controls.update(input, 0);
-
         assertThat(controls.getShip().position(), equalTo(at(-4, 0)));
     }
 
@@ -71,8 +66,6 @@ public class PlayerShipControlsTest {
     public void
     moveRightWhenRightArrowIsPressed() {
         expectKey(KEY_RIGHT);
-
-        controls.update(input, 0);
 
         assertThat(controls.getShip().position(), equalTo(at(4, 0)));
     }
@@ -96,5 +89,7 @@ public class PlayerShipControlsTest {
             oneOf(input).isKeyDown(keyCode); will(returnValue(true));
             allowing(input);
         }});
+
+        controls.update(input, 0);
     }
 }
