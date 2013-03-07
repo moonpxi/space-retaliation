@@ -8,6 +8,7 @@ import retaliation.game.geometry.Position;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.find;
 import static retaliation.game.entities.EntityType.Laser;
 import static retaliation.game.entities.EntityType.Player;
@@ -50,8 +51,16 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Spaceship getPlayerShip() {
-        return (Spaceship) find(active, new Predicate<Entity>() {
-            @Override public boolean apply(Entity entity) { return entity.getType() == Player; }
-        });
+        return (Spaceship) find(active, byType(Player));
+    }
+
+    public Iterable<? extends Entity> filterByType(EntityType type) {
+        return filter(active, byType(type));
+    }
+
+    private Predicate<Entity> byType(final EntityType type) {
+        return new Predicate<Entity>() {
+            @Override public boolean apply(Entity entity) { return entity.getType() == type; }
+        };
     }
 }

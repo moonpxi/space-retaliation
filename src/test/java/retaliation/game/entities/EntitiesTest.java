@@ -21,11 +21,7 @@ public class EntitiesTest {
 
     @Test public void
     returnsListOfAllActiveEntities() {
-        context.checking(new Expectations() {{
-            allowing(listener);
-        }});
-
-        Entities entities = new Entities(listener);
+        Entities entities = entitiesIgnoreListener();
         entities.add(laser);
         entities.add(player);
         entities.add(enemy);
@@ -57,11 +53,8 @@ public class EntitiesTest {
 
     @Test public void
     createsLaserWhenFired() {
-        context.checking(new Expectations() {{
-            allowing(listener);
-        }});
+        Entities entities = entitiesIgnoreListener();
 
-        Entities entities = new Entities(listener);
         entities.fired(at(20, 20));
 
         assertThat(entities.activeEntities(), contains(hasProperty("type", equalTo(Laser))));
@@ -69,15 +62,32 @@ public class EntitiesTest {
 
     @Test public void
     filterOutPlayerShip() {
-        context.checking(new Expectations() {{
-            allowing(listener);
-        }});
-
-        Entities entities = new Entities(listener);
+        Entities entities = entitiesIgnoreListener();
         entities.add(enemy);
         entities.add(player);
         entities.add(enemy);
 
         assertThat(entities.getPlayerShip(), equalTo(player));
     }
+
+    @Test public void
+    filterEntitiesByType() {
+        Entities entities = entitiesIgnoreListener();
+        Entity anotherLaser = new Entity(Laser, null, null);
+        entities.add(laser);
+        entities.add(enemy);
+        entities.add(player);
+        entities.add(anotherLaser);
+
+        assertThat(entities.filterByType(Laser), contains(laser, anotherLaser));
+    }
+
+    private Entities entitiesIgnoreListener() {
+        context.checking(new Expectations() {{
+            allowing(listener);
+        }});
+
+        return new Entities(listener);
+    }
+
 }
