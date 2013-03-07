@@ -2,6 +2,7 @@ package retaliation.game.entities;
 
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
+import retaliation.game.geometry.Rectangle;
 
 public class Entity {
 
@@ -14,7 +15,11 @@ public class Entity {
         this.position = position;
         this.dimension = dimension;
     }
-    
+
+    public EntityType getType() {
+        return type;
+    }
+
     public void move(float xMovement, float yMovement) {
         position = Position.at(position.x() + xMovement, position.y() + yMovement);
     }
@@ -27,7 +32,11 @@ public class Entity {
         return dimension;
     }
 
-    public EntityType getType() {
-        return type;
+    private Rectangle rectangle() {
+        return new Rectangle(position(), dimension());
+    }
+
+    public boolean collideWith(Entity anotherEntity) {
+        return this.rectangle().isIntersectedWith(anotherEntity.rectangle());
     }
 }

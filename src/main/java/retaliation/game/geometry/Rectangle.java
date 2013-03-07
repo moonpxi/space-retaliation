@@ -41,4 +41,7 @@ public class Rectangle {
         return getY() + getHeight();
     }
 
+    public boolean isIntersectedWith(Rectangle anotherRectangle) {
+        return true;
+    }
 }
