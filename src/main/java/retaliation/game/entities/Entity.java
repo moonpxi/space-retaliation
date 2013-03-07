@@ -32,7 +32,7 @@ public class Entity {
         return dimension;
     }
 
-    private Rectangle rectangle() {
+    public Rectangle rectangle() {
         return new Rectangle(position(), dimension());
     }
 

@@ -13,7 +13,7 @@ public class EnforceLevelBoundaryRule implements Rule {
     }
     
     public void enforceBoundaryOn(Entity ship) {
-        Rectangle newPosition = new Rectangle(ship.position(), ship.dimension());
+        Rectangle newPosition = ship.rectangle();
         
         float xAdjustment = calculateAdjustment(newPosition.getX(), newPosition.getRightmostX(),
                                               boundary.getX(), boundary.getRightmostX()),

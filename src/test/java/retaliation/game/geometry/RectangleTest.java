@@ -48,7 +48,7 @@ public class RectangleTest {
     @Test public void
     doesNotIntersectWithOutOfBoundsRectangle() {
         Rectangle rect1 = new Rectangle(at(10, 10), size(50, 50));
-        Rectangle rect2 = new Rectangle(at(51, 51), size(10, 10));
+        Rectangle rect2 = new Rectangle(at(61, 61), size(10, 10));
 
         assertThat(rect1.isIntersectedWith(rect2), is(false));
     }

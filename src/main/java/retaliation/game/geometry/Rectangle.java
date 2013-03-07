@@ -42,6 +42,9 @@ public class Rectangle {
     }
 
     public boolean isIntersectedWith(Rectangle anotherRectangle) {
-        return true;
+        return (this.getX() < anotherRectangle.getRightmostX() &&
+                this.getRightmostX() > anotherRectangle.getX() &&
+                this.getY() < anotherRectangle.getTopmostY() &&
+                this.getTopmostY() > anotherRectangle.getY());
     }
 }
