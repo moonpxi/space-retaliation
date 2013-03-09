@@ -8,9 +8,8 @@ import retaliation.game.entities.listener.SpaceshipShootingListener;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Player;
-import static retaliation.game.entities.Spaceship.State.Alive;
-import static retaliation.game.entities.Spaceship.State.Destroyed;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -35,11 +34,6 @@ public class SpaceshipTest {
         ship.shoot();
         
         context.assertIsSatisfied();
-    }
-
-    @Test public void
-    isAliveWhenCreated() {
-        assertThat(ship.state(), is(Alive));
     }
 
     @Test public void

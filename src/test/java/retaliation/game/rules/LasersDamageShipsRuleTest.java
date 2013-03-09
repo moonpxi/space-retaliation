@@ -10,10 +10,10 @@ import retaliation.game.geometry.Position;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static retaliation.game.entities.Entity.State.Alive;
+import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Enemy;
 import static retaliation.game.entities.EntityType.Laser;
-import static retaliation.game.entities.Spaceship.State.Alive;
-import static retaliation.game.entities.Spaceship.State.Destroyed;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 

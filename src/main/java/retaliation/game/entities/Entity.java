@@ -4,9 +4,16 @@ import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 import retaliation.game.geometry.Rectangle;
 
+import static retaliation.game.entities.Entity.State.Alive;
+
 public class Entity {
 
+    public enum State {
+        Alive, Destroyed
+    }
+
     private final EntityType type;
+    private State state;
     private Position position;
     private final Dimension dimension;
 
@@ -14,10 +21,19 @@ public class Entity {
         this.type = type;
         this.position = position;
         this.dimension = dimension;
+        changeTo(Alive);
     }
 
     public EntityType getType() {
         return type;
+    }
+
+    public State state() {
+        return state;
+    }
+
+    public void changeTo(State newState) {
+        state = newState;
     }
 
     public void move(float xMovement, float yMovement) {

@@ -4,21 +4,14 @@ import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Dimension;
 import retaliation.game.geometry.Position;
 
-import static retaliation.game.entities.Spaceship.State.Alive;
-import static retaliation.game.entities.Spaceship.State.Destroyed;
+import static retaliation.game.entities.Entity.State.Destroyed;
 
 public class Spaceship extends Entity {
 
-    public enum State {
-        Alive, Destroyed
-    }
-    
     private SpaceshipShootingListener shootingListener;
-    private State state;
 
     public Spaceship(EntityType type, Position position, Dimension dimension) {
         super(type, position, dimension);
-        state = Alive;
     }
 
     public void shoot() {
@@ -29,11 +22,7 @@ public class Spaceship extends Entity {
     }
 
     public void takeHit() {
-        state = Destroyed;
-    }
-
-    public State state() {
-        return state;
+        changeTo(Destroyed);
     }
 
     public void registerShootingListener(SpaceshipShootingListener listener) {
