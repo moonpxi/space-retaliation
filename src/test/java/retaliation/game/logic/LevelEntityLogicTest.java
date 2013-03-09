@@ -17,7 +17,7 @@ public class LevelEntityLogicTest {
     @Test public void
     updatesAllTheComposedGameLogic() {
         LevelEntityLogic levelLogic = new LevelEntityLogic();
-        levelLogic.setPlayer(player);
+        levelLogic.add(player);
         levelLogic.add(laser);
         levelLogic.add(enemy);
 
@@ -31,4 +31,5 @@ public class LevelEntityLogicTest {
 
         context.assertIsSatisfied();
     }
+
 }

@@ -31,7 +31,7 @@ public class EntityGameLogicFactory implements EntityListener {
     @Override
     public void spaceshipCreated(Spaceship ship) {
         if (ship.getType() == Player) {
-            levelLogic.setPlayer(new PlayerShipControls(ship));
+            levelLogic.add(new PlayerShipControls(ship));
         } else {
             levelLogic.add(new EnemyAI(ship));
         }

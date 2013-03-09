@@ -41,7 +41,7 @@ public class EntityGameLogicFactoryTest {
     @Test public void
     addsPlayerLogicForSpaceshipWithPlayerType() {
         context.checking(new Expectations() {{
-            oneOf(levelLogic).setPlayer(with(any(PlayerShipControls.class)));
+            oneOf(levelLogic).add(with(any(PlayerShipControls.class)));
         }});
 
         factory.spaceshipCreated(new Spaceship(Player, at(10, 10), size(100, 100)));
