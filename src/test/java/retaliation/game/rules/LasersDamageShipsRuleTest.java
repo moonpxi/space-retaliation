@@ -43,7 +43,7 @@ public class LasersDamageShipsRuleTest {
 
     @Test public void
     aFewShipsHitAndMissed() {
-        laser(at(10, 10)); laser(at(20, 10)); laser(at(50, 55));
+        laser(at(10, 10)); laser(at(20, 24)); laser(at(50, 55));
         Spaceship hit = ship(at(10, 15), size(30, 30));
         Spaceship alsoHit = ship(at(43, 10), size(100, 100));
         Spaceship missed = ship(at(100, 105), size(30, 30));
