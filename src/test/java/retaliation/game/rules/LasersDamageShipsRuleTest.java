@@ -23,22 +23,24 @@ public class LasersDamageShipsRuleTest {
 
     @Test public void
     laserHitsAShip() {
-        laser(at(20, 20));
+        Entity laser = laser(at(20, 20));
         Spaceship ship = ship(at(10, 10), size(50, 50));
 
         new LasersDamageShipsRule().apply(entities);
 
         assertThat(ship.state(), is(Destroyed));
+        assertThat(laser.state(), is(Destroyed));
     }
 
     @Test public void
     laserMissesAShip() {
-        laser(at(20, 20));
+        Entity laser = laser(at(20, 20));
         Spaceship ship = ship(at(30, 30), size(50, 50));
 
         new LasersDamageShipsRule().apply(entities);
 
         assertThat(ship.state(), is(Alive));
+        assertThat(laser.state(), is(Alive));
     }
 
     @Test public void

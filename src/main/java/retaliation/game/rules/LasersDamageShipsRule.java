@@ -4,6 +4,7 @@ import retaliation.game.entities.Entities;
 import retaliation.game.entities.Entity;
 import retaliation.game.entities.Spaceship;
 
+import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Laser;
 
 public class LasersDamageShipsRule implements Rule {
@@ -16,6 +17,7 @@ public class LasersDamageShipsRule implements Rule {
             for (Spaceship ship : ships) {
                 if (laser.collideWith(ship)) {
                     ship.takeHit();
+                    laser.changeTo(Destroyed);
                 }
             }
         }
