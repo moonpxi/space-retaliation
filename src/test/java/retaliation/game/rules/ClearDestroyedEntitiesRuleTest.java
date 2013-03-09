@@ -15,7 +15,7 @@ import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
-public class ClearDestroyedEntitiesTest {
+public class ClearDestroyedEntitiesRuleTest {
 
     private final Entities entities = new Entities(EntityListener.NULL_LISTENER);
 
@@ -28,7 +28,7 @@ public class ClearDestroyedEntitiesTest {
         Entity laser = laser(Alive);
         laser(Destroyed);
 
-        new ClearDestroyedEntities().apply(entities);
+        new ClearDestroyedEntitiesRule().apply(entities);
 
         assertThat(entities.activeEntities(), containsInAnyOrder(playerAlive, liveEnemy, laser));
     }

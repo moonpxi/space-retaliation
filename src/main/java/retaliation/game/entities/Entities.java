@@ -2,6 +2,7 @@ package retaliation.game.entities;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
@@ -69,5 +70,14 @@ public class Entities implements SpaceshipShootingListener {
         return new Predicate<Entity>() {
             @Override public boolean apply(Entity entity) { return entity.getType() == type; }
         };
+    }
+
+    public void clearDestroyed() {
+        Iterables.removeIf(allEntities, new Predicate<Entity>() {
+            @Override
+            public boolean apply(Entity entity) {
+                return entity.state() == Entity.State.Destroyed;
+            }
+        });
     }
 }

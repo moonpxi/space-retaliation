@@ -2,9 +2,10 @@ package retaliation.game.rules;
 
 import retaliation.game.entities.Entities;
 
-public class ClearDestroyedEntities implements Rule {
+public class ClearDestroyedEntitiesRule implements Rule {
 
     @Override
     public void apply(Entities entities) {
+        entities.clearDestroyed();
     }
 }
