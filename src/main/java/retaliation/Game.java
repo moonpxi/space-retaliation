@@ -11,6 +11,7 @@ import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
 import retaliation.game.rules.EnforceLevelBoundaryRule;
+import retaliation.game.rules.LasersDamageShipsRule;
 import retaliation.game.rules.LevelRules;
 import retaliation.ui.renderer.EntitiesRenderer;
 import retaliation.ui.renderer.SlickRenderer;
@@ -29,7 +30,8 @@ public class Game extends BasicGame {
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
-        LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600))));
+        LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600))),
+                                          new LasersDamageShipsRule());
 
         levelLogic = new LevelGameLoop(entities, levelEntityLogic, rules);
         renderer = new EntitiesRenderer(entities);

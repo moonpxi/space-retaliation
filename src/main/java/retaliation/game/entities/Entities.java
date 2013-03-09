@@ -33,7 +33,12 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Iterable<? extends Entity> activeEntities() {
-        return active;
+        return filter(active, new Predicate<Entity>() {
+            @Override
+            public boolean apply(Entity entity) {
+                return entity.state() == Entity.State.Alive;
+            }
+        });
     }
 
     private void notifyListener(Entity entity) {
