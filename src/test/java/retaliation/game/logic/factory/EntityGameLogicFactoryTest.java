@@ -59,4 +59,17 @@ public class EntityGameLogicFactoryTest {
 
         context.assertIsSatisfied();
     }
+
+    @Test public void
+    removeLogicFromDestroyedEntity() {
+        final Entity entity = new Entity(Laser, at(10, 10), size(100, 100));
+
+        context.checking(new Expectations() {{
+            oneOf(levelLogic).removeLogicFor(entity);
+        }});
+
+        factory.entityDestroyed(entity);
+
+        context.assertIsSatisfied();
+    }
 }

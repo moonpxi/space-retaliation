@@ -25,6 +25,7 @@ public class EntityGameLogicFactory implements EntityListener {
 
     @Override
     public void entityDestroyed(Entity entity) {
+        levelLogic.removeLogicFor(entity);
     }
 
     @Override

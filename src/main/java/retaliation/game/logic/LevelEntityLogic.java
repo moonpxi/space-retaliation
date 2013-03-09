@@ -1,6 +1,7 @@
 package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
+import retaliation.game.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,8 @@ public class LevelEntityLogic implements GameLogic {
         }
     }
 
+    public void removeLogicFor(Entity entity) {
+
+    }
 }
 
