@@ -4,7 +4,7 @@ import org.newdawn.slick.Input;
 import retaliation.game.entities.Entities;
 import retaliation.game.rules.LevelRules;
 
-public class LevelGameLoop implements GameLogic {
+public class LevelGameLoop {
 
     private final Entities entities;
     private final LevelEntityLogic levelEntityLogic;
@@ -16,7 +16,6 @@ public class LevelGameLoop implements GameLogic {
         this.levelRules = levelRules;
     }
 
-    @Override
     public void update(Input input, int delta) {
         levelEntityLogic.update(input, delta);
         levelRules.apply(entities);

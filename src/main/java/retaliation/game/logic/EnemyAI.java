@@ -1,6 +1,7 @@
 package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
+import retaliation.game.entities.Entity;
 import retaliation.game.entities.Spaceship;
 
 public class EnemyAI implements GameLogic {
@@ -28,7 +29,8 @@ public class EnemyAI implements GameLogic {
         enemy.move(speed, 0);
     }
 
-    public Spaceship getShip() {
+    @Override
+    public Entity getEntity() {
         return enemy;
     }
 }

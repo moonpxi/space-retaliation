@@ -15,7 +15,9 @@ public class FlyingLaser implements GameLogic {
         laser.move(0, -1);
     }
 
-    public Entity getLaser() {
+    @Override
+    public Entity getEntity() {
         return laser;
     }
+
 }

@@ -1,10 +1,13 @@
 package retaliation.game.logic;
 
+import com.google.common.base.Predicate;
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Iterables.removeIf;
 
 
 public class LevelEntityLogic implements GameLogic {
@@ -16,8 +19,10 @@ public class LevelEntityLogic implements GameLogic {
         addedLogic.add(logic);
     }
 
-    public void removeLogicFor(Entity entity) {
-
+    public void removeLogicFor(final  Entity entity) {
+        removeIf(allEntitiesLogic, new Predicate<GameLogic>() {
+            @Override public boolean apply(GameLogic logic) { return logic.getEntity() == entity; }
+        });
     }
 
     @Override
@@ -28,6 +33,11 @@ public class LevelEntityLogic implements GameLogic {
         for (GameLogic logic : allEntitiesLogic) {
             logic.update(input, delta);
         }
+    }
+
+    @Override
+    public Entity getEntity() {
+       throw new IllegalStateException("No entities for composite");
     }
 
 }

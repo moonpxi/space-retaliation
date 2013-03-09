@@ -1,6 +1,7 @@
 package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
+import retaliation.game.entities.Entity;
 import retaliation.game.entities.Spaceship;
 
 import static org.newdawn.slick.Input.*;
@@ -30,6 +31,11 @@ public class PlayerShipControls implements GameLogic {
         if (input.isKeyDown(KEY_SPACE)) {
             player.shoot();
         }
+    }
+
+    @Override
+    public Entity getEntity() {
+        return player;
     }
 
     public Spaceship getShip() {
