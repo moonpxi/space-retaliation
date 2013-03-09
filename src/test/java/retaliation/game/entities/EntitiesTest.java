@@ -7,6 +7,7 @@ import retaliation.game.entities.listener.EntityListener;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
@@ -36,6 +37,24 @@ public class EntitiesTest {
         }});
 
         new Entities(listener).add(laser);
+
+        context.assertIsSatisfied();
+    }
+
+    @Test public void
+    notifiesListenerWhenEntityDestroyed() {
+        context.checking(new Expectations() {{
+            oneOf(listener).entityDestroyed(laser);
+
+            allowing(listener);
+        }});
+
+
+        Entities entities = new Entities(listener);
+        laser.changeTo(Destroyed);
+        entities.add(laser);
+
+        entities.clearDestroyed();
 
         context.assertIsSatisfied();
     }

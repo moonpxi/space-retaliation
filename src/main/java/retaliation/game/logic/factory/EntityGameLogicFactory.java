@@ -24,6 +24,10 @@ public class EntityGameLogicFactory implements EntityListener {
     }
 
     @Override
+    public void entityDestroyed(Entity entity) {
+    }
+
+    @Override
     public void spaceshipCreated(Spaceship ship) {
         if (ship.getType() == Player) {
             levelLogic.setPlayer(new PlayerShipControls(ship));

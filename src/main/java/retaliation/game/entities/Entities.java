@@ -2,7 +2,6 @@ package retaliation.game.entities;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Iterables.*;
+import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.geometry.Dimension.size;
 
@@ -35,6 +35,13 @@ public class Entities implements SpaceshipShootingListener {
 
     public Iterable<? extends Entity> activeEntities() {
         return allEntities;
+    }
+
+    public void clearDestroyed() {
+        for (Entity destroyed : filter(allEntities, byState(Destroyed))) {
+            listener.entityDestroyed(destroyed);
+        }
+        removeIf(allEntities, byState(Destroyed));
     }
 
     private void notifyListener(Entity entity) {
@@ -72,12 +79,9 @@ public class Entities implements SpaceshipShootingListener {
         };
     }
 
-    public void clearDestroyed() {
-        Iterables.removeIf(allEntities, new Predicate<Entity>() {
-            @Override
-            public boolean apply(Entity entity) {
-                return entity.state() == Entity.State.Destroyed;
-            }
-        });
+    private Predicate<Entity> byState(final Entity.State state) {
+        return new Predicate<Entity>() {
+            @Override public boolean apply(Entity entity) { return entity.state() == state; }
+        };
     }
 }
