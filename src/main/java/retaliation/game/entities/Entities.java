@@ -15,7 +15,7 @@ import static retaliation.game.geometry.Dimension.size;
 
 public class Entities implements SpaceshipShootingListener {
 
-    private final List<Entity> active = new ArrayList<Entity>();
+    private final List<Entity> allEntities = new ArrayList<Entity>();
     private EntityListener listener;
 
     public Entities(EntityListener listener) {
@@ -23,7 +23,7 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public void add(Entity entity) {
-        active.add(entity);
+        allEntities.add(entity);
         notifyListener(entity);
     }
 
@@ -33,12 +33,7 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Iterable<? extends Entity> activeEntities() {
-        return filter(active, new Predicate<Entity>() {
-            @Override
-            public boolean apply(Entity entity) {
-                return entity.state() == Entity.State.Alive;
-            }
-        });
+        return allEntities;
     }
 
     private void notifyListener(Entity entity) {
@@ -55,7 +50,7 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Spaceship getPlayerShip() {
-        return (Spaceship) find(active, byType(Player));
+        return (Spaceship) find(allEntities, byType(Player));
     }
 
     public Iterable<Spaceship> allShips() {
@@ -67,7 +62,7 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Iterable<Entity> filterByType(EntityType type) {
-        return filter(active, byType(type));
+        return filter(allEntities, byType(type));
     }
 
     private Predicate<Entity> byType(final EntityType type) {
