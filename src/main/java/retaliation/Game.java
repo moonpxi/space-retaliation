@@ -10,10 +10,7 @@ import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
-import retaliation.game.rules.ClearDestroyedEntitiesRule;
-import retaliation.game.rules.EnforceLevelBoundaryRule;
-import retaliation.game.rules.LasersDamageShipsRule;
-import retaliation.game.rules.LevelRules;
+import retaliation.game.rules.*;
 import retaliation.ui.renderer.EntitiesRenderer;
 import retaliation.ui.renderer.SlickRenderer;
 
@@ -28,11 +25,13 @@ public class Game extends BasicGame {
     public Game() {
        super("Space Retaliation");
 
+        Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
-        LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(new Rectangle(at(0, 0), size(800, 600))),
+        LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(boundary),
                                           new LasersDamageShipsRule(),
+                                          new DestroyOutOfBoundaryLasersRule(boundary),
                                           new ClearDestroyedEntitiesRule());
 
         levelLogic = new LevelGameLoop(entities, levelEntityLogic, rules);
