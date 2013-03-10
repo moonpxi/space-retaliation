@@ -80,13 +80,13 @@ public class EntitiesTest {
     }
 
     @Test public void
-    filterOutPlayerShip() {
+    getsPlayerShip() {
         Entities entities = entitiesIgnoreListener();
         entities.add(enemy);
         entities.add(player);
         entities.add(enemy);
 
-        assertThat(entities.getPlayerShip(), equalTo(player));
+        assertThat(entities.playerShip(), equalTo(player));
     }
 
     @Test public void

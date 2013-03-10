@@ -36,6 +36,6 @@ public class EnforceLevelBoundaryRule implements Rule {
 
     @Override
     public void apply(Entities entities) {
-        enforceBoundaryOn(entities.getPlayerShip());
+        enforceBoundaryOn(entities.playerShip());
     }
 }

@@ -33,8 +33,9 @@ public class Entities implements SpaceshipShootingListener {
         add((Entity) ship);
     }
 
-    public Iterable<? extends Entity> activeEntities() {
-        return allEntities;
+    @Override
+    public void fired(Position from) {
+        add(new Entity(Laser, from, size(1, 4)));
     }
 
     public void clearDestroyed() {
@@ -42,6 +43,22 @@ public class Entities implements SpaceshipShootingListener {
             listener.entityDestroyed(destroyed);
         }
         removeIf(allEntities, byState(Destroyed));
+    }
+
+    public Iterable<? extends Entity> activeEntities() {
+        return allEntities;
+    }
+
+    public Spaceship playerShip() {
+        return toSpaceship().apply(find(allEntities, byType(Player)));
+    }
+
+    public Iterable<Spaceship> allShips() {
+        return transform(filterByType(Enemy), toSpaceship());
+    }
+
+    public Iterable<Entity> filterByType(EntityType type) {
+        return filter(allEntities, byType(type));
     }
 
     private void notifyListener(Entity entity) {
@@ -52,30 +69,15 @@ public class Entities implements SpaceshipShootingListener {
         }
     }
 
-    @Override
-    public void fired(Position from) {
-        add(new Entity(Laser, from, size(1, 3)));
-    }
-
-    public Spaceship getPlayerShip() {
-        return (Spaceship) find(allEntities, byType(Player));
-    }
-
-    public Iterable<Spaceship> allShips() {
-        Iterable<Spaceship> enemies = transform(filterByType(Enemy), new Function<Entity, Spaceship>() {
+    private Function<Entity, Spaceship> toSpaceship() {
+        return new Function<Entity, Spaceship>() {
             @Override public Spaceship apply(Entity entity) { return (Spaceship) entity; }
-        });
-        return enemies;
-        //return concat(enemies, asList(getPlayerShip()));
+        };
     }
 
-    public Iterable<Entity> filterByType(EntityType type) {
-        return filter(allEntities, byType(type));
-    }
-
-    private Predicate<Entity> byType(final EntityType type) {
+    private Predicate<Entity> byType(final EntityType types) {
         return new Predicate<Entity>() {
-            @Override public boolean apply(Entity entity) { return entity.getType() == type; }
+            @Override public boolean apply(Entity entity) { return entity.getType() == types; }
         };
     }
 
