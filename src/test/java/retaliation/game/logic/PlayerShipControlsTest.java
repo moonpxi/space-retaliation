@@ -43,7 +43,7 @@ public class PlayerShipControlsTest {
     moveUpWhenUpArrowIsPressed() {
         expectKey(KEY_UP);
 
-        assertThat(controls.getShip().position(), equalTo(at(0, -4)));
+        assertThat(controls.getEntity().position(), equalTo(at(0, -4)));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class PlayerShipControlsTest {
     moveDownWhenDownArrowIsPressed() {
         expectKey(KEY_DOWN);
 
-        assertThat(controls.getShip().position(), equalTo(at(0, 4)));
+        assertThat(controls.getEntity().position(), equalTo(at(0, 4)));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class PlayerShipControlsTest {
     moveLeftWhenLeftArrowIsPressed() {
         expectKey(KEY_LEFT);
 
-        assertThat(controls.getShip().position(), equalTo(at(-4, 0)));
+        assertThat(controls.getEntity().position(), equalTo(at(-4, 0)));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class PlayerShipControlsTest {
     moveRightWhenRightArrowIsPressed() {
         expectKey(KEY_RIGHT);
 
-        assertThat(controls.getShip().position(), equalTo(at(4, 0)));
+        assertThat(controls.getEntity().position(), equalTo(at(4, 0)));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PlayerShipControlsTest {
 
         controls.update(input, 0);
 
-        assertThat(controls.getShip().position(), equalTo(at(4, -4)));
+        assertThat(controls.getEntity().position(), equalTo(at(4, -4)));
     }
 
     private void expectKey(final int keyCode) {

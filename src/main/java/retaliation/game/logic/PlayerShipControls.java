@@ -38,7 +38,4 @@ public class PlayerShipControls implements GameLogic {
         return player;
     }
 
-    public Spaceship getShip() {
-        return player;
-    }
 }
