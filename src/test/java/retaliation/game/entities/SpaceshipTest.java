@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 
+import static java.lang.Thread.sleep;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Destroyed;
@@ -25,14 +26,32 @@ public class SpaceshipTest {
 
     @Test
     public void notifiesShootingListenerWhenShooting() {
-        ship.registerShootingListener(shootingListener);
-        
-        context.checking(new Expectations() {{
-            oneOf(shootingListener).fired(at(10, 7));
-        }});
+        expectFiredNotificationsOnly(1);
         
         ship.shoot();
         
+        context.assertIsSatisfied();
+    }
+
+
+    @Test public void
+    limitRateOfFire() {
+        expectFiredNotificationsOnly(1);
+
+        ship.shoot();
+        ship.shoot();
+
+        context.assertIsSatisfied();
+    }
+
+    @Test public void
+    allowAnotherShotAfterCooldownPeriod() throws InterruptedException {
+        expectFiredNotificationsOnly(2);
+
+        ship.shoot();
+        sleep(1000); // Yes, this is horrible.
+        ship.shoot();
+
         context.assertIsSatisfied();
     }
 
@@ -42,5 +61,12 @@ public class SpaceshipTest {
 
         assertThat(ship.state(), is(Destroyed));
     }
-   
+
+    private void expectFiredNotificationsOnly(final int times) {
+        ship.registerShootingListener(shootingListener);
+
+        context.checking(new Expectations() {{
+            exactly(times).of(shootingListener).fired(at(10, 7));
+        }});
+    }
 }
