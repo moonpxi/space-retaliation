@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Alive;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.entities.Laser.Direction.Downwards;
 import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
@@ -58,15 +59,20 @@ public class LasersDamageShipsRuleTest {
 
     @Test public void
     onlyUpwardLasersDestroyEnemiesAndDownwardLasersDestroyPlayer() {
-        Laser upwardsOnEnemy = laser(at(10, 10), Upwards);
+        laser(at(10, 10), Upwards); laser(at(50, 10), Downwards);
         Spaceship enemyDestroyed = ship(Enemy, at(0, 0), size(20, 20));
-        Laser downwardsOnEnemy = laser(at(50, 10), Downwards);
         Spaceship enemyAlive = ship(Enemy, at(40, 0), size(20, 20));
+
+        laser(at(10, 80), Downwards); laser(at(50, 80), Upwards);
+        Spaceship playerDestroyed = ship(Player, at(0, 70), size(20, 20));
+        Spaceship playerAlive = ship(Player, at(40, 70), size(20, 20));
 
         new LasersDamageShipsRule().apply(entities);
 
         assertThat(enemyDestroyed.state(), is(Destroyed));
         assertThat(enemyAlive.state(), is(Alive));
+        assertThat(playerDestroyed.state(), is(Destroyed));
+        assertThat(playerAlive.state(), is(Alive));
     }
 
     private Laser laser(Position position, Laser.Direction direction) {

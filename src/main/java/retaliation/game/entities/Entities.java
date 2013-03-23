@@ -2,6 +2,7 @@ package retaliation.game.entities;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.entities.listener.SpaceshipShootingListener;
 import retaliation.game.geometry.Position;
@@ -54,7 +55,9 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public Iterable<Spaceship> allShips() {
-        return transform(filterByType(Enemy), toSpaceship());
+        Iterable<Entity> enemies = filterByType(Enemy);
+        Iterable<Entity> players = filterByType(Player);
+        return transform(Iterables.concat(enemies, players), toSpaceship());
     }
 
     public Iterable<Laser> allLasers() {
