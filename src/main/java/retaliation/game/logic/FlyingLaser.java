@@ -2,12 +2,13 @@ package retaliation.game.logic;
 
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.Laser;
 
 public class FlyingLaser implements GameLogic {
     public static final int SPEED = 4;
-    private final Entity laser;
+    private final Laser laser;
 
-    public FlyingLaser(Entity laser) {
+    public FlyingLaser(Laser laser) {
         this.laser = laser;
     }
 

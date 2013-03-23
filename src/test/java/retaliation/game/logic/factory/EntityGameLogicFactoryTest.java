@@ -6,13 +6,15 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.Laser;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.PlayerShipControls;
 
-import static retaliation.game.entities.EntityType.*;
+import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -33,7 +35,7 @@ public class EntityGameLogicFactoryTest {
             oneOf(levelLogic).add(with(any(FlyingLaser.class)));
         }});
 
-        factory.entityCreated(new Entity(Laser, at(10, 10), size(100, 100)));
+        factory.laserCreated(new Laser(at(10, 10)));
 
         context.assertIsSatisfied();
     }
@@ -62,7 +64,7 @@ public class EntityGameLogicFactoryTest {
 
     @Test public void
     removeLogicFromDestroyedEntity() {
-        final Entity entity = new Entity(Laser, at(10, 10), size(100, 100));
+        final Entity entity = new Laser(at(10, 10));
 
         context.checking(new Expectations() {{
             oneOf(levelLogic).removeLogicFor(entity);

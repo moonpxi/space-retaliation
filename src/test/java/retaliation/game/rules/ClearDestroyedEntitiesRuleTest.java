@@ -1,17 +1,15 @@
 package retaliation.game.rules;
 
 import org.junit.Test;
-import retaliation.game.entities.Entities;
-import retaliation.game.entities.Entity;
-import retaliation.game.entities.EntityType;
-import retaliation.game.entities.Spaceship;
+import retaliation.game.entities.*;
 import retaliation.game.entities.listener.EntityListener;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Alive;
 import static retaliation.game.entities.Entity.State.Destroyed;
-import static retaliation.game.entities.EntityType.*;
+import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.entities.EntityType.Player;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -34,7 +32,7 @@ public class ClearDestroyedEntitiesRuleTest {
     }
 
     private Entity laser(Entity.State state) {
-        Entity laser = new Entity(Laser, at(10, 10), size(2, 2));
+        Entity laser = new Laser(at(10, 10));
         laser.changeTo(state);
         entities.add(laser);
         return laser;

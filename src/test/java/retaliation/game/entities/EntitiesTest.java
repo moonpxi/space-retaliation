@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.*;
+import static retaliation.game.entities.EntityType.Laser;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -16,7 +17,7 @@ public class EntitiesTest {
     private final Mockery context = new Mockery();
     private final EntityListener listener = context.mock(EntityListener.class);
 
-    private final Entity laser = new Entity(Laser, at(10, 10), size(100, 20));
+    private final Laser laser = new Laser(at(10, 10));
     private final Spaceship player = new Spaceship(Player, at(20, 20), size(200, 30));
     private final Spaceship enemy = new Spaceship(Enemy, at(30, 30), size(300, 40));
 
@@ -33,7 +34,7 @@ public class EntitiesTest {
     @Test public void
     notifiesListenerWhenEntityCreated() {
         context.checking(new Expectations() {{
-            oneOf(listener).entityCreated(laser);
+            oneOf(listener).laserCreated(laser);
         }});
 
         new Entities(listener).add(laser);
@@ -92,7 +93,7 @@ public class EntitiesTest {
     @Test public void
     filterEntitiesByType() {
         Entities entities = entitiesIgnoreListener();
-        Entity anotherLaser = new Entity(Laser, null, null);
+        Entity anotherLaser = new Laser(null);
         entities.add(laser);
         entities.add(enemy);
         entities.add(player);

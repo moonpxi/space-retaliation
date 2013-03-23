@@ -65,7 +65,7 @@ public class Entities implements SpaceshipShootingListener {
         if (entity instanceof Spaceship) {
             listener.spaceshipCreated((Spaceship) entity);
         } else {
-            listener.entityCreated(entity);
+            listener.laserCreated((Laser) entity);
         }
     }
 

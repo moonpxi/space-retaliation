@@ -1,6 +1,7 @@
 package retaliation.game.logic.factory;
 
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.Laser;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.logic.EnemyAI;
@@ -19,8 +20,8 @@ public class EntityGameLogicFactory implements EntityListener {
     }
 
     @Override
-    public void entityCreated(Entity entity) {
-        levelLogic.add(new FlyingLaser(entity));
+    public void laserCreated(Laser laser) {
+        levelLogic.add(new FlyingLaser(laser));
     }
 
     @Override
