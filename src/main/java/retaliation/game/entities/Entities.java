@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.google.common.collect.Iterables.*;
 import static retaliation.game.entities.Entity.State.Destroyed;
-import static retaliation.game.entities.EntityType.Enemy;
-import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.EntityType.*;
+import static retaliation.game.entities.EntityType.Laser;
 
 public class Entities implements SpaceshipShootingListener {
 
@@ -57,6 +57,10 @@ public class Entities implements SpaceshipShootingListener {
         return transform(filterByType(Enemy), toSpaceship());
     }
 
+    public Iterable<Laser> allLasers() {
+        return transform(filterByType(Laser), toLaser());
+    }
+
     public Iterable<Entity> filterByType(EntityType type) {
         return filter(allEntities, byType(type));
     }
@@ -72,6 +76,12 @@ public class Entities implements SpaceshipShootingListener {
     private Function<Entity, Spaceship> toSpaceship() {
         return new Function<Entity, Spaceship>() {
             @Override public Spaceship apply(Entity entity) { return (Spaceship) entity; }
+        };
+    }
+
+    private Function<Entity, Laser> toLaser() {
+        return new Function<Entity, Laser>() {
+            @Override public Laser apply(Entity entity) { return (Laser) entity; }
         };
     }
 

@@ -20,4 +20,8 @@ public class Laser extends Entity {
         float adjustedSpeed = direction == Upwards ? -speed : speed;
         move(0, adjustedSpeed);
     }
+
+    public Direction direction() {
+        return direction;
+    }
 }
