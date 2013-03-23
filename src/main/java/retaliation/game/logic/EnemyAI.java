@@ -27,6 +27,7 @@ public class EnemyAI implements GameLogic {
         }
         
         enemy.move(speed, 0);
+//        enemy.shoot();
     }
 
     @Override

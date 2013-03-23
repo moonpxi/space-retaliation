@@ -6,6 +6,8 @@ import retaliation.game.geometry.Position;
 
 import static java.lang.System.currentTimeMillis;
 import static retaliation.game.entities.Entity.State.Destroyed;
+import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.Laser.Direction.Downwards;
 import static retaliation.game.entities.Laser.Direction.Upwards;
 
 public class Spaceship extends Entity {
@@ -23,7 +25,7 @@ public class Spaceship extends Entity {
             Position from = Position.at(position().x() + (dimension().width() / 2),
                                         position().y() - 1);
         
-            shootingListener.fired(from, Upwards);
+            shootingListener.fired(from, direction());
             lastShot = currentTimeMillis();
         }
     }
@@ -39,4 +41,9 @@ public class Spaceship extends Entity {
     private boolean canShoot() {
         return (currentTimeMillis() - lastShot) > COOLDOWN_PERIOD;
     }
+
+    private Laser.Direction direction() {
+        return getType() == Player ? Upwards : Downwards;
+    }
+
 }

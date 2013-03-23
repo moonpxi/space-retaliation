@@ -10,7 +10,9 @@ import static java.lang.Thread.sleep;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Destroyed;
+import static retaliation.game.entities.EntityType.Enemy;
 import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.Laser.Direction.Downwards;
 import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
@@ -61,6 +63,20 @@ public class SpaceshipTest {
         ship.takeHit();
 
         assertThat(ship.state(), is(Destroyed));
+    }
+
+    @Test public void
+    enemiesShootDownwards() {
+        Spaceship enemy = new Spaceship(Enemy, at(5, 8), size(10, 10));
+        enemy.registerShootingListener(shootingListener);
+
+        context.checking(new Expectations() {{
+            oneOf(shootingListener).fired(at(10, 7), Downwards);
+        }});
+
+        enemy.shoot();
+
+        context.assertIsSatisfied();
     }
 
     private void expectFiredNotificationsOnly(final int times, final Laser.Direction direction) {
