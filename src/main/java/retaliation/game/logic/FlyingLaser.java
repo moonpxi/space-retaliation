@@ -14,7 +14,7 @@ public class FlyingLaser implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        laser.move(0, -SPEED);
+        laser.fly(SPEED);
     }
 
     @Override

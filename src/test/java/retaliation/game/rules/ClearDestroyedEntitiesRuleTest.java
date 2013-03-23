@@ -10,6 +10,7 @@ import static retaliation.game.entities.Entity.State.Alive;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Enemy;
 import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -32,7 +33,7 @@ public class ClearDestroyedEntitiesRuleTest {
     }
 
     private Entity laser(Entity.State state) {
-        Entity laser = new Laser(at(10, 10));
+        Entity laser = new Laser(at(10, 10), Upwards);
         laser.changeTo(state);
         entities.add(laser);
         return laser;

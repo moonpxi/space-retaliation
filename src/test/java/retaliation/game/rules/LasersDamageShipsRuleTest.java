@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Alive;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -58,7 +59,7 @@ public class LasersDamageShipsRuleTest {
     }
 
     private Entity laser(Position position) {
-        Entity laser = new Laser(position);
+        Entity laser = new Laser(position, Upwards);
         entities.add(laser);
         return laser;
     }

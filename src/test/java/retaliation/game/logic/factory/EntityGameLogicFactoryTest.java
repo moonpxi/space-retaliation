@@ -15,6 +15,7 @@ import retaliation.game.logic.PlayerShipControls;
 
 import static retaliation.game.entities.EntityType.Enemy;
 import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -35,7 +36,7 @@ public class EntityGameLogicFactoryTest {
             oneOf(levelLogic).add(with(any(FlyingLaser.class)));
         }});
 
-        factory.laserCreated(new Laser(at(10, 10)));
+        factory.laserCreated(new Laser(at(10, 10), Upwards));
 
         context.assertIsSatisfied();
     }
@@ -64,7 +65,7 @@ public class EntityGameLogicFactoryTest {
 
     @Test public void
     removeLogicFromDestroyedEntity() {
-        final Entity entity = new Laser(at(10, 10));
+        final Entity entity = new Laser(at(10, 10), Upwards);
 
         context.checking(new Expectations() {{
             oneOf(levelLogic).removeLogicFor(entity);
