@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.entities.EntityType.Laser;
+import static retaliation.game.entities.Laser.Direction.Downwards;
 import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
@@ -76,7 +77,7 @@ public class EntitiesTest {
     createsLaserWhenFired() {
         Entities entities = entitiesIgnoreListener();
 
-        entities.fired(at(20, 20));
+        entities.fired(at(20, 20), Downwards);
 
         assertThat(entities.activeEntities(), contains(hasProperty("type", equalTo(Laser))));
     }

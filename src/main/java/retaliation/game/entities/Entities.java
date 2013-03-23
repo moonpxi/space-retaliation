@@ -13,7 +13,6 @@ import static com.google.common.collect.Iterables.*;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Enemy;
 import static retaliation.game.entities.EntityType.Player;
-import static retaliation.game.entities.Laser.Direction.Upwards;
 
 public class Entities implements SpaceshipShootingListener {
 
@@ -35,8 +34,8 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     @Override
-    public void fired(Position from) {
-        add(new Laser(from, Upwards));
+    public void fired(Position from, Laser.Direction direction) {
+        add(new Laser(from, direction));
     }
 
     public void clearDestroyed() {

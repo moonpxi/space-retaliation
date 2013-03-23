@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.Player;
+import static retaliation.game.entities.Laser.Direction.Upwards;
 import static retaliation.game.geometry.Dimension.size;
 import static retaliation.game.geometry.Position.at;
 
@@ -26,7 +27,7 @@ public class SpaceshipTest {
 
     @Test
     public void notifiesShootingListenerWhenShooting() {
-        expectFiredNotificationsOnly(1);
+        expectFiredNotificationsOnly(1, Upwards);
         
         ship.shoot();
         
@@ -36,7 +37,7 @@ public class SpaceshipTest {
 
     @Test public void
     limitRateOfFire() {
-        expectFiredNotificationsOnly(1);
+        expectFiredNotificationsOnly(1, Upwards);
 
         ship.shoot();
         ship.shoot();
@@ -46,7 +47,7 @@ public class SpaceshipTest {
 
     @Test public void
     allowAnotherShotAfterCooldownPeriod() throws InterruptedException {
-        expectFiredNotificationsOnly(2);
+        expectFiredNotificationsOnly(2, Upwards);
 
         ship.shoot();
         sleep(1000); // Yes, this is horrible.
@@ -62,11 +63,11 @@ public class SpaceshipTest {
         assertThat(ship.state(), is(Destroyed));
     }
 
-    private void expectFiredNotificationsOnly(final int times) {
+    private void expectFiredNotificationsOnly(final int times, final Laser.Direction direction) {
         ship.registerShootingListener(shootingListener);
 
         context.checking(new Expectations() {{
-            exactly(times).of(shootingListener).fired(at(10, 7));
+            exactly(times).of(shootingListener).fired(at(10, 7), direction);
         }});
     }
 }

@@ -6,6 +6,7 @@ import retaliation.game.geometry.Position;
 
 import static java.lang.System.currentTimeMillis;
 import static retaliation.game.entities.Entity.State.Destroyed;
+import static retaliation.game.entities.Laser.Direction.Upwards;
 
 public class Spaceship extends Entity {
 
@@ -22,7 +23,7 @@ public class Spaceship extends Entity {
             Position from = Position.at(position().x() + (dimension().width() / 2),
                                         position().y() - 1);
         
-            shootingListener.fired(from);
+            shootingListener.fired(from, Upwards);
             lastShot = currentTimeMillis();
         }
     }
