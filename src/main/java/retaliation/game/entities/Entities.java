@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.google.common.collect.Iterables.*;
 import static retaliation.game.entities.Entity.State.Destroyed;
-import static retaliation.game.entities.EntityType.*;
-import static retaliation.game.geometry.Dimension.size;
+import static retaliation.game.entities.EntityType.Enemy;
+import static retaliation.game.entities.EntityType.Player;
 
 public class Entities implements SpaceshipShootingListener {
 
@@ -35,7 +35,7 @@ public class Entities implements SpaceshipShootingListener {
 
     @Override
     public void fired(Position from) {
-        add(new Entity(Laser, from, size(1, 4)));
+        add(new Laser(from));
     }
 
     public void clearDestroyed() {
