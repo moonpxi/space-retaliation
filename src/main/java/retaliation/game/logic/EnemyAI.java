@@ -5,6 +5,8 @@ import retaliation.game.entities.Entity;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
 
+import java.util.Random;
+
 public class EnemyAI implements GameLogic {
     
     private final float leftSide;
@@ -16,7 +18,7 @@ public class EnemyAI implements GameLogic {
         this.enemy = enemy;
         leftSide = levelBoundary.getX() + 5;
         rightSide = levelBoundary.getRightmostX() - enemy.dimension().width() - 5;
-        speed = -5;
+        speed = new Random().nextFloat() * 3 + 3;
     }
 
     @Override
