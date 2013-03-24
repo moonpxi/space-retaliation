@@ -11,8 +11,8 @@ import static retaliation.game.entities.factory.SpaceshipFactory.playerFighterAt
 
 public class EntitiesSetup {
 
-    public static Entities createSampleLevelEntities(EntityListener listener) {
-        Entities entities = new Entities(listener);
+    public static Entities createSampleLevelEntities(EntityListener... listeners) {
+        Entities entities = new Entities(listeners);
 
         entities.add(playerFighterAt(350, 520));
         entities.add(randomEnemyAtLane(100));
@@ -22,7 +22,7 @@ public class EntitiesSetup {
         return entities;
     }
 
-    private static Spaceship randomEnemyAtLane(float lane) {
+    public static Spaceship randomEnemyAtLane(float lane) {
         return enemyShipAt(new Random().nextInt(650), lane);
     }
 }

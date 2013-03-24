@@ -10,7 +10,7 @@ public class LevelRulesTest {
     private final Mockery context = new Mockery();
     private final Rule rule1 = context.mock(Rule.class, "R1");
     private final Rule rule2 = context.mock(Rule.class, "R2");
-    private final Entities entities = new Entities(null);
+    private final Entities entities = new Entities();
 
     @Test public void
     applyComposedRules() {

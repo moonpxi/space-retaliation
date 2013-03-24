@@ -18,10 +18,10 @@ import static retaliation.game.entities.EntityType.Laser;
 public class Entities implements SpaceshipShootingListener {
 
     private final List<Entity> allEntities = new ArrayList<Entity>();
-    private EntityListener listener;
+    private EntityListener listeners[];
 
-    public Entities(EntityListener listener) {
-        this.listener = listener;
+    public Entities(EntityListener... listeners) {
+        this.listeners = listeners;
     }
 
     public void add(Entity entity) {
@@ -41,7 +41,9 @@ public class Entities implements SpaceshipShootingListener {
 
     public void clearDestroyed() {
         for (Entity destroyed : filter(allEntities, byState(Destroyed))) {
-            listener.entityDestroyed(destroyed);
+            for (EntityListener listener : listeners) {
+                listener.entityDestroyed(destroyed);
+            }
         }
         removeIf(allEntities, byState(Destroyed));
     }
@@ -69,10 +71,12 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     private void notifyListener(Entity entity) {
-        if (entity instanceof Spaceship) {
-            listener.spaceshipCreated((Spaceship) entity);
-        } else {
-            listener.laserCreated((Laser) entity);
+        for (EntityListener listener : listeners) {
+            if (entity instanceof Spaceship) {
+                listener.spaceshipCreated((Spaceship) entity);
+            } else {
+                listener.laserCreated((Laser) entity);
+            }
         }
     }
 
