@@ -29,6 +29,10 @@ public class Game extends BasicGame {
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
+
+        RespawnEnemyRule respawnEnemyRule = new RespawnEnemyRule(entities);
+        entities.addListener(respawnEnemyRule);
+
         LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(boundary),
                                           new LasersDamageShipsRule(),
                                           new DestroyOutOfBoundaryLasersRule(boundary),

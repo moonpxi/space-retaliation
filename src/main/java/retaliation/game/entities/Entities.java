@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.newArrayList;
 import static retaliation.game.entities.Entity.State.Destroyed;
 import static retaliation.game.entities.EntityType.*;
 import static retaliation.game.entities.EntityType.Laser;
@@ -18,10 +19,14 @@ import static retaliation.game.entities.EntityType.Laser;
 public class Entities implements SpaceshipShootingListener {
 
     private final List<Entity> allEntities = new ArrayList<Entity>();
-    private EntityListener listeners[];
+    private final List<EntityListener> listeners;
 
     public Entities(EntityListener... listeners) {
-        this.listeners = listeners;
+        this.listeners = newArrayList(listeners);
+    }
+
+    public void addListener(EntityListener listener) {
+        listeners.add(listener);
     }
 
     public void add(Entity entity) {
