@@ -16,12 +16,6 @@ public class PlayerShipControls implements GameLogic {
 
     @Override
     public void update(Input input, int delta) {
-        if (input.isKeyDown(KEY_UP)) {
-            player.move(0, -SPEED);
-        }
-        if (input.isKeyDown(KEY_DOWN)) {
-            player.move(0, SPEED);
-        }
         if (input.isKeyDown(KEY_LEFT)) {
             player.move(-SPEED, 0);
         }

@@ -40,22 +40,6 @@ public class PlayerShipControlsTest {
 
     @Test
     public void
-    moveUpWhenUpArrowIsPressed() {
-        expectKey(KEY_UP);
-
-        assertThat(controls.getEntity().position(), equalTo(at(0, -4)));
-    }
-
-    @Test
-    public void
-    moveDownWhenDownArrowIsPressed() {
-        expectKey(KEY_DOWN);
-
-        assertThat(controls.getEntity().position(), equalTo(at(0, 4)));
-    }
-
-    @Test
-    public void
     moveLeftWhenLeftArrowIsPressed() {
         expectKey(KEY_LEFT);
 
@@ -70,19 +54,19 @@ public class PlayerShipControlsTest {
         assertThat(controls.getEntity().position(), equalTo(at(4, 0)));
     }
 
-    @Test
-    public void
-    moveInDiagonal() {
-        context.checking(new Expectations() {{
-            oneOf(input).isKeyDown(KEY_UP); will(returnValue(true));
-            oneOf(input).isKeyDown(KEY_RIGHT); will(returnValue(true));
-            allowing(input);
-        }});
-
-        controls.update(input, 0);
-
-        assertThat(controls.getEntity().position(), equalTo(at(4, -4)));
-    }
+//    @Test
+//    public void
+//    moveInDiagonal() {
+//        context.checking(new Expectations() {{
+//            oneOf(input).isKeyDown(KEY_UP); will(returnValue(true));
+//            oneOf(input).isKeyDown(KEY_RIGHT); will(returnValue(true));
+//            allowing(input);
+//        }});
+//
+//        controls.update(input, 0);
+//
+//        assertThat(controls.getEntity().position(), equalTo(at(4, -4)));
+//    }
 
     private void expectKey(final int keyCode) {
         context.checking(new Expectations() {{
