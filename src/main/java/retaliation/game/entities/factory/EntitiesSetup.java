@@ -15,14 +15,14 @@ public class EntitiesSetup {
         Entities entities = new Entities(listener);
 
         entities.add(playerFighterAt(350, 520));
-        entities.add(randomEnemyAtLane(1));
-        entities.add(randomEnemyAtLane(2));
-        entities.add(randomEnemyAtLane(3));
+        entities.add(randomEnemyAtLane(100));
+        entities.add(randomEnemyAtLane(200));
+        entities.add(randomEnemyAtLane(300));
 
         return entities;
     }
 
-    private static Spaceship randomEnemyAtLane(int lane) {
-        return enemyShipAt(new Random().nextInt(650), lane * 100);
+    private static Spaceship randomEnemyAtLane(float lane) {
+        return enemyShipAt(new Random().nextInt(650), lane);
     }
 }
