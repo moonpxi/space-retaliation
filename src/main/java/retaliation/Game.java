@@ -27,7 +27,7 @@ public class Game extends BasicGame {
 
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
-        EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic);
+        EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
         LevelRules rules = new LevelRules(new EnforceLevelBoundaryRule(boundary),
                                           new LasersDamageShipsRule(),

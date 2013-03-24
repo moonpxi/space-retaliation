@@ -4,6 +4,7 @@ import retaliation.game.entities.Entity;
 import retaliation.game.entities.Laser;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.listener.EntityListener;
+import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
 import retaliation.game.logic.LevelEntityLogic;
@@ -14,9 +15,11 @@ import static retaliation.game.entities.EntityType.Player;
 public class EntityGameLogicFactory implements EntityListener {
 
     private final LevelEntityLogic levelLogic;
+    private final Rectangle levelBoundary;
 
-    public EntityGameLogicFactory(LevelEntityLogic levelLogic) {
+    public EntityGameLogicFactory(LevelEntityLogic levelLogic, Rectangle levelBoundary) {
         this.levelLogic = levelLogic;
+        this.levelBoundary = levelBoundary;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class EntityGameLogicFactory implements EntityListener {
         if (ship.getType() == Player) {
             levelLogic.add(new PlayerShipControls(ship));
         } else {
-            levelLogic.add(new EnemyAI(ship));
+            levelLogic.add(new EnemyAI(ship, levelBoundary));
         }
     }
 }

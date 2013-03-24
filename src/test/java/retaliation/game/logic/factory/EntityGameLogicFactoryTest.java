@@ -8,6 +8,7 @@ import org.junit.Test;
 import retaliation.game.entities.Entity;
 import retaliation.game.entities.Laser;
 import retaliation.game.entities.Spaceship;
+import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.EnemyAI;
 import retaliation.game.logic.FlyingLaser;
 import retaliation.game.logic.LevelEntityLogic;
@@ -27,7 +28,7 @@ public class EntityGameLogicFactoryTest {
 
     @Before public void
     createFactory() {
-       factory = new EntityGameLogicFactory(levelLogic);
+       factory = new EntityGameLogicFactory(levelLogic, new Rectangle(at(0, 0), size(800, 600)));
     }
 
     @Test public void

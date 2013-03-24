@@ -3,6 +3,7 @@ package retaliation.game.logic;
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Entity;
 import retaliation.game.entities.Spaceship;
+import retaliation.game.geometry.Rectangle;
 
 public class EnemyAI implements GameLogic {
     
@@ -11,10 +12,10 @@ public class EnemyAI implements GameLogic {
     private float speed;
     private final Spaceship enemy;
 
-    public EnemyAI(Spaceship enemy) {
+    public EnemyAI(Spaceship enemy, Rectangle levelBoundary) {
         this.enemy = enemy;
-        leftSide = enemy.position().x() - 200;
-        rightSide = enemy.position().y() + 300;
+        leftSide = levelBoundary.getX() + 5;
+        rightSide = levelBoundary.getRightmostX() - enemy.dimension().width() - 5;
         speed = -5;
     }
 
