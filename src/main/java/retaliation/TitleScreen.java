@@ -26,12 +26,14 @@ public class TitleScreen implements SlickScreen {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         g.setColor(Color.green);
+
         g.drawString("Space Retaliation", 300, 100);
         g.drawString("[experimental]", 320, 120);
 
         g.drawString("Controls:", 280, 250);
         g.drawString("- Movement: <left> and <right> keys", 280, 270);
         g.drawString("- Shooting: <space> key", 280, 290);
+
         g.drawString("Press <space> to continue", 280, 340);
     }
 }
