@@ -7,12 +7,20 @@ import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
 
+    protected enum Screens { Title, Game, GameOver }
+
     private SlickScreen currentScreen;
 
     public Game() {
        super("Space Retaliation");
 
-        currentScreen = new GameScreen();
+        currentScreen = new TitleScreen(this);
+    }
+
+    public void switchTo(Screens screen) {
+        if (screen == Screens.Game) {
+            currentScreen = new GameScreen(this);
+        }
     }
 
     @Override

@@ -20,8 +20,11 @@ public class GameScreen implements SlickScreen {
 
     private final SlickRenderer renderer;
     private final LevelGameLoop levelLogic;
+    private final Game game;
 
-    public GameScreen() {
+    public GameScreen(Game game) {
+        this.game = game;
+
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
