@@ -4,6 +4,9 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import retaliation.game.entities.Entities;
 import retaliation.game.entities.Entity;
+import retaliation.game.entities.Laser;
+
+import static retaliation.game.entities.Laser.Direction.Upwards;
 
 public class EntitiesRenderer implements SlickRenderer {
 
@@ -34,7 +37,7 @@ public class EntitiesRenderer implements SlickRenderer {
             case Player:
                 return Color.green;
             case Laser:
-                return Color.red;
+                return ((Laser) entity).direction() == Upwards ? Color.green : Color.white;
             default:
                 return Color.white;
         }
