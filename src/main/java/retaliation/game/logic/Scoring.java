@@ -12,6 +12,10 @@ public class Scoring implements EntityListener {
     private int score;
 
     public Scoring() {
+        reset();
+    }
+
+    public void reset() {
         score = 0;
     }
 

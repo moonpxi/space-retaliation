@@ -24,10 +24,9 @@ public class GameScreen implements SlickScreen {
     private final Game game;
     private final Scoring scoring;
 
-    public GameScreen(Game game) {
+    public GameScreen(Game game, Scoring scoring) {
         this.game = game;
-
-        scoring = new Scoring();
+        this.scoring = scoring;
 
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();

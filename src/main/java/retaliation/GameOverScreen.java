@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import retaliation.game.logic.Scoring;
 
 import static org.newdawn.slick.Input.KEY_ESCAPE;
 import static org.newdawn.slick.Input.KEY_SPACE;
@@ -12,9 +13,11 @@ import static retaliation.Game.Screens.Game;
 public class GameOverScreen implements SlickScreen {
 
     private final Game game;
+    private final Scoring scoring;
 
-    public GameOverScreen(Game game) {
+    public GameOverScreen(Game game, Scoring scoring) {
         this.game = game;
+        this.scoring = scoring;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class GameOverScreen implements SlickScreen {
         g.setColor(Color.green);
 
         g.drawString("[Game Over]", margin, 100);
-        g.drawString("Enemies destroyed: 0", margin, 180);
+        g.drawString("Enemies destroyed: " + scoring.getScore(), margin, 180);
 
         g.drawString("Press <space> to play again", margin, 270);
         g.drawString("Press <esc> to exit", margin, 290);

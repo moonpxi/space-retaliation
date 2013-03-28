@@ -4,8 +4,11 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import retaliation.game.logic.Scoring;
 
 public class Game extends BasicGame {
+
+    private final Scoring scoring;
 
     public enum Screens { Game, GameOver }
 
@@ -15,14 +18,16 @@ public class Game extends BasicGame {
        super("Space Retaliation");
 
         currentScreen = new TitleScreen(this);
+        scoring = new Scoring();
     }
 
     public void switchTo(Screens screen) {
         // Crappy state machine
         if (screen == Screens.Game) {
-            currentScreen = new GameScreen(this);
+            scoring.reset();
+            currentScreen = new GameScreen(this, scoring);
         } else if (screen == Screens.GameOver) {
-            currentScreen = new GameOverScreen(this);
+            currentScreen = new GameOverScreen(this, scoring);
         }
     }
 
