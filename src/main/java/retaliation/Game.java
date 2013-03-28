@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
 
-    public enum Screens { Title, Game, GameOver }
+    public enum Screens { Game, GameOver }
 
     private SlickScreen currentScreen;
 

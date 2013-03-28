@@ -8,6 +8,7 @@ import retaliation.game.entities.factory.EntitiesSetup;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.LevelGameLoop;
+import retaliation.game.logic.Scoring;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
 import retaliation.game.rules.*;
 import retaliation.ui.renderer.EntitiesRenderer;
@@ -21,14 +22,17 @@ public class GameScreen implements SlickScreen {
     private final SlickRenderer renderer;
     private final LevelGameLoop levelLogic;
     private final Game game;
+    private final Scoring scoring;
 
     public GameScreen(Game game) {
         this.game = game;
 
+        scoring = new Scoring();
+
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
-        Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory, new GameOverRule(game));
+        Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory, scoring, new GameOverRule(game));
 
         RespawnEnemyRule respawnEnemyRule = new RespawnEnemyRule(entities);
         entities.addListener(respawnEnemyRule);
@@ -50,6 +54,7 @@ public class GameScreen implements SlickScreen {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         renderer.render(g);
+        g.drawString("Score: " + scoring.getScore(), 400, 10);
     }
 
 }

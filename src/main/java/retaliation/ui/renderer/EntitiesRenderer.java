@@ -26,8 +26,6 @@ public class EntitiesRenderer implements SlickRenderer {
             Color color = colorFor(entity);
             renderMoveable(graphics, entity, color);
         }
-
-        graphics.drawString("Active entities: " + count, 400, 10);
     }
 
     private Color colorFor(Entity entity) {

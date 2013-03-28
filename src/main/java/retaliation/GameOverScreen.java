@@ -28,12 +28,13 @@ public class GameOverScreen implements SlickScreen {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
+        float margin = 240;
         g.setColor(Color.green);
 
-        g.drawString("You died!", 300, 100);
-        g.drawString("Enemies destroyed: 0", 300, 120);
+        g.drawString("[Game Over]", margin, 100);
+        g.drawString("Enemies destroyed: 0", margin, 180);
 
-        g.drawString("Press <space> to play again", 280, 270);
-        g.drawString("Press <esc> to exit", 280, 290);
+        g.drawString("Press <space> to play again", margin, 270);
+        g.drawString("Press <esc> to exit", margin, 290);
     }
 }
