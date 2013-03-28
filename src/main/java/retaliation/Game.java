@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
 
-    protected enum Screens { Title, Game, GameOver }
+    public enum Screens { Title, Game, GameOver }
 
     private SlickScreen currentScreen;
 
@@ -18,8 +18,11 @@ public class Game extends BasicGame {
     }
 
     public void switchTo(Screens screen) {
+        // Crappy state machine
         if (screen == Screens.Game) {
             currentScreen = new GameScreen(this);
+        } else if (screen == Screens.GameOver) {
+            currentScreen = new GameOverScreen(this);
         }
     }
 

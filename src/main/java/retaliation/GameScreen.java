@@ -28,7 +28,7 @@ public class GameScreen implements SlickScreen {
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
         LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
         EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
-        Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory);
+        Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory, new GameOverRule(game));
 
         RespawnEnemyRule respawnEnemyRule = new RespawnEnemyRule(entities);
         entities.addListener(respawnEnemyRule);
