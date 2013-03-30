@@ -3,7 +3,8 @@
 	<property name="test.src" location="src/test/java"/>
 	<property name="main.lib" location="lib"/>
 	<property name="test.lib" location="testlib"/>
-    <property name="build" location="build"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
 	
 	<!-- Compiling -->
 	
@@ -13,6 +14,7 @@
 	
 	<target name="clean">
 		<delete dir="${build}" />
+		<delete dir="${dist}" />
 	</target>
 	
 	<target name="compile" depends="clean">
@@ -57,4 +59,13 @@
 			<jvmarg value="-Djava.library.path=native"/>
 		</java>
 	</target>
+
+  <!-- Deployment -->
+  <target name="jar" depends="compile">
+    <mkdir dir="${dist}" />
+    <jar destfile="${dist}/space-retaliation.jar">
+      <fileset dir="${build}" />
+    </jar>
+  </target>
+
 </project>
