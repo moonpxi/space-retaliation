@@ -53,6 +53,7 @@ public class GameScreen implements SlickScreen {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         renderer.render(g);
+
         g.drawString("Score: " + scoring.getScore(), 400, 10);
     }
 
