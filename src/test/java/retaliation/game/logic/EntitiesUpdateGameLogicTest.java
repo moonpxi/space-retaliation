@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.newdawn.slick.Input;
 import retaliation.game.entities.Entity;
 
-public class LevelEntityLogicTest {
+public class EntitiesUpdateGameLogicTest {
 
     private final Mockery context = new Mockery() {{ setImposteriser(ClassImposteriser.INSTANCE); }};
     private final Input input = context.mock(Input.class);
@@ -16,11 +16,11 @@ public class LevelEntityLogicTest {
     private final GameLogic anotherLogic = context.mock(GameLogic.class, "Logic 2");
     private final Entity entity = context.mock(Entity.class, "Entity 1");
     private final Entity anotherEntity = context.mock(Entity.class, "Entity 2");
-    private LevelEntityLogic levelLogic;
+    private EntitiesUpdateGameLogic levelLogic;
 
     @Before
     public void setupLogic() {
-        levelLogic = new LevelEntityLogic();
+        levelLogic = new EntitiesUpdateGameLogic();
         levelLogic.add(logic);
         levelLogic.add(anotherLogic);
     }

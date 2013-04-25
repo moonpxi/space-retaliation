@@ -45,7 +45,7 @@ public class Entities implements SpaceshipShootingListener {
     }
 
     public void clearDestroyed() {
-        // Weird logic to prevent concurrent modification exception, triggerered by the listeners.
+        // Weird logic to prevent concurrent modification exception, triggered by the listeners.
         List<Entity> destroyedEntities = new ArrayList<Entity>();
 
         for (Entity destroyed : filter(allEntities, byState(Destroyed))) {

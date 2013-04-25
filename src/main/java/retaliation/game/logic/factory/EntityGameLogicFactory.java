@@ -6,18 +6,18 @@ import retaliation.game.entities.Spaceship;
 import retaliation.game.entities.listener.EntityListener;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.EnemyAI;
+import retaliation.game.logic.EntitiesUpdateGameLogic;
 import retaliation.game.logic.FlyingLaser;
-import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.PlayerShipControls;
 
 import static retaliation.game.entities.EntityType.Player;
 
 public class EntityGameLogicFactory implements EntityListener {
 
-    private final LevelEntityLogic levelLogic;
+    private final EntitiesUpdateGameLogic levelLogic;
     private final Rectangle levelBoundary;
 
-    public EntityGameLogicFactory(LevelEntityLogic levelLogic, Rectangle levelBoundary) {
+    public EntityGameLogicFactory(EntitiesUpdateGameLogic levelLogic, Rectangle levelBoundary) {
         this.levelLogic = levelLogic;
         this.levelBoundary = levelBoundary;
     }

@@ -7,17 +7,17 @@ import retaliation.game.rules.LevelRules;
 public class LevelGameLoop {
 
     private final Entities entities;
-    private final LevelEntityLogic levelEntityLogic;
+    private final EntitiesUpdateGameLogic entitiesUpdateGameLogic;
     private final LevelRules levelRules;
 
-    public LevelGameLoop(Entities entities, LevelEntityLogic levelEntityLogic, LevelRules levelRules) {
+    public LevelGameLoop(Entities entities, EntitiesUpdateGameLogic entitiesUpdateGameLogic, LevelRules levelRules) {
         this.entities = entities;
-        this.levelEntityLogic = levelEntityLogic;
+        this.entitiesUpdateGameLogic = entitiesUpdateGameLogic;
         this.levelRules = levelRules;
     }
 
     public void update(Input input, int delta) {
-        levelEntityLogic.update(input, delta);
+        entitiesUpdateGameLogic.update(input, delta);
         levelRules.apply(entities);
     }
 }

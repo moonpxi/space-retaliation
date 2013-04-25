@@ -10,7 +10,7 @@ import java.util.List;
 import static com.google.common.collect.Iterables.removeIf;
 
 
-public class LevelEntityLogic implements GameLogic {
+public class EntitiesUpdateGameLogic implements GameLogic {
 
     private final List<GameLogic> addedLogic = new ArrayList<GameLogic>();
     private final List<GameLogic> allEntitiesLogic = new ArrayList<GameLogic>();

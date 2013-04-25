@@ -10,8 +10,8 @@ import retaliation.game.entities.Laser;
 import retaliation.game.entities.Spaceship;
 import retaliation.game.geometry.Rectangle;
 import retaliation.game.logic.EnemyAI;
+import retaliation.game.logic.EntitiesUpdateGameLogic;
 import retaliation.game.logic.FlyingLaser;
-import retaliation.game.logic.LevelEntityLogic;
 import retaliation.game.logic.PlayerShipControls;
 
 import static retaliation.game.entities.EntityType.Enemy;
@@ -23,7 +23,7 @@ import static retaliation.game.geometry.Position.at;
 public class EntityGameLogicFactoryTest {
 
     private final Mockery context = new Mockery() {{ setImposteriser(ClassImposteriser.INSTANCE); }};
-    private final LevelEntityLogic levelLogic = context.mock(LevelEntityLogic.class);
+    private final EntitiesUpdateGameLogic levelLogic = context.mock(EntitiesUpdateGameLogic.class);
     private EntityGameLogicFactory factory;
 
     @Before public void

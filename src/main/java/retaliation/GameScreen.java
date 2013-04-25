@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import retaliation.game.entities.Entities;
 import retaliation.game.entities.factory.EntitiesSetup;
 import retaliation.game.geometry.Rectangle;
-import retaliation.game.logic.LevelEntityLogic;
+import retaliation.game.logic.EntitiesUpdateGameLogic;
 import retaliation.game.logic.LevelGameLoop;
 import retaliation.game.logic.Scoring;
 import retaliation.game.logic.factory.EntityGameLogicFactory;
@@ -29,8 +29,8 @@ public class GameScreen implements SlickScreen {
         this.scoring = scoring;
 
         Rectangle boundary = new Rectangle(at(0, 0), size(800, 600));
-        LevelEntityLogic levelEntityLogic = new LevelEntityLogic();
-        EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(levelEntityLogic, boundary);
+        EntitiesUpdateGameLogic entitiesUpdateGameLogic = new EntitiesUpdateGameLogic();
+        EntityGameLogicFactory entityGameLogicFactory = new EntityGameLogicFactory(entitiesUpdateGameLogic, boundary);
         Entities entities = EntitiesSetup.createSampleLevelEntities(entityGameLogicFactory, scoring, new GameOverRule(game));
 
         RespawnEnemyRule respawnEnemyRule = new RespawnEnemyRule(entities);
@@ -41,7 +41,7 @@ public class GameScreen implements SlickScreen {
                 new DestroyOutOfBoundaryLasersRule(boundary),
                 new ClearDestroyedEntitiesRule());
 
-        levelLogic = new LevelGameLoop(entities, levelEntityLogic, rules);
+        levelLogic = new LevelGameLoop(entities, entitiesUpdateGameLogic, rules);
         renderer = new EntitiesRenderer(entities);
     }
 
